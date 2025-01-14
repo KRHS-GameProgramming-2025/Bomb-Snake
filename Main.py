@@ -1,7 +1,9 @@
 import pygame, sys, math, random
 from Hud import *
 from Pellet import *
+from Head import *
 
+pygame.init()
 
 if not pygame.font: print("Warning, fonts disabled")
 
@@ -41,7 +43,6 @@ while True:
 
     screen.fill([30,40,50])
     screen.blit(score.image, score.rect)
-    screen.blit(timer.image, timer.rect)
     pygame.display.flip()
     clock.tick(60)
     # print(clock.get_fps())
