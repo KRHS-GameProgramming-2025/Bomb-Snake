@@ -4,7 +4,6 @@ from Pellet import *
 from Head import *
 
 pygame.init()
-
 if not pygame.font: print("Warning, fonts disabled")
 
 size = [1000,900]
@@ -13,7 +12,7 @@ screen = pygame.display.set_mode(size)
 clock = pygame.time.Clock();
 
 score = Hud ("Score: ",[0,0])
-
+player = Head(4,[1000/2, 900/2])
 
 while True:
     for event in pygame.event.get():
