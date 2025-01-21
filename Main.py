@@ -12,7 +12,7 @@ screen = pygame.display.set_mode(size)
 clock = pygame.time.Clock();
 
 score = Hud ("Score: ",[0,0])
-player = Head(4,[1000/2, 900/2])
+player = Head(4,[1000/5, 900/2])
 
 while True:
     for event in pygame.event.get():
@@ -36,12 +36,22 @@ while True:
                 player.goKey("sup")
             elif event.key == pygame. K_s or event.key == pygame.K_DOWN:
                 player.goKey("sdown")
-
+                
+                
+                
+   # for hittingBall in balls:
+    #    for hitBall in balls:
+     #     if hittingBall.ballCollide(hitBall):
+      #        if hittingBall.kind == "player":
+       #           balls.remove(hitBall)
+        #          kills += 1
+    player.update(size)
 
 
 
     screen.fill([30,40,50])
     screen.blit(score.image, score.rect)
+    screen.blit(player.image, player.rect)
     pygame.display.flip()
     clock.tick(60)
     # print(clock.get_fps())
