@@ -1,4 +1,6 @@
 import pygame, sys, math
+
+
 class Head():
     def __init__(self, maxSpeed=4, startPos=[0,0]):
         #fix images
