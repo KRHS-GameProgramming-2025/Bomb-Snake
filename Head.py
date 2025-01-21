@@ -3,10 +3,10 @@ import pygame, sys, math
 
 class Head():
     def __init__(self, maxSpeed=4, startPos=[0,0]):
-        self.imagesUp = [pygame.image.load("Art/Snake/snake_head_up.PNG")]
+        self.imagesRight = [pygame.image.load("Art/Snake/snake_head_right.PNG")]
         self.imagesDown = [pygame.image.load("Art/Snake/snake_head_down.PNG")]
         self.imagesLeft = [pygame.image.load("Art/Snake/snake_head_left.PNG")]
-        self.imagesRight = [pygame.image.load("Art/Snake/snake_head_right.PNG")]
+        self.imagesUp = [pygame.image.load("Art/Snake/snake_head_up.PNG")]
         self.images = self.imagesUp
         
         self.frame = 0

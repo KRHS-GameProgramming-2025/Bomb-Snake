@@ -2,10 +2,7 @@ import pygame, sys, math
 
 class Pellet():
     def __init__(self, speed = [0,0], startPos=[0,0]):
-        self.images = [pygame.image.load("images/ball/ball.PNG"),
-                       pygame.image.load("images/ball/ball2.PNG"),
-                       pygame.image.load("images/ball/ball3.PNG"),
-                       pygame.image.load("images/ball/ball2.PNG")]
+        self.images = [pygame.image.load("Art/Objects/mango.PNG")]
         self.frame = 0
         self.frameMax = len(self.images)-1
         self.image = self.images[self.frame]
@@ -20,7 +17,7 @@ class Pellet():
         self.didBounceX = False
         self.didBounceY = False
         
-        self.kind = "ball"
+        self.kind = "pellet"
         self.animationTimer = 0
         self.animationTimerMax = 60/10
         
@@ -34,9 +31,7 @@ class Pellet():
         self.animate()
     
         
-    def move(self):
-        self.speed = [self.speedx, self.speedy]
-        self.rect = self.rect.move(self.speed)
+    
         
         
     def animate(self):
