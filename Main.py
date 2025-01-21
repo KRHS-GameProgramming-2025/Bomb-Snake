@@ -44,21 +44,24 @@ while True:
                 
                 
                 
-    for hittingPellet in pellets:
-        for hitPellet in pellets:
-          if hittingPellet.pelletCollide(hitPellet):
-              if hittingPellet.kind == "player":
-                  pellets.remove(hitPellets)
-                  kills += 1
-    player.update(size)
+    #for hittingPellet in pellets:
+     #   for hitPellet in pellets:
+      #    if hittingPellet.pelletCollide(hitPellet):
+       #       if hittingPellet.kind == "player":
+        #          pellets.remove(hitPellets)
+         #         kills += 1
+    for i, segment in enumerate(snake):
+        if i != len(snake)-1:
+            snake[i+1].goKey(segment.prevDir)
+        segment.update(size)
     
 
     screen.fill([30,40,50])
-    for pellet in pellets:
-        screen.blit(pellet.image, pellet.rect)
+   # for pellet in pellets:
+    #    screen.blit(pellet.image, pellet.rect)
     screen.blit(score.image, score.rect)
-    screen.blit(player.image, player.rect)
-    screen.blit(tail.image, tail.rect)
+    for segment in snake:
+        screen.blit(segment.image, segment.rect)
     pygame.display.flip()
     clock.tick(60)
     # print(clock.get_fps())

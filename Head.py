@@ -18,6 +18,8 @@ class Head():
         self.speedy = 0
         self.speed = [self.speedx, self.speedy]
         self.rad = (self.rect.height/2 + self.rect.width/2)/2
+        self.direction = "sup"
+        self.prevDir = "sup"
         
         self.maxSpeed = maxSpeed
         self.kind = "head"
@@ -28,31 +30,34 @@ class Head():
         self.living = True
         
     def update(self, size):
+        self.prevDir = self.direction
         self.move()
         self.wallCollide(size)
         self.animationTimer += 1
         self.animate()
 
     def goKey(self, direction):
-        if direction == "left":
+        self.prevDir = self.direction
+        self.direction = direction
+        if self.direction == "left":
             self.speedx = -self.maxSpeed
             self.images =self.imagesLeft
-        elif direction == "right":
+        elif self.direction == "right":
             self.speedx = self.maxSpeed
             self.images =self.imagesRight
-        elif direction == "up":
+        elif self.direction == "up":
             self.speedy = -self.maxSpeed
             self.images =self.imagesUp
-        elif direction == "down":
+        elif self.direction == "down":
             self.speedy = self.maxSpeed
             self.images =self.imagesDown
-        elif direction == "sleft":
+        elif self.direction == "sleft":
             self.speedx = 0
-        elif direction == "sright":
+        elif self.direction == "sright":
             self.speedx = 0
-        elif direction == "sup":
+        elif self.direction == "sup":
             self.speedy = 0
-        elif direction == "sdown":
+        elif self.direction == "sdown":
             self.speedy = 0
             
     def move(self):
