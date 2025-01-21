@@ -2,6 +2,7 @@ import pygame, sys, math, random
 from Hud import *
 from Pellet import *
 from Head import *
+from Bomb import *
 
 pygame.init()
 if not pygame.font: print("Warning, fonts disabled")
@@ -13,6 +14,7 @@ clock = pygame.time.Clock();
 
 score = Hud ("Score: ",[0,0])
 player = Head(4,[1000/5, 900/2])
+pellets = [player]
 
 while True:
     for event in pygame.event.get():
@@ -39,17 +41,18 @@ while True:
                 
                 
                 
-   # for hittingBall in balls:
-    #    for hitBall in balls:
-     #     if hittingBall.ballCollide(hitBall):
-      #        if hittingBall.kind == "player":
-       #           balls.remove(hitBall)
-        #          kills += 1
+    for hittingPellet in pellets:
+        for hitPellet in pellets:
+          if hittingPellet.pelletCollide(hitPellet):
+              if hittingPellet.kind == "player":
+                  pellets.remove(hitPellets)
+                  kills += 1
     player.update(size)
-
-
+    
 
     screen.fill([30,40,50])
+    for pellet in pellets:
+        screen.blit(pellet.image, pellet.rect)
     screen.blit(score.image, score.rect)
     screen.blit(player.image, player.rect)
     pygame.display.flip()
