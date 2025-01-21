@@ -3,11 +3,10 @@ import pygame, sys, math
 
 class Head():
     def __init__(self, maxSpeed=4, startPos=[0,0]):
-        #fix images
-        self.imagesUp = [pygame.image.load("images/Playerball/playerBall-UP.PNG")]
-        self.imagesDown = [pygame.image.load("images/Playerball/playerBall-DOWN.PNG")]
-        self.imagesLeft = [pygame.image.load("images/Playerball/playerBall-LEFT.PNG")]
-        self.imagesRight = [pygame.image.load("images/Playerball/playerBall-RIGHT.PNG")]
+        self.imagesUp = [pygame.image.load("Art/Snake/snake_head_up.PNG")]
+        self.imagesDown = [pygame.image.load("Art/Snake/snake_head_down.PNG")]
+        self.imagesLeft = [pygame.image.load("Art/Snake/snake_head_left.PNG")]
+        self.imagesRight = [pygame.image.load("Art/Snake/snake_head_right.PNG")]
         self.images = self.imagesUp
         
         self.frame = 0
@@ -22,6 +21,17 @@ class Head():
         
         self.maxSpeed = maxSpeed
         self.kind = "head"
+        
+        self.animationTimer = 0
+        self.animationTimerMax = 60/10
+        
+        self.living = True
+        
+    def update(self, size):
+        self.move()
+        self.wallCollide(size)
+        self.animationTimer += 1
+        self.animate()
 
     def goKey(self, direction):
         if direction == "left":
@@ -45,9 +55,32 @@ class Head():
         elif direction == "sdown":
             self.speedy = 0
             
+    def move(self):
+        self.speed = [self.speedx, self.speedy]
+        self.rect = self.rect.move(self.speed)  
+        
+    def animate(self):
+        if self.animationTimer >=self.animationTimerMax:
+            self.animationTimer = 0
+            if self.frame >= self.frameMax:
+                self.frame = 0
+            else:
+                self.frame += 1
+            self.image = self.images[self.frame]
+        
+    def wallCollide(self, size):
+        width = size[0]
+        height = size[1]
+        if self.rect.bottom >  height: 
+            self.living = False
+        if self.rect.top < 0: 
+            self.living = False
+        if self.rect.right > width:
+            self.living = False
+        if self.rect.left < 0:
+            self.living = False
             
-            
-    def ballCollide(self, other):
+    def pelletCollide(self, other):
         if self != other:
             if self.rect.right > other.rect.left:
                 if self.rect.left < other.rect.right:
