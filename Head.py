@@ -1,11 +1,12 @@
 import pygame, sys, math
+
+
 class Head():
     def __init__(self, maxSpeed=4, startPos=[0,0]):
-        #fix images
-        self.imagesUp = [pygame.image.load("images/Playerball/playerBall-UP.PNG")]
-        self.imagesDown = [pygame.image.load("images/Playerball/playerBall-DOWN.PNG")]
-        self.imagesLeft = [pygame.image.load("images/Playerball/playerBall-LEFT.PNG")]
-        self.imagesRight = [pygame.image.load("images/Playerball/playerBall-RIGHT.PNG")]
+        self.imagesRight = [pygame.image.load("Art/Snake/snake_head_right.PNG")]
+        self.imagesDown = [pygame.image.load("Art/Snake/snake_head_down.PNG")]
+        self.imagesLeft = [pygame.image.load("Art/Snake/snake_head_left.PNG")]
+        self.imagesUp = [pygame.image.load("Art/Snake/snake_head_up.PNG")]
         self.images = self.imagesUp
         
         self.frame = 0
@@ -17,35 +18,74 @@ class Head():
         self.speedy = 0
         self.speed = [self.speedx, self.speedy]
         self.rad = (self.rect.height/2 + self.rect.width/2)/2
+        self.direction = "sup"
+        self.prevDir = "sup"
         
         self.maxSpeed = maxSpeed
         self.kind = "head"
+        
+        self.animationTimer = 0
+        self.animationTimerMax = 60/10
+        
+        self.living = True
+        
+    def update(self, size):
+        self.prevDir = self.direction
+        self.move()
+        self.wallCollide(size)
+        self.animationTimer += 1
+        self.animate()
 
     def goKey(self, direction):
-        if direction == "left":
+        self.prevDir = self.direction
+        self.direction = direction
+        if self.direction == "left":
             self.speedx = -self.maxSpeed
             self.images =self.imagesLeft
-        elif direction == "right":
+        elif self.direction == "right":
             self.speedx = self.maxSpeed
             self.images =self.imagesRight
-        elif direction == "up":
+        elif self.direction == "up":
             self.speedy = -self.maxSpeed
             self.images =self.imagesUp
-        elif direction == "down":
+        elif self.direction == "down":
             self.speedy = self.maxSpeed
             self.images =self.imagesDown
-        elif direction == "sleft":
+        elif self.direction == "sleft":
             self.speedx = 0
-        elif direction == "sright":
+        elif self.direction == "sright":
             self.speedx = 0
-        elif direction == "sup":
+        elif self.direction == "sup":
             self.speedy = 0
-        elif direction == "sdown":
+        elif self.direction == "sdown":
             self.speedy = 0
             
+    def move(self):
+        self.speed = [self.speedx, self.speedy]
+        self.rect = self.rect.move(self.speed)  
+        
+    def animate(self):
+        if self.animationTimer >=self.animationTimerMax:
+            self.animationTimer = 0
+            if self.frame >= self.frameMax:
+                self.frame = 0
+            else:
+                self.frame += 1
+            self.image = self.images[self.frame]
+        
+    def wallCollide(self, size):
+        width = size[0]
+        height = size[1]
+        if self.rect.bottom >  height: 
+            self.living = False
+        if self.rect.top < 0: 
+            self.living = False
+        if self.rect.right > width:
+            self.living = False
+        if self.rect.left < 0:
+            self.living = False
             
-            
-    def ballCollide(self, other):
+    def pelletCollide(self, other):
         if self != other:
             if self.rect.right > other.rect.left:
                 if self.rect.left < other.rect.right:
