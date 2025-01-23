@@ -2,6 +2,7 @@ import pygame, sys, math, random
 from Hud import *
 from Pellet import *
 from Head import *
+from Bomb import *
 
 pygame.init()
 if not pygame.font: print("Warning, fonts disabled")
@@ -13,6 +14,7 @@ clock = pygame.time.Clock();
 
 score = Hud ("Score: ",[0,0])
 player = Head(4,[1000/2, 900/2])
+bomb = Bomb([900,800])
 
 while True:
     for event in pygame.event.get():
@@ -42,6 +44,7 @@ while True:
 
     screen.fill([30,40,50])
     screen.blit(score.image, score.rect)
+    screen.blit(bomb.image, bomb.rect)
     pygame.display.flip()
     clock.tick(60)
     # print(clock.get_fps())
