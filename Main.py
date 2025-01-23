@@ -3,6 +3,8 @@ from Hud import *
 from Pellet import *
 from Head import *
 from Bomb import *
+from Tail import *
+from Wall import *
 
 pygame.init()
 if not pygame.font: print("Warning, fonts disabled")
@@ -14,7 +16,9 @@ clock = pygame.time.Clock();
 
 score = Hud ("Score: ",[0,0])
 player = Head(4,[1000/5, 900/2])
-pellets = [player]
+snake = [player]
+snake += [Tail(4,[1000/5, 900/2])]
+bomb = Bomb([900,800])
 
 while True:
     for event in pygame.event.get():
@@ -41,20 +45,25 @@ while True:
                 
                 
                 
-    for hittingPellet in pellets:
-        for hitPellet in pellets:
-          if hittingPellet.pelletCollide(hitPellet):
-              if hittingPellet.kind == "player":
-                  pellets.remove(hitPellets)
-                  kills += 1
-    player.update(size)
+    #for hittingPellet in pellets:
+     #   for hitPellet in pellets:
+      #    if hittingPellet.pelletCollide(hitPellet):
+       #       if hittingPellet.kind == "player":
+        #          pellets.remove(hitPellets)
+         #         kills += 1
+    for i, segment in enumerate(snake):
+        if i != len(snake)-1:
+            snake[i+1].goKey(segment.prevDir)
+        segment.update(size)
     
 
     screen.fill([30,40,50])
-    for pellet in pellets:
-        screen.blit(pellet.image, pellet.rect)
+   # for pellet in pellets:
+    #    screen.blit(pellet.image, pellet.rect)
     screen.blit(score.image, score.rect)
-    screen.blit(player.image, player.rect)
+    for segment in snake:
+        screen.blit(segment.image, segment.rect)
+    screen.blit(bomb.image, bomb.rect)
     pygame.display.flip()
     clock.tick(60)
     # print(clock.get_fps())
