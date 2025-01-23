@@ -18,6 +18,7 @@ score = Hud ("Score: ",[0,0])
 player = Head(4,[1000/5, 900/2])
 snake = [player]
 snake += [Tail(4,[1000/5, 900/2])]
+bomb = Bomb([900,800])
 
 while True:
     for event in pygame.event.get():
@@ -62,6 +63,7 @@ while True:
     screen.blit(score.image, score.rect)
     for segment in snake:
         screen.blit(segment.image, segment.rect)
+    screen.blit(bomb.image, bomb.rect)
     pygame.display.flip()
     clock.tick(60)
     # print(clock.get_fps())
