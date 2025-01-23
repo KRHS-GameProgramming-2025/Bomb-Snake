@@ -2,7 +2,7 @@ import pygame, sys,math
 
 class Bomb():
     def __init__(self, startPos=[0,0]):
-        self.image = pygame.image.load("Art/Objects/Bomb.png")
+        self.image = pygame.image.load("Art/Objects/Bomb/Bomb.png")
         self.rect = self.image.get_rect(center=startPos)
         self.rad=self.rect.width/2
         
