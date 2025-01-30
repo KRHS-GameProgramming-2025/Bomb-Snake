@@ -2,7 +2,9 @@ import pygame, sys, math
 
 
 class Head():
-    def __init__(self, maxSpeed=4, startPos=[0,0]):
+    def __init__(self, maxSpeed=5, startPos=[0,0]):
+        self.tileSize = 50
+        
         self.imagesRight = [pygame.image.load("Art/Snake/snake_head_right.PNG")]
         self.imagesDown = [pygame.image.load("Art/Snake/snake_head_down.PNG")]
         self.imagesLeft = [pygame.image.load("Art/Snake/snake_head_left.PNG")]
@@ -39,30 +41,33 @@ class Head():
     def goKey(self, direction):
         self.prevDir = self.direction
         self.direction = direction
+    
+    def upDateDirection(self):
+        print("........................")
         if self.direction == "left":
             self.speedx = -self.maxSpeed
+            self.speedy = 0
             self.images =self.imagesLeft
         elif self.direction == "right":
             self.speedx = self.maxSpeed
+            self.speedy = 0
             self.images =self.imagesRight
         elif self.direction == "up":
+            self.speedx = 0
             self.speedy = -self.maxSpeed
             self.images =self.imagesUp
         elif self.direction == "down":
+            self.speedx = 0
             self.speedy = self.maxSpeed
             self.images =self.imagesDown
-        elif self.direction == "sleft":
-            self.speedx = 0
-        elif self.direction == "sright":
-            self.speedx = 0
-        elif self.direction == "sup":
-            self.speedy = 0
-        elif self.direction == "sdown":
-            self.speedy = 0
+        
             
     def move(self):
         self.speed = [self.speedx, self.speedy]
-        self.rect = self.rect.move(self.speed)  
+        self.rect = self.rect.move(self.speed) 
+        print((self.rect.centerx-self.tileSize/2)%50, (self.rect.centery-self.tileSize/2)%50)
+        if (self.rect.centerx-self.tileSize/2)%50 == 0 and (self.rect.centery-self.tileSize/2)%50==0:
+            self.upDateDirection()
         
     def animate(self):
         if self.animationTimer >=self.animationTimerMax:
