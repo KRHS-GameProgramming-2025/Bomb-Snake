@@ -22,7 +22,7 @@ clock = pygame.time.Clock();
 score = Hud ("Score: ",[0,0])
 player = Head(4,[1000/5, 900/2])
 snake = [player]
-snake += [Tail(4,[1000/5, 900/2])]
+snake += [Tail(player.maxSpeed, player.rect, player.direction)]
 bomb = Bomb([900,800])
 
 while True:
