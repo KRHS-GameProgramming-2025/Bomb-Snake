@@ -7,10 +7,15 @@ from Tail import *
 from Wall import *
 
 pygame.init()
+pygame.mixer.init()
+
 if not pygame.font: print("Warning, fonts disabled")
 
 size = [1000,900]
 screen = pygame.display.set_mode(size)
+
+pygame.mixer.music.load("Music/Background/Main_Background.mp3")
+pygame.mixer.music.play()
 
 clock = pygame.time.Clock();
 

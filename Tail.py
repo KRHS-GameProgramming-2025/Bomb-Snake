@@ -37,7 +37,6 @@ class Tail():
         self.direction = direction
         if self.direction == "left":
             self.speedx = -self.maxSpeed
-            self.images =self.imagesLeft
         elif self.direction == "right":
             self.speedx = self.maxSpeed
             self.images =self.imagesRight
@@ -46,7 +45,6 @@ class Tail():
             self.images =self.imagesUp
         elif self.direction == "down":
             self.speedy = self.maxSpeed
-            self.images =self.imagesDown
         elif self.direction == "sleft":
             self.speedx = 0
         elif self.direction == "sright":
