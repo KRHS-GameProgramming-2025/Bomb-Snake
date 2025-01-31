@@ -20,7 +20,7 @@ class Head():
         self.speedy = 0
         self.speed = [self.speedx, self.speedy]
         self.rad = (self.rect.height/2 + self.rect.width/2)/2
-        self.direction = "sup"
+        self.direction = "up"
         self.prevDir = "sup"
         
         self.maxSpeed = maxSpeed
@@ -41,6 +41,7 @@ class Head():
     def goKey(self, direction):
         self.prevDir = self.direction
         self.direction = direction
+        
     
     def upDateDirection(self):
         print("........................")
@@ -65,7 +66,6 @@ class Head():
     def move(self):
         self.speed = [self.speedx, self.speedy]
         self.rect = self.rect.move(self.speed) 
-        print((self.rect.centerx-self.tileSize/2)%50, (self.rect.centery-self.tileSize/2)%50)
         if (self.rect.centerx-self.tileSize/2)%50 == 0 and (self.rect.centery-self.tileSize/2)%50==0:
             self.upDateDirection()
         
@@ -82,13 +82,13 @@ class Head():
         width = size[0]
         height = size[1]
         if self.rect.bottom >  height: 
-            self.living = False
+            self.rect.centery = self.tileSize/2
         if self.rect.top < 0: 
-            self.living = False
+            self.rect.centery = height-self.tileSize/2
         if self.rect.right > width:
-            self.living = False
+            self.rect.centerx = self.tileSize/2
         if self.rect.left < 0:
-            self.living = False
+            self.rect.centerx = width-self.tileSize/2
             
     def pelletCollide(self, other):
         if self != other:
