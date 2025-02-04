@@ -29,7 +29,7 @@ snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
 snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
 snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
       
-bomb = Bomb([900,800])
+bomb = Bomb([925,825])
 
 bgImage = pygame.image.load("Art/Background/board.png")
 bgRect = bgImage.get_rect()
