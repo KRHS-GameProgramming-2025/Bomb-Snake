@@ -19,11 +19,21 @@ pygame.mixer.music.play()
 
 clock = pygame.time.Clock();
 
+tileSize = 50
+
 score = Hud ("Score: ",[0,0])
-player = Head(4,[1000/5, 900/2])
+player = Head(5,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
 snake = [player]
-snake += [Tail(4,[1000/5, 900/2])]
+snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
+snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
+snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
+snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
+      
 bomb = Bomb([900,800])
+
+bgImage = pygame.image.load("Art/Background/board.png")
+bgRect = bgImage.get_rect()
+
 
 while True:
     for event in pygame.event.get():
@@ -38,15 +48,7 @@ while True:
                 player.goKey("up")
             elif event.key == pygame. K_s or event.key == pygame.K_DOWN:
                 player.goKey("down")
-        elif event.type == pygame.KEYUP:
-            if event.key == pygame. K_a or event.key == pygame.K_LEFT:
-                player.goKey("sleft")
-            elif event.key == pygame. K_d or event.key == pygame.K_RIGHT:
-                player.goKey("sright")
-            elif event.key == pygame. K_w or event.key == pygame.K_UP:
-                player.goKey("sup")
-            elif event.key == pygame. K_s or event.key == pygame.K_DOWN:
-                player.goKey("sdown")
+        
                 
                 
                 
@@ -57,14 +59,16 @@ while True:
         #          pellets.remove(hitPellets)
          #         kills += 1
     for i, segment in enumerate(snake):
-        if i != len(snake)-1:
-            snake[i+1].goKey(segment.prevDir)
         segment.update(size)
+        if segment.kind == "tail" and snake[i-1].didUpdate:
+            segment.goKey(snake[i-1].direction, snake[i-1].turnCoor)
+        
     
 
     screen.fill([30,40,50])
    # for pellet in pellets:
     #    screen.blit(pellet.image, pellet.rect)
+    screen.blit(bgImage, bgRect)
     screen.blit(score.image, score.rect)
     for segment in snake:
         screen.blit(segment.image, segment.rect)

@@ -1,8 +1,8 @@
 import pygame, sys, math
 
 
-class Head():
-    def __init__(self, maxSpeed=5, startPos=[0,0]):
+class Snake():
+    def __init__(self, maxSpeed=5, startPos=[0,0], kind="head"):
         self.tileSize = 50
         
         self.imagesRight = [pygame.image.load("Art/Snake/snake_head_right.PNG")]
@@ -17,11 +17,11 @@ class Head():
         self.rect = self.image.get_rect(center = startPos)
         
         self.speedx = 0
-        self.speedy = -maxSpeed
+        self.speedy = 0
         self.speed = [self.speedx, self.speedy]
         self.rad = (self.rect.height/2 + self.rect.width/2)/2
         self.direction = "up"
-        self.prevDir = "up"
+        self.prevDir = "sup"
         
         self.maxSpeed = maxSpeed
         self.kind = "head"
@@ -30,22 +30,17 @@ class Head():
         self.animationTimerMax = 60/10
         
         self.living = True
-        self.turnCoor = self.rect.center
-        self.didUpdate = False
-        self.keyLock = False
-    
         
     def update(self, size):
-        self.didUpdate = False
+        self.prevDir = self.direction
         self.move()
         self.wallCollide(size)
         self.animationTimer += 1
         self.animate()
 
     def goKey(self, direction):
-        if not self.keyLock:
-            self.prevDir = self.direction
-            self.direction = direction
+        self.prevDir = self.direction
+        self.direction = direction
         
     
     def upDateDirection(self):
@@ -66,21 +61,13 @@ class Head():
             self.speedx = 0
             self.speedy = self.maxSpeed
             self.images =self.imagesDown
-       
         
             
     def move(self):
         self.speed = [self.speedx, self.speedy]
         self.rect = self.rect.move(self.speed) 
-        if ((self.rect.centerx-self.tileSize/2)%50 == 0 and 
-            (self.rect.centery-self.tileSize/2)%50==0 and
-            self.direction!= self.prevDir):
-                self.prevDir = self.direction
-                self.upDateDirection()
-                self.turnCoor = self.rect.center
-                self.didUpdate = True
-                self.keyLock = False
-        
+        if (self.rect.centerx-self.tileSize/2)%50 == 0 and (self.rect.centery-self.tileSize/2)%50==0:
+            self.upDateDirection()
         
     def animate(self):
         if self.animationTimer >=self.animationTimerMax:
