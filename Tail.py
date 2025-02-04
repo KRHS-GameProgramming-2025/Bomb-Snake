@@ -30,12 +30,12 @@ class Tail():
         
         self.animationTimer = 0
         self.animationTimerMax = 60/10
-        
+        self.didUpdate = False
         
         
     def update(self, size):
         print(self.kind, self.direction)
-        self.prevDir = self.direction
+        self.didUpdate = False
         self.move()
         self.animationTimer += 1
         self.animate()
@@ -63,22 +63,23 @@ class Tail():
             self.speedx = 0
             self.speedy = self.maxSpeed
             self.images =self.imagesUpDown
+        self.didUpdate = True
             
-        if self.prevDir != self.direction:
-            if self.prevDir == "up":
-                if self.direction == "right":
-                    self.rect = self.rect.move([-self.tileSize, -self.tileSize])
-                if self.direction == "left":
-                    self.rect = self.rect.move([self.tileSize, -self.tileSize])
-                if self.direction == "down":
-                    self.rect = self.rect.move([0, -self.tileSize*2])
-            if self.prevDir == "right":
-                if self.direction == "up":
-                    self.rect = self.rect.move([-self.tileSize, -self.tileSize])
-                if self.direction == "left":
-                    self.rect = self.rect.move([self.tileSize, -self.tileSize])
-                if self.direction == "down":
-                    self.rect = self.rect.move([0, -self.tileSize*2])
+        # ~ if self.prevDir != self.direction:
+            # ~ if self.prevDir == "up":
+                # ~ if self.direction == "right":
+                    # ~ self.rect = self.rect.move([-self.tileSize, -self.tileSize])
+                # ~ if self.direction == "left":
+                    # ~ self.rect = self.rect.move([self.tileSize, -self.tileSize])
+                # ~ if self.direction == "down":
+                    # ~ self.rect = self.rect.move([0, -self.tileSize*2])
+            # ~ if self.prevDir == "right":
+                # ~ if self.direction == "up":
+                    # ~ self.rect = self.rect.move([-self.tileSize, -self.tileSize])
+                # ~ if self.direction == "left":
+                    # ~ self.rect = self.rect.move([self.tileSize, -self.tileSize])
+                # ~ if self.direction == "down":
+                    # ~ self.rect = self.rect.move([0, -self.tileSize*2])
             
         
             

@@ -24,7 +24,9 @@ tileSize = 50
 score = Hud ("Score: ",[0,0])
 player = Head(5,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
 snake = [player]
-snake += [Tail(player.maxSpeed, player.rect, player.direction)]
+snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
+snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
+      
 bomb = Bomb([900,800])
 
 bgImage = pygame.image.load("Art/Background/board.png")
@@ -38,25 +40,12 @@ while True:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame. K_a or event.key == pygame.K_LEFT:
                 player.goKey("left")
-                for i, segment in enumerate(snake):
-                    if segment.kind == "tail":
-                        segment.goKey(snake[i-1].direction)
             elif event.key == pygame. K_d or event.key == pygame.K_RIGHT:
                 player.goKey("right")
-                for i, segment in enumerate(snake):
-                    if segment.kind == "tail":
-                        segment.goKey(snake[i-1].direction)
             elif event.key == pygame. K_w or event.key == pygame.K_UP:
                 player.goKey("up")
-                for i, segment in enumerate(snake):
-                    if segment.kind == "tail":
-                        segment.goKey(snake[i-1].direction)
             elif event.key == pygame. K_s or event.key == pygame.K_DOWN:
                 player.goKey("down")
-                for i, segment in enumerate(snake):
-                    if segment.kind == "tail":
-                        segment.goKey(snake[i-1].direction)
-            
         
                 
                 
@@ -67,7 +56,9 @@ while True:
        #       if hittingPellet.kind == "player":
         #          pellets.remove(hitPellets)
          #         kills += 1
-    for segment in snake:
+    for i, segment in enumerate(snake):
+        if segment.kind == "tail" and snake[i-1].didUpdate:
+            segment.goKey(snake[i-1].direction)
         segment.update(size)
     
 

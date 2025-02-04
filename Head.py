@@ -30,9 +30,10 @@ class Head():
         self.animationTimerMax = 60/10
         
         self.living = True
+        self.didUpdate = False
         
     def update(self, size):
-        self.prevDir = self.direction
+        self.didUpdate = False
         self.move()
         self.wallCollide(size)
         self.animationTimer += 1
@@ -61,6 +62,7 @@ class Head():
             self.speedx = 0
             self.speedy = self.maxSpeed
             self.images =self.imagesDown
+        self.didUpdate = True
         
             
     def move(self):
