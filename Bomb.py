@@ -6,6 +6,8 @@ class Bomb():
         self.rect = self.image.get_rect(center=startPos)
         self.rad=self.rect.width/2
         
+        
+        
     def collideSnake(self,other):
         if self != other:
             if self.rect.right>other.rect.left:
@@ -22,3 +24,5 @@ class Bomb():
         x2=other.rect.centerx
         y2=other.rect.centery
         return math.sqrt((x2-x1)**2+(y2-y1)**2)
+        ((self.rect.centerx-self.tileSize/2)%50 == 0 and 
+            (self.rect.centery-self.tileSize/2)%50==0)
