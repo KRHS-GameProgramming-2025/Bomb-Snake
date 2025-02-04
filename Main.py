@@ -26,6 +26,8 @@ player = Head(5,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
 snake = [player]
 snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
 snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
+snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
+snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
       
 bomb = Bomb([900,800])
 
@@ -57,9 +59,10 @@ while True:
         #          pellets.remove(hitPellets)
          #         kills += 1
     for i, segment in enumerate(snake):
-        if segment.kind == "tail" and snake[i-1].didUpdate:
-            segment.goKey(snake[i-1].direction)
         segment.update(size)
+        if segment.kind == "tail" and snake[i-1].didUpdate:
+            segment.goKey(snake[i-1].direction, snake[i-1].turnCoor)
+        
     
 
     screen.fill([30,40,50])

@@ -19,7 +19,7 @@ class Tail():
         self.rect = self.image.get_rect(center = startPos)
         
         self.speedx = 0
-        self.speedy = 0
+        self.speedy = -maxSpeed
         self.speed = [self.speedx, self.speedy]
         self.rad = (self.rect.height/2 + self.rect.width/2)/2
         self.direction = headDir
@@ -30,20 +30,28 @@ class Tail():
         
         self.animationTimer = 0
         self.animationTimerMax = 60/10
+        
+        self.targetCoor = []
+        self.turnCoor = self.rect.center
         self.didUpdate = False
+        self.keyLock = False
+         
         
         
     def update(self, size):
-        print(self.kind, self.direction)
         self.didUpdate = False
         self.move()
         self.animationTimer += 1
         self.animate()
         self.wallCollide(size)
 
-    def goKey(self, direction):
-        self.prevDir = self.direction
-        self.direction = direction
+    def goKey(self, direction, turnCoor):
+        if not self.keyLock:
+            self.prevDir = self.direction
+            self.direction = direction
+            self.targetCoor = turnCoor
+            self.keyLock = True
+        
 
     
     def upDateDirection(self):
@@ -63,7 +71,6 @@ class Tail():
             self.speedx = 0
             self.speedy = self.maxSpeed
             self.images =self.imagesUpDown
-        self.didUpdate = True
             
         # ~ if self.prevDir != self.direction:
             # ~ if self.prevDir == "up":
@@ -86,9 +93,11 @@ class Tail():
     def move(self):
         self.speed = [self.speedx, self.speedy]
         self.rect = self.rect.move(self.speed) 
-        print((self.rect.centerx-self.tileSize/2)%50, (self.rect.centery-self.tileSize/2)%50)
-        if (self.rect.centerx-self.tileSize/2)%50 == 0 and (self.rect.centery-self.tileSize/2)%50==0:
+        if self.rect.center == self.targetCoor:
             self.upDateDirection()
+            self.turnCoor = self.rect.center
+            self.didUpdate = True
+            self.keyLock = False
     
     def wallCollide(self, size):
         width = size[0]
