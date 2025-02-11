@@ -65,9 +65,9 @@ while True:
         
     
 
-    screen.fill([30,40,50])
-   # for pellet in pellets:
-    #    screen.blit(pellet.image, pellet.rect)
+   # screen.fill([30,40,50])
+    #for pellet in pellets:
+     #   screen.blit(pellet.image, pellet.rect)
     screen.blit(bgImage, bgRect)
     screen.blit(score.image, score.rect)
     for segment in snake:
