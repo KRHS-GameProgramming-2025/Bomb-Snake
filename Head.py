@@ -112,3 +112,51 @@ class Head():
                             if self.getDist(other) < self.rad + other.rad:
                                 return True
         return False
+        
+        
+        
+        
+        
+        
+        
+        self.hitbox = (self.x + 5, self.y, 5, 5)
+        
+    
+        
+        
+        class player(object):
+            def __init__(self,x,y,width,height):
+
+                self.x = x
+                self.y = y
+                self.width = width
+                self.height = height
+                self.vel = 5
+                self.left = False
+                self.right = False
+                self.up = False
+                self.down = False
+                self.hitbox = (self.x + 5, self.y, 5, 5)
+
+            def draw(self, win):
+                if self.walkCount + 1 >= 27:
+                    self.walkCount = 0
+
+                if not(self.standing):
+                    if self.left:
+                        win.blit(walkLeft[self.walkCount//3], (self.x,self.y))
+                        self.walkCount += 1
+                    elif self.right:
+                        win.blit(walkRight[self.walkCount//3], (self.x,self.y))
+                        self.walkCount +=1
+                else:
+                    if self.right:
+                        win.blit(walkRight[0], (self.x, self.y))
+                    else:
+                        win.blit(walkLeft[0], (self.x, self.y))
+                self.hitbox = (self.x + 17, self.y + 11, 29, 52) # NEW
+                pygame.draw.rect(win, (255,0,0), self.hitbox,2) # To draw the hit box around the player
+        
+        
+        
+        
