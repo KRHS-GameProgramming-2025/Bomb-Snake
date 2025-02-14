@@ -35,7 +35,6 @@ counter = 0;
 score = Hud ("Score: ",[0,0])
 player = Head(5,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
 snake = [player]
-pellets = [player]
 snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
 
       
@@ -45,7 +44,7 @@ kills = 0
 
 bgImage = pygame.image.load("Art/Background/board.png")
 bgRect = bgImage.get_rect()
-
+points = 0
 
 while True:
     for event in pygame.event.get():
@@ -63,21 +62,13 @@ while True:
         
 
                 
-    for hittingPellet in pellets:
-        for hitPellet in pellets:
-          if hittingPellet.collide(hitPellet):
-              if hittingPellet.kind == "player":
-                  pellets.remove(hitPellets)
-                  kills += 1
+   
     if counter >= 5: 
         counter = 0;
         pellets += [Pellet([random.randint(-7,7), random.randint(-7,7)],  
            [random.randint(100, 750), random.randint(100, 500)])
         ]
-        for pellet in pellets:
-            if pellets[-1].collide(pellet):
-                pellets.remove(pellet[-1])
-                break
+        
 
     
     for i, segment in enumerate(snake):
@@ -88,7 +79,9 @@ while True:
     if player.collide(bomb):
         print("Boom")
     if player.collide(pellet):
-        print("nom")
+        points += 1
+        score.update(points)
+        pellet.respawn(size, tileSize)
     
     
     screen.blit(bgImage, bgRect)

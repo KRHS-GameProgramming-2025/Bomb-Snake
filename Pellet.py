@@ -1,4 +1,4 @@
-import pygame, sys, math
+import pygame, sys, math, random
 
 class Pellet():
     def __init__(self, startPos=[0,5]):
@@ -29,3 +29,9 @@ class Pellet():
         y1 = self.rect.centery
         y2 = other.rect.centery
         return math.sqrt((x2-x1)**2 + (y2-y1)**2)
+        
+        
+    def respawn(self, size, tileSize):
+        x =  random.randint(0, int(size[0]/tileSize))*50+25
+        y =  random.randint(0, int(size[1]/tileSize))*50+25
+        self.rect.center = [x,y]

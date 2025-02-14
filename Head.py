@@ -2,7 +2,7 @@ import pygame, sys, math
 
 
 class Head():
-    def __init__(self, maxSpeed=5, startPos=[0,0]):
+    def __init__(self, maxSpeed=2, startPos=[0,0]):
         self.tileSize = 50
         
         self.imagesRight = [pygame.image.load("Art/Snake/snake_head_right.PNG")]
