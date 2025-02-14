@@ -49,7 +49,6 @@ class Head():
         
     
     def upDateDirection(self):
-        print("........................")
         if self.direction == "left":
             self.speedx = -self.maxSpeed
             self.speedy = 0
@@ -66,6 +65,7 @@ class Head():
             self.speedx = 0
             self.speedy = self.maxSpeed
             self.images =self.imagesDown
+    
        
         
             
@@ -103,7 +103,7 @@ class Head():
         if self.rect.left < 0:
             self.rect.centerx = width-self.tileSize/2
             
-    def pelletCollide(self, other):
+    def collide(self, other):
         if self != other:
             if self.rect.right > other.rect.left:
                 if self.rect.left < other.rect.right:
@@ -115,48 +115,12 @@ class Head():
         
         
         
-        
-        
-        
-        
-        self.hitbox = (self.x + 5, self.y, 5, 5)
-        
-    
-        
-        
-        class player(object):
-            def __init__(self,x,y,width,height):
-
-                self.x = x
-                self.y = y
-                self.width = width
-                self.height = height
-                self.vel = 5
-                self.left = False
-                self.right = False
-                self.up = False
-                self.down = False
-                self.hitbox = (self.x + 5, self.y, 5, 5)
-
-            def draw(self, win):
-                if self.walkCount + 1 >= 27:
-                    self.walkCount = 0
-
-                if not(self.standing):
-                    if self.left:
-                        win.blit(walkLeft[self.walkCount//3], (self.x,self.y))
-                        self.walkCount += 1
-                    elif self.right:
-                        win.blit(walkRight[self.walkCount//3], (self.x,self.y))
-                        self.walkCount +=1
-                else:
-                    if self.right:
-                        win.blit(walkRight[0], (self.x, self.y))
-                    else:
-                        win.blit(walkLeft[0], (self.x, self.y))
-                self.hitbox = (self.x + 17, self.y + 11, 29, 52) # NEW
-                pygame.draw.rect(win, (255,0,0), self.hitbox,2) # To draw the hit box around the player
-        
+    def getDist(self, other):
+        x1 = self.rect.centerx
+        x2 = other.rect.centerx
+        y1 = self.rect.centery
+        y2 = other.rect.centery
+        return math.sqrt((x2-x1)**2 + (y2-y1)**2)
         
         
         

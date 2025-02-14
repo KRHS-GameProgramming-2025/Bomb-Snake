@@ -71,4 +71,4 @@ class Bomb():
 
     
     def hit(self):
-        print('hit')
+        print("'hit'")
