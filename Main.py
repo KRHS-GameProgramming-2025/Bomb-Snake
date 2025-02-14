@@ -61,21 +61,23 @@ while True:
             elif event.key == pygame. K_s or event.key == pygame.K_DOWN:
                 player.goKey("down")
         
-    #counter +=1
-    #if counter >= 5: 
-        #counter = 0;
-        #pellets += [Pellet([random.randint(-7,7), random.randint(-7,7)],  
-        #   [random.randint(100, 750), random.randint(100, 500)])
-        #]
+
                 
-                
-    #for hittingPellet in pellets:
-        #for hitPellet in pellets:
-         # if hittingPellet.pelletCollide(hitPellet):
-           #   if hittingPellet.kind == "player":
-          #        pellets.remove(hitPellets)
-         #         kills += 1
-    
+    for hittingPellet in pellets:
+        for hitPellet in pellets:
+          if hittingPellet.collide(hitPellet):
+              if hittingPellet.kind == "player":
+                  pellets.remove(hitPellets)
+                  kills += 1
+    if counter >= 5: 
+        counter = 0;
+        pellets += [Pellet([random.randint(-7,7), random.randint(-7,7)],  
+           [random.randint(100, 750), random.randint(100, 500)])
+        ]
+        for pellet in pellets:
+            if pellets[-1].collide(pellet):
+                pellets.remove(pellet[-1])
+                break
 
     
     for i, segment in enumerate(snake):
@@ -85,7 +87,8 @@ while True:
         
     if player.collide(bomb):
         print("Boom")
-    
+    if player.collide(pellet):
+        print("nom")
     
     
     screen.blit(bgImage, bgRect)

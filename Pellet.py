@@ -9,8 +9,6 @@ class Pellet():
         self.kind = "pellet"
     
         
-    
-     
     def snakeCollide(self, other):
         if self != other:
             if self.rect.right > other.rect.left:
