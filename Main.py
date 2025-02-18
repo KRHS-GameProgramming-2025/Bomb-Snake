@@ -36,6 +36,8 @@ score = Hud ("Score: ",[0,0])
 player = Head(5,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
 snake = [player]
 snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
+life = Hud ("Lives: ", [870,0])
+
 
       
 bomb = Bomb([925,825])
@@ -77,14 +79,18 @@ while True:
         points += 1
         score.update(points)
         pellet.respawn(size, tileSize)
-    
+        
+  #  if player.wallCollide:
+   #     print(".")
+        
     
     screen.blit(bgImage, bgRect)
-    screen.blit(score.image, score.rect)
     screen.blit(bomb.image, bomb.rect)
     screen.blit(pellet.image, pellet.rect)
     for segment in snake:
         screen.blit(segment.image, segment.rect)
+    screen.blit(score.image, score.rect)
+    screen.blit(life.image, life.rect)
     pygame.display.flip()
     clock.tick(60)
     # print(clock.get_fps())
