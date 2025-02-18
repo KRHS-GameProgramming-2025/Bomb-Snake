@@ -63,13 +63,7 @@ while True:
 
                 
    
-    if counter >= 5: 
-        counter = 0;
-        pellets += [Pellet([random.randint(-7,7), random.randint(-7,7)],  
-           [random.randint(100, 750), random.randint(100, 500)])
-        ]
-        
-
+    
     
     for i, segment in enumerate(snake):
         segment.update(size)
@@ -78,6 +72,7 @@ while True:
         
     if player.collide(bomb):
         print("Boom")
+        bomb.respawn(size, tileSize)
     if player.collide(pellet):
         points += 1
         score.update(points)
