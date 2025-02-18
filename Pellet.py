@@ -32,6 +32,7 @@ class Pellet():
         
         
     def respawn(self, size, tileSize):
-        x =  random.randint(0, int(size[0]/tileSize))*50+25
-        y =  random.randint(0, int(size[1]/tileSize))*50+25
+        x =  random.randint(0, int(size[0]/tileSize)-1)*50+25
+        y =  random.randint(0, int(size[1]/tileSize)-1)*50+25
         self.rect.center = [x,y]
+        print(x,y)
