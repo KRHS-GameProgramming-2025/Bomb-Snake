@@ -2,7 +2,15 @@ import pygame, sys, math, random
 
 class Pellet():
     def __init__(self, startPos=[0,5]):
-        self.image = pygame.image.load("Art/Objects/mango.png")
+        self.fruits=["mango",
+                "blueberries",
+                "dragonfruit",
+                "grapes",
+                "pomegrante",
+                "B3RR0R"
+                ]
+        self.fruit=self.fruits[random.randint(0,len(self.fruits)-1)]
+        self.image = pygame.image.load("Art/Objects/"+self.fruit+".png")
         self.rect = self.image.get_rect(center=startPos)
         self.rad=self.rect.width/2
         
@@ -32,6 +40,11 @@ class Pellet():
         
         
     def respawn(self, size, tileSize):
+        self.fruit=self.fruits[random.randint(0,len(self.fruits)-1)]
+        self.image = pygame.image.load("Art/Objects/"+self.fruit+".png")
+        self.rect = self.image.get_rect(center=self.rect.center)
+        self.rad=self.rect.width/2
+        
         x =  random.randint(0, int(size[0]/tileSize)-1)*50+25
         y =  random.randint(0, int(size[1]/tileSize)-1)*50+25
         self.rect.center = [x,y]

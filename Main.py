@@ -5,7 +5,6 @@ from Head import *
 from Bomb import *
 from Tail import *
 from Wall import *
-
 pygame.init()
 pygame.mixer.init()
 
@@ -39,12 +38,13 @@ snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
 
       
 bomb = Bomb([925,825])
-pellet = Pellet([925,725])
+pellets = [Pellet([925,725])]
 kills = 0
 
 bgImage = pygame.image.load("Art/Background/board.png")
 bgRect = bgImage.get_rect()
 points = 0
+didSpawn=True
 
 while True:
     for event in pygame.event.get():
@@ -61,7 +61,14 @@ while True:
                 player.goKey("down")
         
 
-                
+    if not didSpawn and points%5==0:
+        p = Pellet([925,725])
+        p.respawn(size, tileSize)
+        pellets+=[p]
+        didSpawn=True
+    elif didSpawn and points%5==1:
+        didSpawn=False
+                   
    
     
     
@@ -73,16 +80,18 @@ while True:
     if player.collide(bomb):
         print("Boom")
         bomb.respawn(size, tileSize)
-    if player.collide(pellet):
-        points += 1
-        score.update(points)
-        pellet.respawn(size, tileSize)
+    for pellet in pellets:
+        if player.collide(pellet):
+            points += 1
+            score.update(points)
+            pellet.respawn(size, tileSize)
     
     
     screen.blit(bgImage, bgRect)
     screen.blit(score.image, score.rect)
     screen.blit(bomb.image, bomb.rect)
-    screen.blit(pellet.image, pellet.rect)
+    for pellet in pellets:
+        screen.blit(pellet.image, pellet.rect)
     for segment in snake:
         screen.blit(segment.image, segment.rect)
     pygame.display.flip()
