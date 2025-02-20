@@ -5,7 +5,6 @@ from Head import *
 from Bomb import *
 from Tail import *
 from Wall import *
-
 pygame.init()
 pygame.mixer.init()
 
@@ -47,6 +46,7 @@ kills = 0
 bgImage = pygame.image.load("Art/Background/board.png")
 bgRect = bgImage.get_rect()
 points = 0
+didSpawn=True
 
 while True:
     for event in pygame.event.get():
