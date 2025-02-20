@@ -13,3 +13,5 @@ class Hud():
             text = self.baseText + str(score)
             self.image =  self.font.render(text, 1, (255,255,255))
             self.rect = self.image.get_rect(topleft = self.rect.topleft)
+            
+            
