@@ -61,16 +61,23 @@ while True:
                 player.goKey("down")
         
 
-    if not didSpawn and points%5==0:
+    if not didSpawn and points%20==0:
         p = Pellet([925,725])
         p.respawn(size, tileSize)
         pellets+=[p]
         didSpawn=True
-    elif didSpawn and points%5==1:
+    elif didSpawn and points%20==1:
         didSpawn=False
                    
    
-    
+    if not didSpawn and points%15==0:
+        b = Bomb([925,825])
+        b.respawn(size, tileSize)
+        bomb+=[b]
+        didSpawn=True
+    elif didSpawn and points%15==1:
+        didSpawn=False
+                   
     
     for i, segment in enumerate(snake):
         segment.update(size)
