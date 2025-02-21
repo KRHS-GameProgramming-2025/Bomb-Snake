@@ -39,9 +39,11 @@ while True:
         
         pygame.display.flip()
         clock.tick(70)
+        
+            
 
 
-    #-----------------------Start screen--------------------------------
+    #-----------------------Game screen--------------------------------
     if sound:
         pygame.mixer.music.load("Music/Background/Main_Background.mp3")
         pygame.mixer.music.set_volume(.25)
@@ -93,9 +95,7 @@ while True:
             if segment.kind == "tail" and snake[i-1].didUpdate:
                 segment.goKey(snake[i-1].direction, snake[i-1].turnCoor)
             
-        if player.collide(bomb):
-            print("Boom")
-            bomb.respawn(size, tileSize)
+        player.collide(bomb)
         for pellet in pellets:
             if player.collide(pellet):
                 points += 1
@@ -104,7 +104,9 @@ while True:
             
       #  if player.wallCollide:
        #     print(".")
-            
+         
+        if not player.living:
+            mode = "end"
         
         screen.blit(bgImage, bgRect)
         screen.blit(bomb.image, bomb.rect)
@@ -117,3 +119,20 @@ while True:
         pygame.display.flip()
         clock.tick(60)
         # print(clock.get_fps())
+        
+    #-----------------------End screen--------------------------------
+    bgImage=pygame.image.load("Art/Background/End_Screen.png")
+    bgRect = bgImage.get_rect()
+    while mode=="end":
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                sys.exit();
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                     mode="start"
+            
+        screen.blit(bgImage, bgRect)
+        
+        pygame.display.flip()
+        clock.tick(70)
+        

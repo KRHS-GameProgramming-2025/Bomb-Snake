@@ -46,6 +46,6 @@ class Pellet():
         self.rad=self.rect.width/2
         
         x =  random.randint(0, int(size[0]/tileSize)-1)*50+25
-        y =  random.randint(0, int(size[1]/tileSize)-1)*50+25
+        y =  random.randint(1, int(size[1]/tileSize)-1)*50+25
         self.rect.center = [x,y]
         print(x,y)

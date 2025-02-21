@@ -6,6 +6,8 @@ class Bomb():
         self.rect = self.image.get_rect(center=startPos)
         self.rad=self.rect.width/2
         
+        self.kind = "Bomb"
+        
     def collideSnake(self,other):
         if self != other:
             if self.rect.right>other.rect.left:
@@ -75,7 +77,7 @@ class Bomb():
    
    
     
-        self.kind = "Bomb"
+        
     
         
     def snakeCollide(self, other):
@@ -102,6 +104,6 @@ class Bomb():
         
     def respawn(self, size, tileSize):
         x =  random.randint(0, int(size[0]/tileSize)-1)*50+25
-        y =  random.randint(0, int(size[1]/tileSize)-1)*50+25
+        y =  random.randint(1, int(size[1]/tileSize)-1)*50+25
         self.rect.center = [x,y]
         print(x,y)

@@ -110,6 +110,8 @@ class Head():
                     if self.rect.bottom > other.rect.top:
                         if self.rect.top < other.rect.bottom:
                             if self.getDist(other) < self.rad + other.rad:
+                                if other.kind == "Bomb":
+                                    self.living = False
                                 return True
         return False
         
