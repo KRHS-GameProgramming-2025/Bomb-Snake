@@ -38,7 +38,7 @@ while True:
         screen.blit(bgImage, bgRect)
         
         pygame.display.flip()
-        clock.tick(70)
+        clock.tick(60)
         
             
 
@@ -67,7 +67,7 @@ while True:
     
     pellets = [Pellet([925,725])]
     pelletDidSpawn=True
-    pelletSpawnRate=5
+    pelletSpawnRate=15
 
     bgImage = pygame.image.load("Art/Background/board.png")
     bgRect = bgImage.get_rect()
@@ -120,9 +120,9 @@ while True:
                 points += 1
                 score.update(points)
                 pellet.respawn(size, tileSize)
+
             
-      #  if player.wallCollide:
-       #     print(".")
+        
          
         if not player.living:
             lives-=1
@@ -143,11 +143,10 @@ while True:
         screen.blit(score.image, score.rect)
         screen.blit(life.image, life.rect)
         pygame.display.flip()
-        clock.tick(60)
         # print(clock.get_fps())
         
     #-----------------------End screen--------------------------------
-    bgImage=pygame.image.load("Art/Background/End_Screen.png")
+    bgImage=pygame.image.load("Art/Background/dead_Screen.png")
     bgRect = bgImage.get_rect()
     while mode=="end":
         for event in pygame.event.get():
@@ -160,5 +159,5 @@ while True:
         screen.blit(bgImage, bgRect)
         
         pygame.display.flip()
-        clock.tick(70)
+        clock.tick(60)
         
