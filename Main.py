@@ -56,15 +56,20 @@ while True:
     snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
     life = Hud ("Lives: ", [870,0])
           
-    bomb = Bomb([925,825])
+    bombs = [Bomb([925,825])]
+    bombDidSpawn=True
+    bombSpawnRate=15
+    
     pellets = [Pellet([925,725])]
-
+    pelletDidSpawn=True
+    pelletSpawnRate=20
+    
     kills = 0
 
     bgImage = pygame.image.load("Art/Background/board.png")
     bgRect = bgImage.get_rect()
     points = 0
-    didSpawn=True
+    
 
     while mode=="play":
         for event in pygame.event.get():
@@ -80,31 +85,32 @@ while True:
                 elif event.key == pygame. K_s or event.key == pygame.K_DOWN:
                     player.goKey("down")
             
-        if not didSpawn and points%20==0:
-	        p = Pellet([925,725])
-	        p.respawn(size, tileSize)
-	        pellets+=[p]
-	        didSpawn=True
-	    elif didSpawn and points%20==1:
-	        didSpawn=False
-	                   
-	   
-	    if not didSpawn and points%15==0:
-	        b = Bomb([925,825])
-	        b.respawn(size, tileSize)
-	        bomb+=[b]
-	        didSpawn=True
-	    elif didSpawn and points%15==1:
-	        didSpawn=False
+        if not bombDidSpawn and points % bombSpawnRate == 0:
+            b = Bomb([925,825])
+            b.respawn(size, tileSize)
+            bombs+=[b]
+            bombDidSpawn=True
+        elif bombDidSpawn and points % bombSpawnRate == 1:
+            bombDidSpawn=False
+        
+        if not pelletDidSpawn and points % pelletSpawnRate == 0:
+            p = Pellet([925,725])
+            p.respawn(size, tileSize)
+            pellets+=[p]
+            pelletDidSpawn=True
+        elif pelletDidSpawn and points % pelletSpawnRate == 1:
+            pelletDidSpawn=False
+                       
         
         for i, segment in enumerate(snake):
             segment.update(size)
             if segment.kind == "tail" and snake[i-1].didUpdate:
                 segment.goKey(snake[i-1].direction, snake[i-1].turnCoor)
             
-        if player.collide(bomb):
-            print("Boom")
-            bomb.respawn(size, tileSize)
+        for bomb in bombs:
+            if player.collide(bomb):
+               (quit)
+                bomb.respawn(size, tileSize)
         for pellet in pellets:
             if player.collide(pellet):
                 points += 1
@@ -116,7 +122,8 @@ while True:
             
         
         screen.blit(bgImage, bgRect)
-        screen.blit(bomb.image, bomb.rect)
+        for bomb in bombs:
+            screen.blit(bomb.image, bomb.rect)
         for pellet in pellets:
             screen.blit(pellet.image, pellet.rect)
         for segment in snake:
