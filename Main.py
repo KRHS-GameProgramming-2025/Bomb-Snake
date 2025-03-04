@@ -51,21 +51,23 @@ while True:
     else:
         print("No Sound")
 
-    counter = 0;
-    score = Hud ("Score: ",[0,0])
+    counter = 0
+    points = 0
+    
+    score = Hud ("Score: ", points, [0,0])
     player = Head(5,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
     snake = [player]
     snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
-    life = Hud ("Lives: ", [870,0])
+    lives = 2
+    life = Hud ("Lives: ", lives, [870,0])
           
     bomb = Bomb([925,825])
     pellets = [Pellet([925,725])]
 
-    kills = 0
 
     bgImage = pygame.image.load("Art/Background/board.png")
     bgRect = bgImage.get_rect()
-    points = 0
+    
     didSpawn=True
 
     while mode=="play":
@@ -91,11 +93,14 @@ while True:
             didSpawn=False
         
         for i, segment in enumerate(snake):
-            segment.update(size)
-            if segment.kind == "tail" and snake[i-1].didUpdate:
+            if segment.update(size):
+                break
+            elif segment.kind == "tail" and snake[i-1].didUpdate:
                 segment.goKey(snake[i-1].direction, snake[i-1].turnCoor)
             
-        player.collide(bomb)
+        if player.collide(bomb):
+            player.die()
+            bomb.respawn(size,tileSize)
         for pellet in pellets:
             if player.collide(pellet):
                 points += 1
@@ -106,7 +111,13 @@ while True:
        #     print(".")
          
         if not player.living:
-            mode = "end"
+            lives-=1
+            player = Head(5,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+            snake = [player]
+            snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
+            life.update(lives)
+            if lives <0:
+                mode = "end"
         
         screen.blit(bgImage, bgRect)
         screen.blit(bomb.image, bomb.rect)
