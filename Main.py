@@ -61,9 +61,13 @@ while True:
     lives = 2
     life = Hud ("Lives: ", lives, [870,0])
           
-    bomb = Bomb([925,825])
+    bombs = [Bomb([925,825])]
+    bombDidSpawn=True
+    bombSpawnRate=15
+    
     pellets = [Pellet([925,725])]
-
+    pelletDidSpawn=True
+    pelletSpawnRate=5
 
     bgImage = pygame.image.load("Art/Background/board.png")
     bgRect = bgImage.get_rect()
@@ -84,13 +88,22 @@ while True:
                 elif event.key == pygame. K_s or event.key == pygame.K_DOWN:
                     player.goKey("down")
             
-        if not didSpawn and points%5==0:
+        if not bombDidSpawn and points % bombSpawnRate == 0:
+            b = Bomb([925,825])
+            b.respawn(size, tileSize)
+            bombs+=[b]
+            bombDidSpawn=True
+        elif bombDidSpawn and points % bombSpawnRate == 1:
+            bombDidSpawn=False
+        
+        if not pelletDidSpawn and points % pelletSpawnRate == 0:
             p = Pellet([925,725])
             p.respawn(size, tileSize)
             pellets+=[p]
-            didSpawn=True
-        elif didSpawn and points%5==1:
-            didSpawn=False
+            pelletDidSpawn=True
+        elif pelletDidSpawn and points % pelletSpawnRate == 1:
+            pelletDidSpawn=False
+                       
         
         for i, segment in enumerate(snake):
             if segment.update(size):
@@ -98,9 +111,10 @@ while True:
             elif segment.kind == "tail" and snake[i-1].didUpdate:
                 segment.goKey(snake[i-1].direction, snake[i-1].turnCoor)
             
-        if player.collide(bomb):
-            player.die()
-            bomb.respawn(size,tileSize)
+        for bomb in bombs:
+            if player.collide(bomb):
+                player.die()
+                bomb.respawn(size, tileSize)
         for pellet in pellets:
             if player.collide(pellet):
                 points += 1
@@ -120,7 +134,8 @@ while True:
                 mode = "end"
         
         screen.blit(bgImage, bgRect)
-        screen.blit(bomb.image, bomb.rect)
+        for bomb in bombs:
+            screen.blit(bomb.image, bomb.rect)
         for pellet in pellets:
             screen.blit(pellet.image, pellet.rect)
         for segment in snake:
