@@ -67,7 +67,7 @@ while True:
     
     pellets = [Pellet([925,725])]
     pelletDidSpawn=True
-    pelletSpawnRate=20
+    pelletSpawnRate=5
 
     bgImage = pygame.image.load("Art/Background/board.png")
     bgRect = bgImage.get_rect()

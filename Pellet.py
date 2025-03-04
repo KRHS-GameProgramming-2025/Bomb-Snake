@@ -2,14 +2,22 @@ import pygame, sys, math, random
 
 class Pellet():
     def __init__(self, startPos=[0,5]):
-        self.fruits=["mango",
-                "blueberries",
-                "dragonfruit",
-                "grapes",
-                "pomegrante",
-                "B3RR0R"
-                ]
-        self.fruit=self.fruits[random.randint(0,len(self.fruits)-1)]
+        self.fruits=[
+            "mango", "blueberries", "dragonfruit", "grapes", "pomegrante", "B3RR0R"]
+        self.fruitOdds = [
+              25   ,    20        ,    15        ,   10    ,    5        ,    1    ]
+        self.totalFruitOdds = 0
+        for fo in self.fruitOdds:
+            self.totalFruitOdds += fo
+        fruitValue = random.randint(0,self.totalFruitOdds)
+        print(fruitValue)
+        index = 0
+        for i, fo in enumerate(self.fruitOdds):
+            fruitValue -= fo
+            if fruitValue <= 0:
+                index = i
+                break
+        self.fruit=self.fruits[index]
         self.image = pygame.image.load("Art/Objects/"+self.fruit+".png")
         self.rect = self.image.get_rect(center=startPos)
         self.rad=self.rect.width/2
@@ -40,7 +48,15 @@ class Pellet():
         
         
     def respawn(self, size, tileSize):
-        self.fruit=self.fruits[random.randint(0,len(self.fruits)-1)]
+        fruitValue = random.randint(0,self.totalFruitOdds)
+        print(fruitValue)
+        index = 0
+        for i, fo in enumerate(self.fruitOdds):
+            fruitValue -= fo
+            if fruitValue <= 0:
+                index = i
+                break
+        self.fruit=self.fruits[index]
         self.image = pygame.image.load("Art/Objects/"+self.fruit+".png")
         self.rect = self.image.get_rect(center=self.rect.center)
         self.rad=self.rect.width/2
