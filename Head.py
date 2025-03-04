@@ -5,6 +5,8 @@ class Head():
     def __init__(self, maxSpeed=2, startPos=[0,0]):
         self.tileSize = 50
         
+        self.startPos = startPos
+        
         self.imagesRight = [pygame.image.load("Art/Snake/snake_head_right.PNG")]
         self.imagesDown = [pygame.image.load("Art/Snake/snake_head_down.PNG")]
         self.imagesLeft = [pygame.image.load("Art/Snake/snake_head_left.PNG")]
@@ -38,9 +40,9 @@ class Head():
     def update(self, size):
         self.didUpdate = False
         self.move()
-        self.wallCollide(size)
         self.animationTimer += 1
         self.animate()
+        return (self.wallCollide(size))
 
     def goKey(self, direction):
         if not self.keyLock:
@@ -95,13 +97,18 @@ class Head():
         width = size[0]
         height = size[1]
         if self.rect.bottom >  height: 
-            self.rect.centery = self.tileSize/2
+            self.die()
+            return True
         if self.rect.top < 0: 
-            self.rect.centery = height-self.tileSize/2
+            self.die()
+            return True        
         if self.rect.right > width:
-            self.rect.centerx = self.tileSize/2
+            self.die()
+            return True
         if self.rect.left < 0:
-            self.rect.centerx = width-self.tileSize/2
+            self.die()
+            return True
+        return False
             
     def collide(self, other):
         if self != other:
@@ -110,10 +117,13 @@ class Head():
                     if self.rect.bottom > other.rect.top:
                         if self.rect.top < other.rect.bottom:
                             if self.getDist(other) < self.rad + other.rad:
+                                if other.kind == "Bomb":
+                                    self.living = False
                                 return True
         return False
         
-        
+    def die(self):
+        self.living=False
         
     def getDist(self, other):
         x1 = self.rect.centerx

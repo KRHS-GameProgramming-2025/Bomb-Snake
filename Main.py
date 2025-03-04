@@ -39,9 +39,11 @@ while True:
         
         pygame.display.flip()
         clock.tick(70)
+        
+            
 
 
-    #-----------------------Start screen--------------------------------
+    #-----------------------Game screen--------------------------------
     if sound:
         pygame.mixer.music.load("Music/Background/Main_Background.mp3")
         pygame.mixer.music.set_volume(.25)
@@ -49,27 +51,28 @@ while True:
     else:
         print("No Sound")
 
-    counter = 0;
-    score = Hud ("Score: ",[0,0])
+    counter = 0
+    points = 0
+    
+    score = Hud ("Score: ", points, [0,0])
     player = Head(5,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
     snake = [player]
     snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
-    life = Hud ("Lives: ", [870,0])
+    lives = 2
+    life = Hud ("Lives: ", lives, [870,0])
           
     bombs = [Bomb([925,825])]
     bombDidSpawn=True
     bombSpawnRate=15
     
     pellets = [Pellet([925,725])]
-    pelletDidSpawn=True
+	pelletDidSpawn=True
     pelletSpawnRate=20
-    
-    kills = 0
 
     bgImage = pygame.image.load("Art/Background/board.png")
     bgRect = bgImage.get_rect()
-    points = 0
     
+    didSpawn=True
 
     while mode=="play":
         for event in pygame.event.get():
@@ -103,13 +106,14 @@ while True:
                        
         
         for i, segment in enumerate(snake):
-            segment.update(size)
-            if segment.kind == "tail" and snake[i-1].didUpdate:
+            if segment.update(size):
+                break
+            elif segment.kind == "tail" and snake[i-1].didUpdate:
                 segment.goKey(snake[i-1].direction, snake[i-1].turnCoor)
             
         for bomb in bombs:
             if player.collide(bomb):
-               (quit)
+                player.die()
                 bomb.respawn(size, tileSize)
         for pellet in pellets:
             if player.collide(pellet):
@@ -119,7 +123,15 @@ while True:
             
       #  if player.wallCollide:
        #     print(".")
-            
+         
+        if not player.living:
+            lives-=1
+            player = Head(5,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+            snake = [player]
+            snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
+            life.update(lives)
+            if lives <0:
+                mode = "end"
         
         screen.blit(bgImage, bgRect)
         for bomb in bombs:
@@ -133,3 +145,20 @@ while True:
         pygame.display.flip()
         clock.tick(60)
         # print(clock.get_fps())
+        
+    #-----------------------End screen--------------------------------
+    bgImage=pygame.image.load("Art/Background/End_Screen.png")
+    bgRect = bgImage.get_rect()
+    while mode=="end":
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                sys.exit();
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                     mode="start"
+            
+        screen.blit(bgImage, bgRect)
+        
+        pygame.display.flip()
+        clock.tick(70)
+        

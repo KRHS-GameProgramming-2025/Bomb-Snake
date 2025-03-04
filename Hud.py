@@ -1,10 +1,10 @@
 import pygame, sys, math
 
 class Hud():
-    def __init__ (self,baseText, startPos=[0,0]):
+    def __init__ (self,baseText, startVal=0, startPos=[0,0]):
         self.font = pygame.font.Font(None, 46)
         self.baseText = baseText
-        self.image = self.font.render(self.baseText + "0", 1, (255,255,255))
+        self.image = self.font.render(self.baseText + str(startVal), 1, (255,255,255))
         self.rect = self.image.get_rect(topleft = startPos)
         
         
