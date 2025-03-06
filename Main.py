@@ -66,7 +66,7 @@ while True:
     bombSpawnRate=15
     
     bomb2xDidSpawn=True
-    bomb2xSpawnRate=5
+    bomb2xSpawnRate=40
     
     pellets = [Pellet([925,725])]
     pelletDidSpawn=True
