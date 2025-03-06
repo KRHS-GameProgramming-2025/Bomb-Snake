@@ -58,7 +58,7 @@ while True:
     player = Head(5,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
     snake = [player]
     snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
-    lives = 2
+    lives = 3
     life = Hud ("Lives: ", lives, [870,0])
           
     bombs = [Bomb([925,825])]
