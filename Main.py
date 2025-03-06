@@ -130,7 +130,7 @@ while True:
             snake = [player]
             snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
             life.update(lives)
-            if lives <0:
+            if lives <=0:
                 mode = "end"
         
         screen.blit(bgImage, bgRect)
