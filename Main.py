@@ -55,15 +55,18 @@ while True:
     points = 0
     
     score = Hud ("Score: ", points, [0,0])
-    player = Head(5,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+    player = Head(3,5,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
     snake = [player]
     snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
-    lives = 3
+    lives = player.lives
     life = Hud ("Lives: ", lives, [870,0])
           
-    bombs = [Bomb([925,825])]
+    bombs = [Bomb("Bomb",[925,825])]
     bombDidSpawn=True
     bombSpawnRate=15
+    
+    bomb2xDidSpawn=True
+    bomb2xSpawnRate=40
     
     pellets = [Pellet([925,725])]
     pelletDidSpawn=True
@@ -89,12 +92,21 @@ while True:
                     player.goKey("down")
             
         if not bombDidSpawn and points % bombSpawnRate == 0:
-            b = Bomb([925,825])
+            b = Bomb("Bomb",[925,825])
             b.respawn(size, tileSize)
             bombs+=[b]
             bombDidSpawn=True
         elif bombDidSpawn and points % bombSpawnRate == 1:
             bombDidSpawn=False
+            
+        if not bomb2xDidSpawn and points % bomb2xSpawnRate == 0:
+            b = Bomb("Bomb2x",[925,825])
+            b.respawn(size, tileSize)
+            bombs+=[b]
+            bomb2xDidSpawn=True
+        elif bomb2xDidSpawn and points % bomb2xSpawnRate == 1:
+            bomb2xDidSpawn=False
+         
         
         if not pelletDidSpawn and points % pelletSpawnRate == 0:
             p = Pellet([925,725])
@@ -113,8 +125,10 @@ while True:
             
         for bomb in bombs:
             if player.collide(bomb):
-                player.die()
+                player.die(bomb.damage)
                 bomb.respawn(size, tileSize)
+              
+        
         for pellet in pellets:
             if player.collide(pellet):
                 points += 1
@@ -125,17 +139,19 @@ while True:
         
          
         if not player.living:
-            lives-=1
-            player = Head(5,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+            lives=player.lives
+            player = Head(player.lives,5,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
             snake = [player]
             snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
             life.update(lives)
-            if lives <0:
+            if lives <=0:
                 mode = "end"
         
         screen.blit(bgImage, bgRect)
         for bomb in bombs:
             screen.blit(bomb.image, bomb.rect)
+            
+        
         for pellet in pellets:
             screen.blit(pellet.image, pellet.rect)
         for segment in snake:
