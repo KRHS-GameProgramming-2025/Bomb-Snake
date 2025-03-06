@@ -140,7 +140,7 @@ while True:
          
         if not player.living:
             lives=player.lives
-            player = Head(player.lives,5,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+            player = Head(player.lives,player.maxSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
             snake = [player]
             snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
             life.update(lives)
@@ -159,6 +159,7 @@ while True:
         screen.blit(score.image, score.rect)
         screen.blit(life.image, life.rect)
         pygame.display.flip()
+        clock.tick(60)
         # print(clock.get_fps())
         
     #-----------------------End screen--------------------------------
