@@ -1,12 +1,17 @@
 import pygame, sys,math,random
 
 class Bomb():
-    def __init__(self, startPos=[0,9]):
-        self.image = pygame.image.load("Art/Objects/Bomb/Bomb.png")
+    def __init__(self, kind, startPos=[0,9]):
+        if kind == "Bomb":
+            self.image = pygame.image.load("Art/Objects/Bomb/Bomb.png")
+            self.damage=1
+        elif kind == "Bomb2x":
+            self.image = pygame.image.load("Art/Objects/Bomb/Bomb2x.png")
+            self.damage=2
         self.rect = self.image.get_rect(center=startPos)
         self.rad=self.rect.width/2
         
-        self.kind = "Bomb"
+        self.kind = kind
         
     def collideSnake(self,other):
         if self != other:

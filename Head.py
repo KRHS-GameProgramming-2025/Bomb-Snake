@@ -2,7 +2,7 @@ import pygame, sys, math
 
 
 class Head():
-    def __init__(self, maxSpeed=4, startPos=[0,0]):
+    def __init__(self, lives=3, maxSpeed=4, startPos=[0,0]):
         self.tileSize = 50
         
         self.startPos = startPos
@@ -30,6 +30,8 @@ class Head():
         
         self.animationTimer = 0
         self.animationTimerMax = 60/10
+        
+        self.lives=lives
         
         self.living = True
         self.turnCoor = self.rect.center
@@ -122,7 +124,8 @@ class Head():
                                 return True
         return False
         
-    def die(self):
+    def die(self,damage=1):
+        self.lives-=damage
         self.living=False
         
     def getDist(self, other):
