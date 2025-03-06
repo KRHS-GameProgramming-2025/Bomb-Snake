@@ -13,7 +13,7 @@ class Tail():
         self.image = self.images[self.frame]
         if headDir[-2:] == "up":
             startPos = [headRect.centerx, headRect.centery+self.tileSize]
-        if headDir[-2:] == "up":
+        elif headDir[-2:] == "up":
             startPos = [headRect.centerx, headRect.centery+self.tileSize]    
             
         self.rect = self.image.get_rect(center = startPos)
