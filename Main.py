@@ -58,6 +58,8 @@ while True:
     player = Head(3,5,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
     snake = [player]
     snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
+    snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
+    snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
     lives = player.lives
     life = Hud ("Lives: ", lives, [870,0])
           
@@ -118,9 +120,8 @@ while True:
                        
         
         for i, segment in enumerate(snake):
-            if segment.update(size):
-                break
-            elif segment.kind == "tail" and snake[i-1].didUpdate:
+            segment.update(size)
+            if segment.kind == "tail" and snake[i-1].didUpdate:
                 segment.goKey(snake[i-1].direction, snake[i-1].turnCoor)
             
         for bomb in bombs:

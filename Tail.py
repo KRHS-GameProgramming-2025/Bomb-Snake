@@ -35,10 +35,13 @@ class Tail():
         self.turnCoor = self.rect.center
         self.didUpdate = False
         self.keyLock = False
+        
+        self.moveBuffer = []
          
         
         
     def update(self, size):
+        print(self.moveBuffer)
         self.didUpdate = False
         self.move()
         self.animationTimer += 1
@@ -51,6 +54,8 @@ class Tail():
             self.direction = direction
             self.targetCoor = turnCoor
             self.keyLock = True
+        else:
+            self.moveBuffer += [[direction, turnCoor]]
         
 
     
@@ -97,7 +102,14 @@ class Tail():
             self.upDateDirection()
             self.turnCoor = self.rect.center
             self.didUpdate = True
-            self.keyLock = False
+            if len(self.moveBuffer)==0:
+                self.keyLock = False
+            else:
+                self.prevDir = self.direction
+                [self.direction,self.targetCoor] = self.moveBuffer.pop(0)
+        else:
+            print(self.rect.center, self.targetCoor)
+            
     
     def wallCollide(self, size):
         width = size[0]
