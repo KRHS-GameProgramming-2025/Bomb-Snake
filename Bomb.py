@@ -8,6 +8,9 @@ class Bomb():
         elif kind == "Bomb2x":
             self.image = pygame.image.load("Art/Objects/Bomb/Bomb2x.png")
             self.damage=2
+        elif kind == "Bomb3x":
+            self.image = pygame.image.load("Art/Objects/Bomb/Bomb3x.png")
+            self.damage=3
         self.rect = self.image.get_rect(center=startPos)
         self.rad=self.rect.width/2
         

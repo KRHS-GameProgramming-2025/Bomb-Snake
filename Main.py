@@ -68,6 +68,9 @@ while True:
     bomb2xDidSpawn=True
     bomb2xSpawnRate=40
     
+    bomb3xDidSpawn=True
+    bomb3xSpawnRate=5
+    
     pellets = [Pellet([925,725])]
     pelletDidSpawn=True
     pelletSpawnRate=15
@@ -100,12 +103,20 @@ while True:
             bombDidSpawn=False
             
         if not bomb2xDidSpawn and points % bomb2xSpawnRate == 0:
-            b = Bomb("Bomb2x",[925,825])
+            b = Bomb("Bomb2x",[725,825])
             b.respawn(size, tileSize)
             bombs+=[b]
             bomb2xDidSpawn=True
         elif bomb2xDidSpawn and points % bomb2xSpawnRate == 1:
             bomb2xDidSpawn=False
+            
+        if not bomb3xDidSpawn and points % bomb3xSpawnRate == 0:
+            b = Bomb("Bomb3x",[625,825])
+            b.respawn(size, tileSize)
+            bombs+=[b]
+            bomb3xDidSpawn=True
+        elif bomb3xDidSpawn and points % bomb3xSpawnRate == 1:
+            bomb3xDidSpawn=False
          
         
         if not pelletDidSpawn and points % pelletSpawnRate == 0:
