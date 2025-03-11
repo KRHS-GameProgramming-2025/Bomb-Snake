@@ -158,6 +158,7 @@ while True:
                 points += 1
                 score.update(points)
                 pellet.respawn(size, tileSize)
+                snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].prevDir)]
 
             
         
@@ -190,6 +191,13 @@ while True:
         # print(clock.get_fps())
         
     #-----------------------End screen--------------------------------
+    if sound:
+        pygame.mixer.music.load("Music/Background/DEATH.mp3")
+        pygame.mixer.music.set_volume(.25)
+        pygame.mixer.music.play()
+    else:
+        print("No Sound")
+    
     bgImage=pygame.image.load("Art/Background/dead_Screen.png")
     bgRect = bgImage.get_rect()
     while mode=="end":

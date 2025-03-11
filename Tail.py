@@ -6,18 +6,37 @@ class Tail():
         self.tileSize = 50
         self.imagesUpDown = [pygame.image.load("Art/Snake/snake_Body_Down and Up.PNG")]
         self.imagesLeftRight = [pygame.image.load("Art/Snake/snake_Body_Left and Right.PNG")]
-        self.images = self.imagesUpDown
+        
 
+        
+        if headDir == "up":
+            startPos = [headRect.centerx, headRect.centery+self.tileSize] 
+            self.speedx = 0
+            self.speedy = -maxSpeed   
+            self.images = self.imagesUpDown
+        elif headDir == "down":
+            startPos = [headRect.centerx, headRect.centery-self.tileSize] 
+            self.speedx = 0
+            self.speedy = maxSpeed  
+            self.images = self.imagesUpDown 
+        elif headDir == "right":
+            startPos = [headRect.centerx-self.tileSize, headRect.centery] 
+            self.speedx = maxSpeed 
+            self.speedy = 0  
+            self.images = self.imagesLeftRight
+        elif headDir == "left":
+            startPos = [headRect.centerx+self.tileSize, headRect.centery] 
+            self.speedx = -maxSpeed 
+            self.speedy = 0  
+            self.images = self.imagesLeftRight
+            
         self.frame = 0
         self.frameMax = len(self.images)-1
         self.image = self.images[self.frame]
-       
-        startPos = [headRect.centerx, headRect.centery+self.tileSize]    
-            
         self.rect = self.image.get_rect(center = startPos)
         
-        self.speedx = 0
-        self.speedy = -maxSpeed
+        
+        
         self.speed = [self.speedx, self.speedy]
         self.rad = (self.rect.height/2 + self.rect.width/2)/2
         self.direction = headDir
