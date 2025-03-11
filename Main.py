@@ -55,7 +55,8 @@ while True:
     points = 0
     
     score = Hud ("Score: ", points, [0,0])
-    player = Head(5,5,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+    playerSpeed=5
+    player = Head(5,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
     snake = [player]
     snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
     lives = player.lives
@@ -72,7 +73,7 @@ while True:
     bomb3xSpawnRate=100
     
     bomb4xDidSpawn=True
-    bomb4xSpawnRate=130
+    bomb4xSpawnRate=5
     
     pellets = [Pellet([925,725])]
     pelletDidSpawn=True
@@ -146,6 +147,8 @@ while True:
             
         for bomb in bombs:
             if player.collide(bomb):
+                if bomb.kind =="Bomb4x":
+                    playerSpeed-=2.5
                 player.die(bomb.damage)
                 bomb.respawn(size, tileSize)
               
@@ -161,7 +164,7 @@ while True:
          
         if not player.living:
             lives=player.lives
-            player = Head(player.lives,player.maxSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+            player = Head(player.lives,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
             snake = [player]
             snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
             life.update(lives)
