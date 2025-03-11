@@ -11,10 +11,8 @@ class Tail():
         self.frame = 0
         self.frameMax = len(self.images)-1
         self.image = self.images[self.frame]
-        if headDir[-2:] == "up":
-            startPos = [headRect.centerx, headRect.centery+self.tileSize]
-        elif headDir[-2:] == "up":
-            startPos = [headRect.centerx, headRect.centery+self.tileSize]    
+       
+        startPos = [headRect.centerx, headRect.centery+self.tileSize]    
             
         self.rect = self.image.get_rect(center = startPos)
         
@@ -31,10 +29,9 @@ class Tail():
         self.animationTimer = 0
         self.animationTimerMax = 60/10
         
-        self.targetCoor = []
+        self.targetCoor = None
         self.turnCoor = self.rect.center
         self.didUpdate = False
-        self.keyLock = False
          
         
         
@@ -46,11 +43,11 @@ class Tail():
         self.wallCollide(size)
 
     def goKey(self, direction, turnCoor):
-        if not self.keyLock:
+        if self.targetCoor == None:
             self.prevDir = self.direction
             self.direction = direction
             self.targetCoor = turnCoor
-            self.keyLock = True
+            #self.keyLock = True
         
 
     
@@ -92,24 +89,18 @@ class Tail():
             
     def move(self):
         self.speed = [self.speedx, self.speedy]
-        self.rect = self.rect.move(self.speed) 
-        if self.rect.center == self.targetCoor:
-            self.upDateDirection()
-            self.turnCoor = self.rect.center
-            self.didUpdate = True
-            self.keyLock = False
+        self.rect = self.rect.move(self.speed)
+        
+        if (self.targetCoor != None and 
+            self.rect.centerx == self.targetCoor[0] and self.rect.centery == self.targetCoor[1]):
+                self.prevDir = self.direction
+                self.upDateDirection()
+                self.turnCoor = self.rect.center
+                self.didUpdate = True
+                self.targetCoor = None
     
     def wallCollide(self, size):
-        width = size[0]
-        height = size[1]
-        if self.rect.bottom >  height: 
-            self.rect.centery = self.tileSize/2
-        if self.rect.top < 0: 
-            self.rect.centery = height-self.tileSize/2
-        if self.rect.right > width:
-            self.rect.centerx = self.tileSize/2
-        if self.rect.left < 0:
-            self.rect.centerx = width-self.tileSize/2
+        pass
             
         
     def animate(self):

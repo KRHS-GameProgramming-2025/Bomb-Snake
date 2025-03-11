@@ -57,7 +57,10 @@ while True:
     score = Hud ("Score: ", points, [0,0])
     player = Head(3,5,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
     snake = [player]
-    snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
+    snakeSize = 3
+    for i in range(snakeSize-1):
+        snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[0].direction)]
+    
     lives = player.lives
     life = Hud ("Lives: ", lives, [870,0])
           
@@ -90,6 +93,7 @@ while True:
                     player.goKey("up")
                 elif event.key == pygame. K_s or event.key == pygame.K_DOWN:
                     player.goKey("down")
+                print("\n\t"+player.direction)
             
         if not bombDidSpawn and points % bombSpawnRate == 0:
             b = Bomb("Bomb",[925,825])
@@ -116,13 +120,17 @@ while True:
         elif pelletDidSpawn and points % pelletSpawnRate == 1:
             pelletDidSpawn=False
                        
-        
-        for i, segment in enumerate(snake):
-            if segment.update(size):
-                break
-            elif segment.kind == "tail" and snake[i-1].didUpdate:
-                segment.goKey(snake[i-1].direction, snake[i-1].turnCoor)
+       
             
+        for i, segment in enumerate(snake):
+            segment.update(size)
+            if segment.kind == "tail" and snake[i-1].didUpdate:
+                segment.goKey(snake[i-1].prevDir, snake[i-1].turnCoor)
+            
+        for seg in snake:
+            print(seg.kind, seg.rect.center, seg.targetCoor)     
+        print("----------------")
+        
         for bomb in bombs:
             if player.collide(bomb):
                 player.die(bomb.damage)
@@ -139,11 +147,14 @@ while True:
         
          
         if not player.living:
-            lives=player.lives
+            lives = player.lives
             player = Head(player.lives,player.maxSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
             snake = [player]
-            snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].direction)]
+            for i in range(snakeSize-1):
+                snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[0].direction)]
+    
             life.update(lives)
+            
             if lives <=0:
                 mode = "end"
         

@@ -1,4 +1,5 @@
 import pygame, sys, math
+from rounder import *
 
 
 class Head():
@@ -35,8 +36,8 @@ class Head():
         
         self.living = True
         self.turnCoor = self.rect.center
+        self.targetCoor = None
         self.didUpdate = False
-        self.keyLock = False
     
         
     def update(self, size):
@@ -47,7 +48,15 @@ class Head():
         return (self.wallCollide(size))
 
     def goKey(self, direction):
-        if not self.keyLock:
+        if self.targetCoor == None:
+            if self.direction == "up":
+                self.targetCoor = [self.rect.centerx, rounder(self.rect.centery, self.tileSize, "down")-self.tileSize/2]
+            if self.direction == "down":
+                self.targetCoor = [self.rect.centerx, rounder(self.rect.centery, self.tileSize, "up")+self.tileSize/2]
+            if self.direction == "left":
+                self.targetCoor = [rounder(self.rect.centerx, self.tileSize, "down")-self.tileSize/2, self.rect.centery]
+            if self.direction == "right":
+                self.targetCoor = [rounder(self.rect.centerx, self.tileSize, "up")+self.tileSize/2, self.rect.centery]
             self.prevDir = self.direction
             self.direction = direction
         
@@ -75,15 +84,16 @@ class Head():
             
     def move(self):
         self.speed = [self.speedx, self.speedy]
-        self.rect = self.rect.move(self.speed) 
-        if ((self.rect.centerx-self.tileSize/2)%50 == 0 and 
-            (self.rect.centery-self.tileSize/2)%50==0 and
-            self.direction!= self.prevDir):
+        self.rect = self.rect.move(self.speed)
+        
+        if (self.targetCoor != None and 
+            self.rect.centerx == self.targetCoor[0] and self.rect.centery == self.targetCoor[1]):
+                print(".....at location.....")
                 self.prevDir = self.direction
                 self.upDateDirection()
                 self.turnCoor = self.rect.center
                 self.didUpdate = True
-                self.keyLock = False
+                self.targetCoor = None
         
         
     def animate(self):
