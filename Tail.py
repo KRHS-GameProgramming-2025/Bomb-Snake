@@ -32,6 +32,7 @@ class Tail():
         self.targetCoor = None
         self.turnCoor = self.rect.center
         self.didUpdate = False
+
          
         
         
@@ -47,8 +48,7 @@ class Tail():
             self.prevDir = self.direction
             self.direction = direction
             self.targetCoor = turnCoor
-            #self.keyLock = True
-        
+
 
     
     def upDateDirection(self):

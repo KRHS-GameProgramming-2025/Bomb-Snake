@@ -108,19 +108,29 @@ class Head():
     def wallCollide(self, size):
         width = size[0]
         height = size[1]
+        
         if self.rect.bottom >  height: 
-            self.die()
-            return True
+            self.rect.centery = self.tileSize/2
         if self.rect.top < 0: 
-            self.die()
-            return True        
+            self.rect.centery = height-self.tileSize/2
         if self.rect.right > width:
-            self.die()
-            return True
+            self.rect.centerx = self.tileSize/2
         if self.rect.left < 0:
-            self.die()
-            return True
-        return False
+            self.rect.centerx = width-self.tileSize/2
+            
+        # ~ if self.rect.bottom >  height: 
+            # ~ self.die()
+            # ~ return True
+        # ~ if self.rect.top < 0: 
+            # ~ self.die()
+            # ~ return True        
+        # ~ if self.rect.right > width:
+            # ~ self.die()
+            # ~ return True
+        # ~ if self.rect.left < 0:
+            # ~ self.die()
+            # ~ return True
+        # ~ return False
             
     def collide(self, other):
         if self != other:
