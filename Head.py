@@ -2,7 +2,7 @@ import pygame, sys, math
 
 
 class Head():
-    def __init__(self, lives=3, maxSpeed=4, startPos=[0,0]):
+    def __init__(self, lives=5, maxSpeed=4, startPos=[0,0]):
         self.tileSize = 50
         
         self.startPos = startPos
