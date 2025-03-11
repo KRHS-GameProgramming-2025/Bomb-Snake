@@ -25,6 +25,13 @@ mode="start"
 
 while True:
     #-----------------------Start screen--------------------------------
+    if sound:
+        pygame.mixer.music.load("Music/Background/Main_Theme.mp3")
+        pygame.mixer.music.set_volume(.25)
+        pygame.mixer.music.play()
+    else:
+        print("No Sound")
+    
     bgImage=pygame.image.load("Art/Background/Start_Screen.png")
     bgRect = bgImage.get_rect()
     while mode=="start":
@@ -36,6 +43,8 @@ while True:
                      mode="play"
             
         screen.blit(bgImage, bgRect)
+        
+
         
         pygame.display.flip()
         clock.tick(60)
