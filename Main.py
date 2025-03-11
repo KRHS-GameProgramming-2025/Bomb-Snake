@@ -82,10 +82,11 @@ while True:
     bomb2xSpawnRate=40
     
     bomb3xDidSpawn=True
-    bomb3xSpawnRate=100
-    
+    bomb3xSpawnRate=5
+    flame=False
     bomb4xDidSpawn=True
-    bomb4xSpawnRate=5
+    bomb4xSpawnRate=130
+    frozen=False
     
     pellets = [Pellet([925,725])]
     pelletDidSpawn=True
@@ -109,7 +110,9 @@ while True:
                     player.goKey("up")
                 elif event.key == pygame. K_s or event.key == pygame.K_DOWN:
                     player.goKey("down")
-            
+        
+        
+        
         if not bombDidSpawn and points % bombSpawnRate == 0:
             b = Bomb("Bomb",[925,825])
             b.respawn(size, tileSize)
@@ -161,7 +164,11 @@ while True:
         for bomb in bombs:
             if player.collide(bomb):
                 if bomb.kind =="Bomb4x":
-                    playerSpeed-=2.5
+                    playerSpeed=2.5
+                    frozen=True
+                if bomb.kind =="Bomb3x":
+                    playerSpeed=10
+                    flame=True
                 player.die(bomb.damage)
                 bomb.respawn(size, tileSize)
               
@@ -182,7 +189,12 @@ while True:
             snake = [player]
             for i in range(snakeSize-1):
                 snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[0].direction)]
-    
+            if frozen:
+                frozen = False
+                playerSpeed = 5
+            if flame:
+                flame = False
+                playerSpeed = 5
             life.update(lives)
             
             if lives <=0:
