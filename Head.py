@@ -88,7 +88,6 @@ class Head():
         
         if (self.targetCoor != None and 
             self.rect.centerx == self.targetCoor[0] and self.rect.centery == self.targetCoor[1]):
-                print(".....at location.....")
                 self.prevDir = self.direction
                 self.upDateDirection()
                 self.turnCoor = self.rect.center
