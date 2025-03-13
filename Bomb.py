@@ -21,11 +21,6 @@ class Bomb():
         
         
         
-class Bomb():
-    def _inti_(self, speed=[0,0], startPos=[0,0]):
-        self.image=[pygame.image.load("Bomb_explode_1")]
-        
-        
         
         
     def collideSnake(self,other):
