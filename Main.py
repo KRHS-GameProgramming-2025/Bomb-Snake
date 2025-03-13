@@ -24,7 +24,7 @@ screen = pygame.display.set_mode(size)
 mode="start"
 
 while True:
-    #-----------------------Start screen--------------------------------
+    #-----------------------Start screen--------------------------------#
     if sound:
         pygame.mixer.music.load("Music/Background/Main_Theme.mp3")
         pygame.mixer.music.set_volume(.25)
@@ -52,7 +52,7 @@ while True:
             
 
 
-    #-----------------------Game screen--------------------------------
+    #-----------------------Game screen--------------------------------#
     if sound:
         pygame.mixer.music.load("Music/Background/Main_Background.mp3")
         pygame.mixer.music.set_volume(.25)
@@ -215,7 +215,7 @@ while True:
         clock.tick(60)
         # print(clock.get_fps())
         
-    #-----------------------End screen--------------------------------
+    #-----------------------End screen--------------------------------#
     if sound:
         pygame.mixer.music.load("Music/Background/DEATH.mp3")
         pygame.mixer.music.set_volume(.25)
