@@ -1,5 +1,5 @@
 import pygame, sys,math,random
-
+#e
 class Bomb():
     def __init__(self, kind, startPos=[0,9]):
         if kind == "Bomb":

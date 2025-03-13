@@ -1,6 +1,6 @@
 import pygame, sys, math
 from rounder import *
-
+#e
 
 class Head():
     def __init__(self, lives=10, maxSpeed=4, startPos=[0,0]):
