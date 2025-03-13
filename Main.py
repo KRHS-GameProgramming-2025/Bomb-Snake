@@ -138,7 +138,7 @@ while True:
             bomb3xDidSpawn=False
             
         if not bomb4xDidSpawn and points % bomb4xSpawnRate == 0:
-            b = Bomb("Bomb4x",[625,825])
+            b = Bomb("Bomb4x",[625,525])
             b.respawn(size, tileSize)
             bombs+=[b]
             bomb4xDidSpawn=True
