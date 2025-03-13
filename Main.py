@@ -1,10 +1,13 @@
 import pygame, sys, math, random
 from Hud import *
+
 from Pellet import *
 from Head import *
 from Bomb import *
 from Tail import *
+
 from Wall import *
+
 pygame.init()
 pygame.mixer.init()
 
@@ -22,6 +25,7 @@ size = [1000,900]
 screen = pygame.display.set_mode(size)
 
 mode="start"
+
 
 while True:
     #-----------------------Start screen--------------------------------#
