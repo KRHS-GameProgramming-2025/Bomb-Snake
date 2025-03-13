@@ -1,10 +1,13 @@
 import pygame, sys, math, random
 from Hud import *
+
 from Pellet import *
 from Head import *
 from Bomb import *
 from Tail import *
+
 from Wall import *
+
 pygame.init()
 pygame.mixer.init()
 
@@ -22,6 +25,7 @@ size = [1000,900]
 screen = pygame.display.set_mode(size)
 
 mode="start"
+
 
 while True:
     #-----------------------Start screen--------------------------------#
@@ -55,7 +59,7 @@ while True:
     #-----------------------Game screen--------------------------------#
     if sound:
         pygame.mixer.music.load("Music/Background/Main_Background.mp3")
-        pygame.mixer.music.set_volume(.25)
+        pygame.mixer.music.set_volume(.15)
         pygame.mixer.music.play()
     else:
         print("No Sound")
@@ -103,13 +107,17 @@ while True:
                 sys.exit();
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame. K_a or event.key == pygame.K_LEFT:
-                    player.goKey("left")
+                    if player.direction != "right":
+                        player.goKey("left")
                 elif event.key == pygame. K_d or event.key == pygame.K_RIGHT:
-                    player.goKey("right")
+                    if player.direction != "left":
+                        player.goKey("right")
                 elif event.key == pygame. K_w or event.key == pygame.K_UP:
-                    player.goKey("up")
+                    if player.direction != "down":
+                        player.goKey("up")
                 elif event.key == pygame. K_s or event.key == pygame.K_DOWN:
-                    player.goKey("down")
+                    if player.direction != "up":
+                        player.goKey("down")
         
         
         
@@ -181,6 +189,11 @@ while True:
                 score.update(points)
                 pellet.respawn(size, tileSize)
                 snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].prevDir)]
+                
+                
+        for i, segment, in enumerate(snake):        
+            if i >=4 and player.collide(segment):
+                player.die()
 
             
         
