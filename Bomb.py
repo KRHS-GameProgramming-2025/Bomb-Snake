@@ -16,6 +16,15 @@ class Bomb():
         
         self.kind = kind
         
+        
+        
+class Bomb():
+    def _inti_(self, speed=[0,0], startPos=[0,0]):
+        self.image=[pygame.image.load("Bomb_explode_1")]
+        
+        
+        
+        
     def collideSnake(self,other):
         if self != other:
             if self.rect.right>other.rect.left:
@@ -74,3 +83,17 @@ class Bomb():
         y =  random.randint(1, int(size[1]/tileSize)-1)*50+25
         self.rect.center = [x,y]
         print(x,y)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
