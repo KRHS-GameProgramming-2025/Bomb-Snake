@@ -1,5 +1,5 @@
 import pygame, sys,math,random
-
+#e
 class Bomb():
     def __init__(self, kind, startPos=[0,9]):
         if kind == "Bomb":
@@ -11,6 +11,9 @@ class Bomb():
         elif kind == "Bomb3x":
             self.image = pygame.image.load("Art/Objects/Bomb/Bomb3x.png")
             self.damage=3
+        elif kind == "Bomb4x":
+            self.image = pygame.image.load("Art/Objects/Bomb/Bomb4x.png")
+            self.damage=4
         self.rect = self.image.get_rect(center=startPos)
         self.rad=self.rect.width/2
         

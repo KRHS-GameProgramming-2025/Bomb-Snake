@@ -24,7 +24,7 @@ screen = pygame.display.set_mode(size)
 mode="start"
 
 while True:
-    #-----------------------Start screen--------------------------------
+    #-----------------------Start screen--------------------------------#
     if sound:
         pygame.mixer.music.load("Music/Background/Main_Theme.mp3")
         pygame.mixer.music.set_volume(.25)
@@ -52,7 +52,7 @@ while True:
             
 
 
-    #-----------------------Game screen--------------------------------
+    #-----------------------Game screen--------------------------------#
     if sound:
         pygame.mixer.music.load("Music/Background/Main_Background.mp3")
         pygame.mixer.music.set_volume(.25)
@@ -64,7 +64,8 @@ while True:
     points = 0
     
     score = Hud ("Score: ", points, [0,0])
-    player = Head(3,5,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+    playerSpeed=5
+    player = Head(10,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
     snake = [player]
     snakeSize = 3
     for i in range(snakeSize-1):
@@ -81,7 +82,11 @@ while True:
     bomb2xSpawnRate=40
     
     bomb3xDidSpawn=True
-    bomb3xSpawnRate=5
+    bomb3xSpawnRate=65
+    flame=False
+    bomb4xDidSpawn=True
+    bomb4xSpawnRate=100
+    frozen=False
     
     pellets = [Pellet([925,725])]
     pelletDidSpawn=True
@@ -105,7 +110,9 @@ while True:
                     player.goKey("up")
                 elif event.key == pygame. K_s or event.key == pygame.K_DOWN:
                     player.goKey("down")
-            
+        
+        
+        
         if not bombDidSpawn and points % bombSpawnRate == 0:
             b = Bomb("Bomb",[925,825])
             b.respawn(size, tileSize)
@@ -129,7 +136,14 @@ while True:
             bomb3xDidSpawn=True
         elif bomb3xDidSpawn and points % bomb3xSpawnRate == 1:
             bomb3xDidSpawn=False
-         
+            
+        if not bomb4xDidSpawn and points % bomb4xSpawnRate == 0:
+            b = Bomb("Bomb4x",[625,525])
+            b.respawn(size, tileSize)
+            bombs+=[b]
+            bomb4xDidSpawn=True
+        elif bomb4xDidSpawn and points % bomb4xSpawnRate == 1:
+            bomb4xDidSpawn=False
         
         if not pelletDidSpawn and points % pelletSpawnRate == 0:
             p = Pellet([925,725])
@@ -149,6 +163,12 @@ while True:
         
         for bomb in bombs:
             if player.collide(bomb):
+                if bomb.kind =="Bomb4x":
+                    playerSpeed=2.5
+                    frozen=True
+                if bomb.kind =="Bomb3x":
+                    playerSpeed=10
+                    flame=True
                 player.die(bomb.damage)
                 bomb.respawn(size, tileSize)
               
@@ -164,12 +184,17 @@ while True:
         
          
         if not player.living:
-            lives = player.lives
-            player = Head(player.lives,player.maxSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+            lives=player.lives
+            player = Head(player.lives,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
             snake = [player]
             for i in range(snakeSize-1):
                 snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[0].direction)]
-    
+            if frozen:
+                frozen = False
+                playerSpeed = 5
+            if flame:
+                flame = False
+                playerSpeed = 5
             life.update(lives)
             
             if lives <=0:
@@ -190,7 +215,7 @@ while True:
         clock.tick(60)
         # print(clock.get_fps())
         
-    #-----------------------End screen--------------------------------
+    #-----------------------End screen--------------------------------#
     if sound:
         pygame.mixer.music.load("Music/Background/DEATH.mp3")
         pygame.mixer.music.set_volume(.25)
