@@ -23,7 +23,8 @@ class Pellet():
         self.rad=self.rect.width/2
         
         self.kind = "pellet"
-    
+        
+        self.sound=pygame.mixer.Sound("Music/Objects/fruit.wav")
         
     def snakeCollide(self, other):
         if self != other:
@@ -32,7 +33,7 @@ class Pellet():
                     if self.rect.bottom > other.rect.top:
                         if self.rect.top < other.rect.bottom:
                             if self.getDist(other) < self.rad + other.rad:
-                                
+                                self.sound.play()
                                 return True
         return False
                          

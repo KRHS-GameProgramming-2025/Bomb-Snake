@@ -169,12 +169,14 @@ while True:
                 if bomb.kind =="Bomb3x":
                     playerSpeed=10
                     flame=True
+                bomb.snakeCollide(player)
                 player.die(bomb.damage)
                 bomb.respawn(size, tileSize)
               
         
         for pellet in pellets:
             if player.collide(pellet):
+                pellet.snakeCollide(player)
                 points += 1
                 score.update(points)
                 pellet.respawn(size, tileSize)
