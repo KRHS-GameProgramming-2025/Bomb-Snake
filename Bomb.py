@@ -20,7 +20,8 @@ class Bomb():
         self.kind = kind
         
         
-        
+
+
         
         
     def collideSnake(self,other):
