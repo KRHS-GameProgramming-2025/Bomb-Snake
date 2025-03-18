@@ -14,7 +14,28 @@ class Bomb():
         elif kind == "Bomb4x":
             self.image = pygame.image.load("Art/Objects/Bomb/Bomb4x.png")
             self.damage=4
+        elif kind == "Bomb5x":
+            self.image = pygame.image.load("Art/Objects/Bomb/Bomb5x.png")
+            self.damage=5
+        elif kind == "Bomb6x":
+            self.image = pygame.image.load("Art/Objects/Bomb/Bomb6x.png")
+            self.damage=6
+        elif kind == "bmoB":
+            self.image = pygame.image.load("Art/Objects/Bomb/bmoB.png")
+            self.damage=-1
+        elif kind == "flame":
+            self.image = pygame.image.load("Art/Objects/Bomb/flame.png")
+            self.damage=1
+        elif kind == "poison":
+            self.image = pygame.image.load("Art/Objects/Bomb/poison.png")
+            self.damage=2
+        else:
+            print(kind)
         self.rect = self.image.get_rect(center=startPos)
+        self.rad=self.rect.width/2
+        self.kind = kind
+        self.rad=self.rect.width/2
+        self.kind = kind
         self.rad=self.rect.width/2
         
         self.kind = kind

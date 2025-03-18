@@ -87,10 +87,24 @@ while True:
     
     bomb3xDidSpawn=True
     bomb3xSpawnRate=65
-    flame=False
+    
     bomb4xDidSpawn=True
     bomb4xSpawnRate=100
     frozen=False
+    
+    bomb5xDidSpawn=True
+    bomb5xSpawnRate=110
+    zap=False
+    
+    bomb6xDidSpawn=True
+    bomb6xSpawnRate=5
+    
+    bmobDidSpawn=True
+    bmobSpawnRate=51
+    
+    flameDidSpawn=True
+    
+    poisonDidSpawn=True
     
     pellets = [Pellet([925,725])]
     pelletDidSpawn=True
@@ -152,6 +166,33 @@ while True:
             bomb4xDidSpawn=True
         elif bomb4xDidSpawn and points % bomb4xSpawnRate == 1:
             bomb4xDidSpawn=False
+            
+            
+        if not bomb5xDidSpawn and points % bomb5xSpawnRate == 0:
+            b = Bomb("Bomb5x",[625,525])
+            b.respawn(size, tileSize)
+            bombs+=[b]
+            bomb5xDidSpawn=True
+        elif bomb5xDidSpawn and points % bomb5xSpawnRate == 1:
+            bomb5xDidSpawn=False
+            
+        if not bomb6xDidSpawn and points % bomb6xSpawnRate == 0:
+            b = Bomb("Bomb6x",[625,525])
+            b.respawn(size, tileSize)
+            bombs+=[b]
+            bomb6xDidSpawn=True
+        elif bomb6xDidSpawn and points % bomb6xSpawnRate == 1:
+            bomb6xDidSpawn=False
+            
+        if not bmobDidSpawn and points % bmobSpawnRate == 0:
+            b = Bomb("bmoB",[625,525])
+            b.respawn(size, tileSize)
+            bombs+=[b]
+            bmobDidSpawn=True
+        elif bmobDidSpawn and points % bmobSpawnRate == 1:
+            bmobDidSpawn=False
+           
+      
         
         if not pelletDidSpawn and points % pelletSpawnRate == 0:
             p = Pellet([925,725])
@@ -174,9 +215,15 @@ while True:
                 if bomb.kind =="Bomb4x":
                     playerSpeed=2.5
                     frozen=True
+                if bomb.kind =="Bomb5x":
+                    playerSpeed=20
+                    zap=True
                 if bomb.kind =="Bomb3x":
-                    playerSpeed=10
-                    flame=True
+                    b = Bomb("flame",[625,525])
+                    bombs+=[b]
+                if bomb.kind =="Bomb6x":
+                    b = Bomb("poison",[625,525])
+                    bombs+=[b]
                 bomb.snakeCollide(player)
                 player.die(bomb.damage)
                 bomb.respawn(size, tileSize)
@@ -207,9 +254,12 @@ while True:
             if frozen:
                 frozen = False
                 playerSpeed = 5
-            if flame:
-                flame = False
+                
+                
+            if zap:
+                zap = False
                 playerSpeed = 5
+              
             life.update(lives)
             
             if lives <=0:
