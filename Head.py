@@ -39,7 +39,7 @@ class Head():
         self.targetCoor = None
         self.didUpdate = False
         
-        self.sound=pygame.mixer.Sound("Music/Objects/wall.wav")
+        
 
     
         
