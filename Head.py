@@ -38,6 +38,9 @@ class Head():
         self.turnCoor = self.rect.center
         self.targetCoor = None
         self.didUpdate = False
+        
+        self.sound=pygame.mixer.Sound("Music/Objects/wall.wav")
+
     
         
     def update(self, size):
@@ -85,7 +88,7 @@ class Head():
     def move(self):
         self.speed = [self.speedx, self.speedy]
         self.rect = self.rect.move(self.speed)
-        
+       
         if (self.targetCoor != None and 
             self.rect.centerx == self.targetCoor[0] and self.rect.centery == self.targetCoor[1]):
                 self.prevDir = self.direction
@@ -93,7 +96,7 @@ class Head():
                 self.turnCoor = self.rect.center
                 self.didUpdate = True
                 self.targetCoor = None
-        
+                
         
     def animate(self):
         if self.animationTimer >=self.animationTimerMax:
@@ -104,10 +107,11 @@ class Head():
                 self.frame += 1
             self.image = self.images[self.frame]
         
+       
+        
     def wallCollide(self, size):
         width = size[0]
         height = size[1]
-        
         # ~ if self.rect.bottom >  height: 
             # ~ self.rect.centery = self.tileSize/2
         # ~ if self.rect.top < 0: 
@@ -116,7 +120,7 @@ class Head():
             # ~ self.rect.centerx = self.tileSize/2
         # ~ if self.rect.left < 0:
             # ~ self.rect.centerx = width-self.tileSize/2
-            
+        
         if self.rect.bottom >  height: 
             self.die()
             return True
@@ -130,8 +134,9 @@ class Head():
             self.die()
             return True
         return False
-            
+       
     def collide(self, other):
+       
         if self != other:
             if self.rect.right > other.rect.left:
                 if self.rect.left < other.rect.right:
@@ -140,13 +145,16 @@ class Head():
                             if self.getDist(other) < self.rad + other.rad:
                                 if other.kind == "Bomb":
                                     self.living = False
+                               
+                                    
+
                                 return True
         return False
         
     def die(self,damage=1):
         self.lives-=damage
         self.living=False
-        
+
     def getDist(self, other):
         x1 = self.rect.centerx
         x2 = other.rect.centerx
