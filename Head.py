@@ -39,11 +39,10 @@ class Head():
         self.targetCoor = None
         self.didUpdate = False
         
-<<<<<<< Updated upstream
+
         
 
-=======
->>>>>>> Stashed changes
+
     
         
     def update(self, size):
