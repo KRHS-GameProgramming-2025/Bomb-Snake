@@ -32,6 +32,9 @@ class Bomb():
         elif kind == "goldBomb":
             self.image = pygame.image.load("Art/Objects/Bomb/goldBomb.png")
             self.damage=100
+        elif kind == "Bomb7x":
+            self.image = pygame.image.load("Art/Objects/Bomb/Bomb7x.png")
+            self.damage=7
         else:
             print(kind)
         self.rect = self.image.get_rect(center=startPos)
