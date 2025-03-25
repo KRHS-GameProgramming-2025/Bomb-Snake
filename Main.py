@@ -47,6 +47,8 @@ while True:
                      mode="play"
                 if event.key == pygame.K_m:
                     mode="modeSelect"
+                if event.key == pygame.K_c:
+                    mode="credits"
             
         screen.blit(bgImage, bgRect)
         
@@ -57,6 +59,24 @@ while True:
         
     
     #-----------------------Mode Select Screen--------------------------#
+    
+    
+    bgImage=pygame.image.load("Art/Background/Credit_idea.png")
+    bgRect = bgImage.get_rect()
+    while mode =="credits":
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                sys.exit();
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_c:
+                     mode="play"
+                     
+        screen.blit(bgImage, bgRect)
+        
+        pygame.display.flip()
+        clock.tick(60)
+
+    #-----------------------Credits Screen------------------------------#
     
     
     bgImage=pygame.image.load("Art/Background/Mode_Select_idea.png")
@@ -73,6 +93,8 @@ while True:
         
         pygame.display.flip()
         clock.tick(60)
+
+
 
 
     #-----------------------Game screen---------------------------------#

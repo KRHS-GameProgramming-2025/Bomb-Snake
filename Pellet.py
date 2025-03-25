@@ -49,6 +49,8 @@ class Pellet():
         
         
     def respawn(self, size, tileSize):
+        width = size[0]
+        height = size[1]-100
         fruitValue = random.randint(0,self.totalFruitOdds)
         print(fruitValue)
         index = 0
@@ -62,7 +64,7 @@ class Pellet():
         self.rect = self.image.get_rect(center=self.rect.center)
         self.rad=self.rect.width/2
         
-        x =  random.randint(0, int(size[0]/tileSize)-1)*50+25
-        y =  random.randint(1, int(size[1]/tileSize)-1)*50+25
+        x =  random.randint(0, int(width/tileSize)-1)*50+25
+        y =  random.randint(1, int(height/tileSize)-1)*50+25
         self.rect.center = [x,y]
         print(x,y)
