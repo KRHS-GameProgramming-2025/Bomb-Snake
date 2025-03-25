@@ -21,7 +21,7 @@ clock = pygame.time.Clock();
 
 if not pygame.font: print("Warning, fonts disabled")
 tileSize = 50
-size = [1000,900]
+size = [1000,1000]
 screen = pygame.display.set_mode(size)
 
 mode="start"
@@ -45,6 +45,8 @@ while True:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                      mode="play"
+                if event.key == pygame.K_m:
+                    mode="modeSelect"
             
         screen.blit(bgImage, bgRect)
         
@@ -57,11 +59,20 @@ while True:
     #-----------------------Mode Select Screen--------------------------#
     
     
-   # bgImage=pygame.image.load("Art/Background/Mode_Select_idea.png")
-    #bgRect = bgImage.get_rect()
-    #while mode =="modeSelect":
-   # if event in pygame.event.get():
-   # if event.type:
+    bgImage=pygame.image.load("Art/Background/Mode_Select_idea.png")
+    bgRect = bgImage.get_rect()
+    while mode =="modeSelect":
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                sys.exit();
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_m:
+                     mode="play"
+                     
+        screen.blit(bgImage, bgRect)
+        
+        pygame.display.flip()
+        clock.tick(60)
 
 
     #-----------------------Game screen---------------------------------#
@@ -152,7 +163,7 @@ while True:
         if not bombDidSpawn and points % bombSpawnRate == 0:
             b = Bomb("Bomb",[925,825])
             b.respawn(size, tileSize)
-            bombs+=[b]
+            bombs+=[b] 
             bombDidSpawn=True
         elif bombDidSpawn and points % bombSpawnRate == 1:
             bombDidSpawn=False
@@ -256,7 +267,11 @@ while True:
                     playerSpeed=1.25
                     sick=True
                 bomb.snakeCollide(player)
-                player.die(bomb.damage)
+                player.die(bomb.damage) # ~ bgImage=pygame.image.load("Art/Background/Mode_Select_idea.png")
+    # ~ bgRect = bgImage.get_rect()
+    # ~ while mode =="modeSelect":
+        # ~ if event in pygame.event.get():
+            # ~ if event.type:
                 bomb.respawn(size, tileSize)
               
         
