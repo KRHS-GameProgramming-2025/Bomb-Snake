@@ -57,11 +57,11 @@ while True:
     #-----------------------Mode Select Screen--------------------------#
     
     
-    bgImage=pygame.image.load("Art/Background/Mode_Select_idea.png")
-    bgRect = bgImage.get_rect()
-    while mode =="modeSelect":
-        if event in pygame.event.get():
-            if event.type
+   # bgImage=pygame.image.load("Art/Background/Mode_Select_idea.png")
+    #bgRect = bgImage.get_rect()
+    #while mode =="modeSelect":
+   # if event in pygame.event.get():
+   # if event.type:
 
 
     #-----------------------Game screen---------------------------------#
@@ -117,6 +117,9 @@ while True:
     goldbombDidSpawn=True
     goldbombSpawnRate=500
     
+    bomb7xDidSpawn=True
+    bomb7xSpawnRate=135
+    sick=False
     pellets = [Pellet([925,725])]
     pelletDidSpawn=True
     pelletSpawnRate=15
@@ -210,7 +213,13 @@ while True:
             goldbombDidSpawn=True
         elif goldbombDidSpawn and points % goldbombSpawnRate == 1:
             goldbombDidSpawn=False
-           
+        if not bomb7xDidSpawn and points % bomb7xSpawnRate == 0:
+            b = Bomb("Bomb7x",[625,525])
+            b.respawn(size, tileSize)
+            bombs+=[b]
+            bomb7xDidSpawn=True
+        elif bomb7xDidSpawn and points % bomb7xSpawnRate == 1:
+            bomb7xDidSpawn=False
       
         
         if not pelletDidSpawn and points % pelletSpawnRate == 0:
@@ -243,6 +252,9 @@ while True:
                 if bomb.kind =="Bomb6x":
                     b = Bomb("poison",[625,525])
                     bombs+=[b]
+                if bomb.kind =="Bomb7x":
+                    playerSpeed=1.25
+                    sick=True
                 bomb.snakeCollide(player)
                 player.die(bomb.damage)
                 bomb.respawn(size, tileSize)
