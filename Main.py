@@ -53,10 +53,18 @@ while True:
         pygame.display.flip()
         clock.tick(60)
         
-            
+    
+    #-----------------------Mode Select Screen--------------------------#
+    
+    
+    bgImage=pygame.image.load("Art/Background/Mode_Select_idea.png")
+    bgRect = bgImage.get_rect()
+    while mode =="modeSelect":
+        if event in pygame.event.get():
+            if event.type
 
 
-    #-----------------------Game screen--------------------------------#
+    #-----------------------Game screen---------------------------------#
     if sound:
         pygame.mixer.music.load("Music/Background/Main_Background.mp3")
         pygame.mixer.music.set_volume(.15)
@@ -291,7 +299,7 @@ while True:
         clock.tick(60)
         # print(clock.get_fps())
         
-    #-----------------------End screen--------------------------------#
+    #-----------------------End screen----------------------------------#
     if sound:
         pygame.mixer.music.load("Music/Background/DEATH.mp3")
         pygame.mixer.music.set_volume(.25)
