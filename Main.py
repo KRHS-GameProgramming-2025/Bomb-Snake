@@ -69,7 +69,7 @@ while True:
     
     score = Hud ("Score: ", points, [0,0])
     playerSpeed=5
-    player = Head(101,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+    player = Head(10,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
     snake = [player]
     snakeSize = 3
     for i in range(snakeSize-1):
@@ -107,7 +107,7 @@ while True:
     poisonDidSpawn=True
     
     goldbombDidSpawn=True
-    goldbombSpawnRate=5
+    goldbombSpawnRate=500
     
     pellets = [Pellet([925,725])]
     pelletDidSpawn=True
