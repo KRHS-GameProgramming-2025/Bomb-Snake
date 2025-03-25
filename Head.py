@@ -113,7 +113,7 @@ class Head():
         
     def wallCollide(self, size):
         width = size[0]
-        height = size[1]
+        height = size[1]-100
         # ~ if self.rect.bottom >  height: 
             # ~ self.rect.centery = self.tileSize/2
         # ~ if self.rect.top < 0: 
