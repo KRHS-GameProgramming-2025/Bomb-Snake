@@ -145,14 +145,22 @@ while True:
     
     flameDidSpawn=True
     
+    rockDidSpawn=True
+    
+    pitDidSpawn=True
+    
     poisonDidSpawn=True
     
     goldbombDidSpawn=True
     goldbombSpawnRate=500
     
+    
     bomb7xDidSpawn=True
     bomb7xSpawnRate=135
     sick=False
+    
+    bomb8xDidSpawn=True
+    bomb8xSpawnRate=145
     pellets = [Pellet([925,725])]
     pelletDidSpawn=True
     pelletSpawnRate=15
@@ -253,6 +261,13 @@ while True:
             bomb7xDidSpawn=True
         elif bomb7xDidSpawn and points % bomb7xSpawnRate == 1:
             bomb7xDidSpawn=False
+        if not bomb8xDidSpawn and points % bomb8xSpawnRate == 0:
+            b = Bomb("Bomb8x",[625,525])
+            b.respawn(size, tileSize)
+            bombs+=[b]
+            bomb8xDidSpawn=True
+        elif bomb8xDidSpawn and points % bomb8xSpawnRate == 1:
+            bomb8xDidSpawn=False
       
         
         if not pelletDidSpawn and points % pelletSpawnRate == 0:
@@ -288,6 +303,12 @@ while True:
                 if bomb.kind =="Bomb7x":
                     playerSpeed=1.25
                     sick=True
+                if bomb.kind =="Bomb8x":
+                    b = Bomb("rock",[625,525])
+                    bombs+=[b]
+                if bomb.kind =="Bomb8x":
+                    b = Bomb("pit",[525,100])
+                    bombs+=[b]
                 bomb.snakeCollide(player)
                 player.die(bomb.damage) # ~ bgImage=pygame.image.load("Art/Background/Mode_Select_idea.png")
     # ~ bgRect = bgImage.get_rect()
