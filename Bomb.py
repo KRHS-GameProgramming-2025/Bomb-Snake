@@ -38,6 +38,9 @@ class Bomb():
         elif kind == "Bomb8x":
             self.image = pygame.image.load("Art/Objects/Bomb/Bomb8x.png")
             self.damage=8
+        elif kind == "Bomb9x":
+            self.image = pygame.image.load("Art/Objects/Bomb/Bomb9x.png")
+            self.damage=9
         elif kind == "rock":
             self.image = pygame.image.load("Art/Objects/Bomb/rock.png")
             self.damage=3
