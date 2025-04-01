@@ -117,7 +117,7 @@ while True:
         snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[0].direction)]
     
     lives = player.lives
-    life = Hud ("Lives: ", lives, [870,0])
+    life = Hud ("Lives: ", lives, [755,943])
           
     bombs = [Bomb("Bomb",[925,825])]
     bombDidSpawn=True
