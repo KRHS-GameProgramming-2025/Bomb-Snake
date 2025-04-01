@@ -35,6 +35,18 @@ class Bomb():
         elif kind == "Bomb7x":
             self.image = pygame.image.load("Art/Objects/Bomb/Bomb7x.png")
             self.damage=7
+        elif kind == "Bomb8x":
+            self.image = pygame.image.load("Art/Objects/Bomb/Bomb8x.png")
+            self.damage=8
+        elif kind == "Bomb9x":
+            self.image = pygame.image.load("Art/Objects/Bomb/Bomb9x.png")
+            self.damage=9
+        elif kind == "rock":
+            self.image = pygame.image.load("Art/Objects/Bomb/rock.png")
+            self.damage=3
+        elif kind == "pit":
+            self.image = pygame.image.load("Art/Objects/Bomb/pit.png")
+            self.damage=3
         else:
             print(kind)
         self.rect = self.image.get_rect(center=startPos)
