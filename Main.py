@@ -399,6 +399,14 @@ while True:
             if zap:
                 zap = False
                 playerSpeed = 5
+                
+            if sick:
+                sick = False
+                playerSpeed = 5
+                
+            if clean:
+                clean = False
+                playerSpeed = 5
               
             life.update(lives)
             
