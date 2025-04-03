@@ -58,8 +58,13 @@ while True:
         clock.tick(60)
         
     
-    #-----------------------Mode Select Screen--------------------------#
-    
+    #-----------------------Credits Screen------------------------------#
+    if sound:
+        pygame.mixer.music.load("Music/Background/Thanks!.mp3")
+        pygame.mixer.music.set_volume(.25)
+        pygame.mixer.music.play()
+    else:
+        print("No Sound")
     
     bgImage=pygame.image.load("Art/Background/Credit_idea.png")
     bgRect = bgImage.get_rect()
@@ -77,7 +82,7 @@ while True:
         clock.tick(60)
 
     #-----------------------Credits Screen------------------------------#
-    
+
     
     bgImage=pygame.image.load("Art/Background/Mode_Select_idea.png")
     bgRect = bgImage.get_rect()
