@@ -143,6 +143,9 @@ while True:
     bmobDidSpawn=True
     bmobSpawnRate=51
     
+    x2bmobDidSpawn=True
+    x2bmobSpawnRate=140
+    
     flameDidSpawn=True
     
     rockDidSpawn=True
@@ -250,6 +253,14 @@ while True:
             bmobDidSpawn=True
         elif bmobDidSpawn and points % bmobSpawnRate == 1:
             bmobDidSpawn=False
+            
+        if not x2bmobDidSpawn and points % x2bmobSpawnRate == 0:
+            b = Bomb("x2bmoB",[625,525])
+            b.respawn(size, tileSize)
+            bombs+=[b]
+            x2bmobDidSpawn=True
+        elif x2bmobDidSpawn and points % x2bmobSpawnRate == 1:
+            x2bmobDidSpawn=False
             
         if not goldbombDidSpawn and points % goldbombSpawnRate == 0:
             b = Bomb("goldBomb",[925,825])

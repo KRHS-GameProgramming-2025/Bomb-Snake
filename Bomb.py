@@ -23,6 +23,9 @@ class Bomb():
         elif kind == "bmoB":
             self.image = pygame.image.load("Art/Objects/Bomb/bmoB.png")
             self.damage=-1
+        elif kind == "x2bmoB":
+            self.image = pygame.image.load("Art/Objects/Bomb/x2bomB.png")
+            self.damage=-2
         elif kind == "flame":
             self.image = pygame.image.load("Art/Objects/Bomb/flame.png")
             self.damage=1
