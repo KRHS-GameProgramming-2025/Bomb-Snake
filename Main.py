@@ -148,7 +148,12 @@ while True:
     bmobDidSpawn=True
     bmobSpawnRate=51
     
+    x2bmobDidSpawn=True
+    x2bmobSpawnRate=140
+    
     flameDidSpawn=True
+    
+    waterDidSpawn=True
     
     rockDidSpawn=True
     
@@ -170,6 +175,9 @@ while True:
     bomb9xDidSpawn=True
     bomb9xSpawnRate=160
     clean=False
+    
+    bomb10xDidSpawn=True
+    bomb10xSpawnRate=185
     pellets = [Pellet([925,725])]
     pelletDidSpawn=True
     pelletSpawnRate=15
@@ -256,6 +264,14 @@ while True:
         elif bmobDidSpawn and points % bmobSpawnRate == 1:
             bmobDidSpawn=False
             
+        if not x2bmobDidSpawn and points % x2bmobSpawnRate == 0:
+            b = Bomb("x2bmoB",[625,525])
+            b.respawn(size, tileSize)
+            bombs+=[b]
+            x2bmobDidSpawn=True
+        elif x2bmobDidSpawn and points % x2bmobSpawnRate == 1:
+            x2bmobDidSpawn=False
+            
         if not goldbombDidSpawn and points % goldbombSpawnRate == 0:
             b = Bomb("goldBomb",[925,825])
             b.respawn(size, tileSize)
@@ -285,6 +301,14 @@ while True:
             bomb9xDidSpawn=True
         elif bomb9xDidSpawn and points % bomb9xSpawnRate == 1:
             bomb9xDidSpawn=False
+            
+        if not bomb10xDidSpawn and points % bomb10xSpawnRate == 0:
+            b = Bomb("Bomb10x",[625,525])
+            b.respawn(size, tileSize)
+            bombs+=[b]
+            bomb10xDidSpawn=True
+        elif bomb10xDidSpawn and points % bomb10xSpawnRate == 1:
+            bomb10xDidSpawn=False
       
         
         if not pelletDidSpawn and points % pelletSpawnRate == 0:
@@ -312,16 +336,21 @@ while True:
                     playerSpeed=20
                     zap=True
                 if bomb.kind =="Bomb3x":
-                    b = Bomb("flame",[625,525])
+                    b = Bomb("flame",[225,525])
                     bombs+=[b]
                 if bomb.kind =="Bomb6x":
                     b = Bomb("poison",[625,525])
                     bombs+=[b]
+                    
+                if bomb.kind =="Bomb10x":
+                    b = Bomb("water",[725,525])
+                    bombs+=[b]
+                    
                 if bomb.kind =="Bomb7x":
                     playerSpeed=1.25
                     sick=True
                 if bomb.kind =="Bomb8x":
-                    b = Bomb("rock",[625,525])
+                    b = Bomb("rock",[425,525])
                     bombs+=[b]
                 if bomb.kind =="Bomb8x":
                     b = Bomb("pit",[525,100])

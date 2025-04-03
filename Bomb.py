@@ -23,9 +23,15 @@ class Bomb():
         elif kind == "bmoB":
             self.image = pygame.image.load("Art/Objects/Bomb/bmoB.png")
             self.damage=-1
+        elif kind == "x2bmoB":
+            self.image = pygame.image.load("Art/Objects/Bomb/x2bomB.png")
+            self.damage=-2
         elif kind == "flame":
             self.image = pygame.image.load("Art/Objects/Bomb/flame.png")
             self.damage=1
+        elif kind == "water":
+            self.image = pygame.image.load("Art/Objects/Bomb/water.png")
+            self.damage=3
         elif kind == "poison":
             self.image = pygame.image.load("Art/Objects/Bomb/poison.png")
             self.damage=2
@@ -41,6 +47,9 @@ class Bomb():
         elif kind == "Bomb9x":
             self.image = pygame.image.load("Art/Objects/Bomb/Bomb9x.png")
             self.damage=9
+        elif kind == "Bomb10x":
+            self.image = pygame.image.load("Art/Objects/Bomb/Bomb10x.png")
+            self.damage=10
         elif kind == "rock":
             self.image = pygame.image.load("Art/Objects/Bomb/rock.png")
             self.damage=3
