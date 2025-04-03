@@ -58,8 +58,13 @@ while True:
         clock.tick(60)
         
     
-    #-----------------------Mode Select Screen--------------------------#
-    
+    #-----------------------Credits Screen------------------------------#
+    if sound:
+        pygame.mixer.music.load("Music/Background/Thanks!.mp3")
+        pygame.mixer.music.set_volume(.25)
+        pygame.mixer.music.play()
+    else:
+        print("No Sound")
     
     bgImage=pygame.image.load("Art/Background/Credit_idea.png")
     bgRect = bgImage.get_rect()
@@ -77,7 +82,7 @@ while True:
         clock.tick(60)
 
     #-----------------------Credits Screen------------------------------#
-    
+
     
     bgImage=pygame.image.load("Art/Background/Mode_Select_idea.png")
     bgRect = bgImage.get_rect()
@@ -117,7 +122,7 @@ while True:
         snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[0].direction)]
     
     lives = player.lives
-    life = Hud ("Lives: ", lives, [870,0])
+    life = Hud ("Lives: ", lives, [755,943])
           
     bombs = [Bomb("Bomb",[925,825])]
     bombDidSpawn=True
@@ -143,16 +148,36 @@ while True:
     bmobDidSpawn=True
     bmobSpawnRate=51
     
+    x2bmobDidSpawn=True
+    x2bmobSpawnRate=140
+    
     flameDidSpawn=True
+    
+    waterDidSpawn=True
+    
+    rockDidSpawn=True
+    
+    pitDidSpawn=True
     
     poisonDidSpawn=True
     
     goldbombDidSpawn=True
     goldbombSpawnRate=500
     
+    
     bomb7xDidSpawn=True
     bomb7xSpawnRate=135
     sick=False
+    
+    bomb8xDidSpawn=True
+    bomb8xSpawnRate=145
+
+    bomb9xDidSpawn=True
+    bomb9xSpawnRate=160
+    clean=False
+    
+    bomb10xDidSpawn=True
+    bomb10xSpawnRate=185
     pellets = [Pellet([925,725])]
     pelletDidSpawn=True
     pelletSpawnRate=15
@@ -239,6 +264,14 @@ while True:
         elif bmobDidSpawn and points % bmobSpawnRate == 1:
             bmobDidSpawn=False
             
+        if not x2bmobDidSpawn and points % x2bmobSpawnRate == 0:
+            b = Bomb("x2bmoB",[625,525])
+            b.respawn(size, tileSize)
+            bombs+=[b]
+            x2bmobDidSpawn=True
+        elif x2bmobDidSpawn and points % x2bmobSpawnRate == 1:
+            x2bmobDidSpawn=False
+            
         if not goldbombDidSpawn and points % goldbombSpawnRate == 0:
             b = Bomb("goldBomb",[925,825])
             b.respawn(size, tileSize)
@@ -253,6 +286,29 @@ while True:
             bomb7xDidSpawn=True
         elif bomb7xDidSpawn and points % bomb7xSpawnRate == 1:
             bomb7xDidSpawn=False
+        if not bomb8xDidSpawn and points % bomb8xSpawnRate == 0:
+            b = Bomb("Bomb8x",[625,525])
+            b.respawn(size, tileSize)
+            bombs+=[b]
+            bomb8xDidSpawn=True
+        elif bomb8xDidSpawn and points % bomb8xSpawnRate == 1:
+            bomb8xDidSpawn=False
+            
+        if not bomb9xDidSpawn and points % bomb9xSpawnRate == 0:
+            b = Bomb("Bomb9x",[625,525])
+            b.respawn(size, tileSize)
+            bombs+=[b]
+            bomb9xDidSpawn=True
+        elif bomb9xDidSpawn and points % bomb9xSpawnRate == 1:
+            bomb9xDidSpawn=False
+            
+        if not bomb10xDidSpawn and points % bomb10xSpawnRate == 0:
+            b = Bomb("Bomb10x",[625,525])
+            b.respawn(size, tileSize)
+            bombs+=[b]
+            bomb10xDidSpawn=True
+        elif bomb10xDidSpawn and points % bomb10xSpawnRate == 1:
+            bomb10xDidSpawn=False
       
         
         if not pelletDidSpawn and points % pelletSpawnRate == 0:
@@ -280,14 +336,30 @@ while True:
                     playerSpeed=20
                     zap=True
                 if bomb.kind =="Bomb3x":
-                    b = Bomb("flame",[625,525])
+                    b = Bomb("flame",[225,525])
                     bombs+=[b]
                 if bomb.kind =="Bomb6x":
                     b = Bomb("poison",[625,525])
                     bombs+=[b]
+                    
+                if bomb.kind =="Bomb10x":
+                    b = Bomb("water",[725,525])
+                    bombs+=[b]
+                    
                 if bomb.kind =="Bomb7x":
                     playerSpeed=1.25
                     sick=True
+                if bomb.kind =="Bomb8x":
+                    b = Bomb("rock",[425,525])
+                    bombs+=[b]
+                if bomb.kind =="Bomb8x":
+                    b = Bomb("pit",[525,100])
+                    bombs+=[b]
+                if bomb.kind =="Bomb9x":
+                    playerSpeed=10
+                    clean=True
+                    
+                    
                 bomb.snakeCollide(player)
                 player.die(bomb.damage) # ~ bgImage=pygame.image.load("Art/Background/Mode_Select_idea.png")
     # ~ bgRect = bgImage.get_rect()
