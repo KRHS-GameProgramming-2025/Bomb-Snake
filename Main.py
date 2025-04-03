@@ -113,7 +113,7 @@ while True:
     counter = 0
     points = 0
     
-    score = Hud ("Score: ", points, [0,0])
+    score = Hud ("Score: ", points, [70,938])
     playerSpeed=5
     player = Head(10,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
     snake = [player]
@@ -122,7 +122,7 @@ while True:
         snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[0].direction)]
     
     lives = player.lives
-    life = Hud ("Lives: ", lives, [755,943])
+    life = Hud ("Lives: ", lives, [765,938])
           
     bombs = [Bomb("Bomb",[925,825])]
     bombDidSpawn=True
