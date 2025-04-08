@@ -126,10 +126,10 @@ while True:
           
     bombs = [Bomb("Bomb",[925,825])]
     bombDidSpawn=True
-    bombSpawnRate=15
+    bombSpawnRate=25
     
     bomb2xDidSpawn=True
-    bomb2xSpawnRate=20
+    bomb2xSpawnRate=15
     
     bomb3xDidSpawn=True
     bomb3xSpawnRate=35
@@ -139,7 +139,7 @@ while True:
     frozen=False
     
     bomb5xDidSpawn=True
-    bomb5xSpawnRate=75
+    bomb5xSpawnRate=65
     zap=False
     
     bomb6xDidSpawn=True
