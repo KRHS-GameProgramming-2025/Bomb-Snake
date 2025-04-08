@@ -366,11 +366,7 @@ while True:
                     
                     
                 bomb.snakeCollide(player)
-                player.die(bomb.damage) # ~ bgImage=pygame.image.load("Art/Background/Mode_Select_idea.png")
-    # ~ bgRect = bgImage.get_rect()
-    # ~ while mode =="modeSelect":
-        # ~ if event in pygame.event.get():
-            # ~ if event.type:
+                player.die(bomb.damage) 
                 bomb.respawn(size, tileSize)
               
         

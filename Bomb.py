@@ -110,7 +110,15 @@ class Bomb():
         return math.sqrt((x2-x1)**2 + (y2-y1)**2)
         
     def respawn(self, size, tileSize):
+        width = size[0]
+        height = size[1]-100
         x =  random.randint(0, int(size[0]/tileSize)-1)*50+25
         y =  random.randint(1, int(size[1]/tileSize)-1)*50+25
         self.rect.center = [x,y]
         print(x,y)
+        
+        x =  random.randint(0, int(width/tileSize)-1)*50+25
+        y =  random.randint(1, int(height/tileSize)-1)*50+25
+        self.rect.center = [x,y]
+        print(x,y)
+
