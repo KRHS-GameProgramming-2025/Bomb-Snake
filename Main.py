@@ -110,7 +110,7 @@ while True:
     #-----------------------Game screen---------------------------------#
     if sound:
         pygame.mixer.music.load("Music/Background/Main_Background.mp3")
-        pygame.mixer.music.set_volume(.15)
+        pygame.mixer.music.set_volume(.25)
         pygame.mixer.music.play()
     else:
         print("No Sound")
@@ -129,7 +129,7 @@ while True:
     lives = player.lives
     life = Hud ("Lives: ", lives, [765,938])
           
-    bombs = [Bomb("Bomb",[925,825])]
+    bombs = [Bomb("Bomb",[550,425])]
     bombDidSpawn=True
     bombSpawnRate=25
     
@@ -183,7 +183,7 @@ while True:
     
     bomb10xDidSpawn=True
     bomb10xSpawnRate=185
-    pellets = [Pellet([925,725])]
+    pellets = [Pellet([550,425])]
     pelletDidSpawn=True
     pelletSpawnRate=15
 
