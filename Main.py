@@ -17,6 +17,19 @@ try:
 except:
     sound = False
 
+def checkSpawn(thing):
+    for pellet in pellets:
+        if thing.collide(pellet):
+            return True
+    for bomb in bombs:
+        if thing.collide(bomb):
+            return True
+    for segment in snake:
+        if thing.collide(segment):
+            return True
+            
+    return False
+
 clock = pygame.time.Clock();
 
 if not pygame.font: print("Warning, fonts disabled")
@@ -183,6 +196,7 @@ while True:
     
     bomb10xDidSpawn=True
     bomb10xSpawnRate=185
+    
     pellets = [Pellet([550,425])]
     pelletDidSpawn=True
     pelletSpawnRate=15
@@ -216,7 +230,10 @@ while True:
             b = Bomb("Bomb",[925,825])
             b.respawn(size, tileSize)
             bombs+=[b] 
-            bombDidSpawn=True
+            if checkSpawn(bombs[-1]):
+                bombs.remove(bombs[-1])
+            else:
+                bombDidSpawn=True
         elif bombDidSpawn and points % bombSpawnRate == 1:
             bombDidSpawn=False
             
@@ -224,7 +241,10 @@ while True:
             b = Bomb("Bomb2x",[725,825])
             b.respawn(size, tileSize)
             bombs+=[b]
-            bomb2xDidSpawn=True
+            if checkSpawn(bombs[-1]):
+                bombs.remove(bombs[-1])
+            else:
+                bomb2xDidSpawn=True
         elif bomb2xDidSpawn and points % bomb2xSpawnRate == 1:
             bomb2xDidSpawn=False
             
@@ -232,7 +252,10 @@ while True:
             b = Bomb("Bomb3x",[625,825])
             b.respawn(size, tileSize)
             bombs+=[b]
-            bomb3xDidSpawn=True
+            if checkSpawn(bombs[-1]):
+                bombs.remove(bombs[-1])
+            else:
+                bomb3xDidSpawn=True
         elif bomb3xDidSpawn and points % bomb3xSpawnRate == 1:
             bomb3xDidSpawn=False
             
@@ -240,7 +263,10 @@ while True:
             b = Bomb("Bomb4x",[625,525])
             b.respawn(size, tileSize)
             bombs+=[b]
-            bomb4xDidSpawn=True
+            if checkSpawn(bombs[-1]):
+                bombs.remove(bombs[-1])
+            else:
+                bomb4xDidSpawn=True
         elif bomb4xDidSpawn and points % bomb4xSpawnRate == 1:
             bomb4xDidSpawn=False
             
@@ -249,7 +275,10 @@ while True:
             b = Bomb("Bomb5x",[625,525])
             b.respawn(size, tileSize)
             bombs+=[b]
-            bomb5xDidSpawn=True
+            if checkSpawn(bombs[-1]):
+                bombs.remove(bombs[-1])
+            else:
+                bomb5xDidSpawn=True
         elif bomb5xDidSpawn and points % bomb5xSpawnRate == 1:
             bomb5xDidSpawn=False
             
@@ -257,7 +286,10 @@ while True:
             b = Bomb("Bomb6x",[625,525])
             b.respawn(size, tileSize)
             bombs+=[b]
-            bomb6xDidSpawn=True
+            if checkSpawn(bombs[-1]):
+                bombs.remove(bombs[-1])
+            else:
+                bomb6xDidSpawn=True
         elif bomb6xDidSpawn and points % bomb6xSpawnRate == 1:
             bomb6xDidSpawn=False
             
@@ -288,14 +320,20 @@ while True:
             b = Bomb("Bomb7x",[625,525])
             b.respawn(size, tileSize)
             bombs+=[b]
-            bomb7xDidSpawn=True
+            if checkSpawn(bombs[-1]):
+                bombs.remove(bombs[-1])
+            else:
+                bomb7xDidSpawn=True
         elif bomb7xDidSpawn and points % bomb7xSpawnRate == 1:
             bomb7xDidSpawn=False
         if not bomb8xDidSpawn and points % bomb8xSpawnRate == 0:
             b = Bomb("Bomb8x",[625,525])
             b.respawn(size, tileSize)
             bombs+=[b]
-            bomb8xDidSpawn=True
+            if checkSpawn(bombs[-1]):
+                bombs.remove(bombs[-1])
+            else:
+                bomb8xDidSpawn=True
         elif bomb8xDidSpawn and points % bomb8xSpawnRate == 1:
             bomb8xDidSpawn=False
             
@@ -303,7 +341,10 @@ while True:
             b = Bomb("Bomb9x",[625,525])
             b.respawn(size, tileSize)
             bombs+=[b]
-            bomb9xDidSpawn=True
+            if checkSpawn(bombs[-1]):
+                bombs.remove(bombs[-1])
+            else:
+                bomb9xDidSpawn=True
         elif bomb9xDidSpawn and points % bomb9xSpawnRate == 1:
             bomb9xDidSpawn=False
             
@@ -311,7 +352,10 @@ while True:
             b = Bomb("Bomb10x",[625,525])
             b.respawn(size, tileSize)
             bombs+=[b]
-            bomb10xDidSpawn=True
+            if checkSpawn(bombs[-1]):
+                bombs.remove(bombs[-1])
+            else:
+                bomb10xDidSpawn=True
         elif bomb10xDidSpawn and points % bomb10xSpawnRate == 1:
             bomb10xDidSpawn=False
       
@@ -320,11 +364,16 @@ while True:
             p = Pellet([925,725])
             p.respawn(size, tileSize)
             pellets+=[p]
-            pelletDidSpawn=True
+            if checkSpawn(pellets[-1]):
+                pellets.remove(pellets[-1])
+            else:
+                pelletDidSpawn=True
         elif pelletDidSpawn and points % pelletSpawnRate == 1:
             pelletDidSpawn=False
-                       
-       
+   
+        
+        
+
             
         for i, segment in enumerate(snake):
             segment.update(size)

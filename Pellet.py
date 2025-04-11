@@ -37,7 +37,15 @@ class Pellet():
                                 return True
         return False
                          
-                         
+    def collide(self, other):
+        if self != other:
+            if self.rect.right > other.rect.left:
+                if self.rect.left < other.rect.right:
+                    if self.rect.bottom > other.rect.top:
+                        if self.rect.top < other.rect.bottom:
+                            if self.getDist(other) < self.rad + other.rad:
+                                return True
+        return False
                          
     
     def getDist(self, other):
