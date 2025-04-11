@@ -144,30 +144,30 @@ while True:
           
     bombs = [Bomb("Bomb",[550,425])]
     bombDidSpawn=True
-    bombSpawnRate=25
+    bombSpawnRate=1
     
     bomb2xDidSpawn=True
-    bomb2xSpawnRate=15
+    bomb2xSpawnRate=1
     
     bomb3xDidSpawn=True
-    bomb3xSpawnRate=35
+    bomb3xSpawnRate=1
     
     bomb4xDidSpawn=True
-    bomb4xSpawnRate=50
+    bomb4xSpawnRate=1
     frozen=False
     
     bomb5xDidSpawn=True
-    bomb5xSpawnRate=65
+    bomb5xSpawnRate=1
     zap=False
     
     bomb6xDidSpawn=True
-    bomb6xSpawnRate=100
+    bomb6xSpawnRate=1
     
     bmobDidSpawn=True
-    bmobSpawnRate=51
+    bmobSpawnRate=1
     
     x2bmobDidSpawn=True
-    x2bmobSpawnRate=120
+    x2bmobSpawnRate=1
     
     flameDidSpawn=True
     
@@ -180,18 +180,18 @@ while True:
     poisonDidSpawn=True
     
     goldbombDidSpawn=True
-    goldbombSpawnRate=500
+    goldbombSpawnRate=1
     
     
     bomb7xDidSpawn=True
-    bomb7xSpawnRate=115
+    bomb7xSpawnRate=1
     sick=False
     
     bomb8xDidSpawn=True
-    bomb8xSpawnRate=135
+    bomb8xSpawnRate=1
 
     bomb9xDidSpawn=True
-    bomb9xSpawnRate=150
+    bomb9xSpawnRate=1
     clean=False
     
     bomb10xDidSpawn=True
