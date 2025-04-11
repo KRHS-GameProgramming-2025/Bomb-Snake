@@ -167,7 +167,7 @@ while True:
     poisonDidSpawn=True
     
     goldbombDidSpawn=True
-    goldbombSpawnRate=500
+    goldbombSpawnRate=300
     
     
     bomb7xDidSpawn=True

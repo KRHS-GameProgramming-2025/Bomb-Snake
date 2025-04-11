@@ -31,7 +31,7 @@ class Bomb():
             self.damage=1
         elif kind == "water":
             self.image = pygame.image.load("Art/Objects/Bomb/water.png")
-            self.damage=3
+            self.damage=-3
         elif kind == "poison":
             self.image = pygame.image.load("Art/Objects/Bomb/poison.png")
             self.damage=2
