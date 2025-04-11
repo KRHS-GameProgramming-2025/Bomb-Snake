@@ -82,12 +82,7 @@ while True:
         clock.tick(60)
 
     #-----------------------Credits Screen------------------------------#
-    if sound:
-        pygame.mixer.music.load("Music/Background/CHOOSE.mp3")
-        pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play()
-    else:
-        print("No Sound")
+
     
     bgImage=pygame.image.load("Art/Background/Mode_Select_idea.png")
     bgRect = bgImage.get_rect()
@@ -110,7 +105,7 @@ while True:
     #-----------------------Game screen---------------------------------#
     if sound:
         pygame.mixer.music.load("Music/Background/Main_Background.mp3")
-        pygame.mixer.music.set_volume(.25)
+        pygame.mixer.music.set_volume(.15)
         pygame.mixer.music.play()
     else:
         print("No Sound")
@@ -129,32 +124,32 @@ while True:
     lives = player.lives
     life = Hud ("Lives: ", lives, [765,938])
           
-    bombs = [Bomb("Bomb",[550,425])]
+    bombs = [Bomb("Bomb",[925,825])]
     bombDidSpawn=True
-    bombSpawnRate=25
+    bombSpawnRate=1
     
     bomb2xDidSpawn=True
-    bomb2xSpawnRate=15
+    bomb2xSpawnRate=1
     
     bomb3xDidSpawn=True
-    bomb3xSpawnRate=35
+    bomb3xSpawnRate=1
     
     bomb4xDidSpawn=True
-    bomb4xSpawnRate=50
+    bomb4xSpawnRate=1
     frozen=False
     
     bomb5xDidSpawn=True
-    bomb5xSpawnRate=65
+    bomb5xSpawnRate=1
     zap=False
     
     bomb6xDidSpawn=True
-    bomb6xSpawnRate=100
+    bomb6xSpawnRate=1
     
     bmobDidSpawn=True
-    bmobSpawnRate=51
+    bmobSpawnRate=1
     
     x2bmobDidSpawn=True
-    x2bmobSpawnRate=120
+    x2bmobSpawnRate=1
     
     flameDidSpawn=True
     
@@ -167,23 +162,23 @@ while True:
     poisonDidSpawn=True
     
     goldbombDidSpawn=True
-    goldbombSpawnRate=300
+    goldbombSpawnRate=1
     
     
     bomb7xDidSpawn=True
-    bomb7xSpawnRate=115
+    bomb7xSpawnRate=1
     sick=False
     
     bomb8xDidSpawn=True
-    bomb8xSpawnRate=135
+    bomb8xSpawnRate=1
 
     bomb9xDidSpawn=True
-    bomb9xSpawnRate=150
+    bomb9xSpawnRate=1
     clean=False
     
     bomb10xDidSpawn=True
-    bomb10xSpawnRate=185
-    pellets = [Pellet([550,425])]
+    bomb10xSpawnRate=1
+    pellets = [Pellet([925,725])]
     pelletDidSpawn=True
     pelletSpawnRate=15
 
@@ -366,7 +361,11 @@ while True:
                     
                     
                 bomb.snakeCollide(player)
-                player.die(bomb.damage) 
+                player.die(bomb.damage) # ~ bgImage=pygame.image.load("Art/Background/Mode_Select_idea.png")
+    # ~ bgRect = bgImage.get_rect()
+    # ~ while mode =="modeSelect":
+        # ~ if event in pygame.event.get():
+            # ~ if event.type:
                 bomb.respawn(size, tileSize)
               
         
