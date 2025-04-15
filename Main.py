@@ -364,6 +364,7 @@ while True:
             p = Pellet([925,725])
             p.respawn(size, tileSize)
             pellets+=[p]
+            print(checkSpawn(pellets[-1]))
             if checkSpawn(pellets[-1]):
                 pellets.remove(pellets[-1])
             else:
@@ -424,7 +425,14 @@ while True:
                 pellet.snakeCollide(player)
                 points += 1
                 score.update(points)
-                pellet.respawn(size, tileSize)
+                
+                goodSpawn = False
+                while not goodSpawn:
+                    print("Respawning")
+                    pellet.respawn(size, tileSize)
+                    goodSpawn = not checkSpawn(pellet)
+                print("-----")
+                
                 snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[-1].prevDir)]
                 
                 

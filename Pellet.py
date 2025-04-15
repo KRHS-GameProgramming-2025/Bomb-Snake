@@ -60,7 +60,6 @@ class Pellet():
         width = size[0]
         height = size[1]-100
         fruitValue = random.randint(0,self.totalFruitOdds)
-        print(fruitValue)
         index = 0
         for i, fo in enumerate(self.fruitOdds):
             fruitValue -= fo
@@ -75,4 +74,3 @@ class Pellet():
         x =  random.randint(0, int(width/tileSize)-1)*50+25
         y =  random.randint(1, int(height/tileSize)-1)*50+25
         self.rect.center = [x,y]
-        print(x,y)
