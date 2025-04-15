@@ -75,7 +75,7 @@ while True:
     if sound:
         pygame.mixer.music.load("Music/Background/Thanks!.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play()
+        pygame.mixer.music.play(0)
     else:
         print("No Sound")
     
@@ -98,7 +98,7 @@ while True:
     if sound:
         pygame.mixer.music.load("Music/Background/CHOOSE.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play()
+        pygame.mixer.music.play(0)
     else:
         print("No Sound")
     
@@ -124,7 +124,7 @@ while True:
     if sound:
         pygame.mixer.music.load("Music/Background/Main_Background.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play()
+        pygame.mixer.music.play(0)
     else:
         print("No Sound")
 
@@ -143,6 +143,37 @@ while True:
     life = Hud ("Lives: ", lives, [765,938])
           
     bombs = [Bomb("Bomb",[550,425])]
+    
+    bombSpawnRates={"Bomb": 1,
+                    "Bomb2x": 5,
+                    "Bomb3x": 10,
+                    "Bomb4x": 15,
+                    "Bomb5x": 20,
+                    "Bomb6x": 25,
+                    "bmoB": 30,
+                    "x2bmoB": 35,
+                    "goldBomb": 40,
+                    "Bomb7x": 45,
+                    "Bomb8x": 50,
+                    "Bomb9x": 55,
+                    "Bomb10x": 60
+                    }
+                    
+    bombDidSpawns={"Bomb": True,
+                   "Bomb2x": True,
+                   "Bomb3x": True,
+                   "Bomb4x": True,
+                   "Bomb5x": True,
+                   "Bomb6x": True,
+                   "bmoB": True,
+                   "x2bmoB": True,
+                   "goldBomb": True,
+                   "Bomb7x": True,
+                   "Bomb8x": True,
+                   "Bomb9x": True,
+                   "Bomb10x": True
+                    }
+    
     bombDidSpawn=True
     bombSpawnRate=1
     
@@ -154,11 +185,9 @@ while True:
     
     bomb4xDidSpawn=True
     bomb4xSpawnRate=1
-    frozen=False
     
     bomb5xDidSpawn=True
     bomb5xSpawnRate=1
-    zap=False
     
     bomb6xDidSpawn=True
     bomb6xSpawnRate=1
@@ -169,15 +198,6 @@ while True:
     x2bmobDidSpawn=True
     x2bmobSpawnRate=1
     
-    flameDidSpawn=True
-    
-    waterDidSpawn=True
-    
-    rockDidSpawn=True
-    
-    pitDidSpawn=True
-    
-    poisonDidSpawn=True
     
     goldbombDidSpawn=True
     goldbombSpawnRate=1
@@ -185,14 +205,14 @@ while True:
     
     bomb7xDidSpawn=True
     bomb7xSpawnRate=1
-    sick=False
+
     
     bomb8xDidSpawn=True
     bomb8xSpawnRate=1
 
     bomb9xDidSpawn=True
     bomb9xSpawnRate=1
-    clean=False
+
     
     bomb10xDidSpawn=True
     bomb10xSpawnRate=185
@@ -203,7 +223,7 @@ while True:
 
     bgImage = pygame.image.load("Art/Background/board.png")
     bgRect = bgImage.get_rect()
-    
+    Bomb
     didSpawn=True
 
     while mode=="play":
@@ -225,139 +245,19 @@ while True:
                         player.goKey("down")
         
         
+        for bomb in bombSpawnRates.keys():
+            if not bombDidSpawns[bomb] and points % bombSpawnRates[bomb] == 0:
+                b = Bomb(bomb,[925,825])
+                b.respawn(size, tileSize)
+                if checkSpawn(b):
+                    break
+                else:
+                    bombs+=[b] 
+                    bombDidSpawns[bomb]=True
+            elif bombDidSpawns[bomb] and points % bombSpawnRates[bomb] == 1:
+                bombDidSpawns[bomb]=False
+            
         
-        if not bombDidSpawn and points % bombSpawnRate == 0:
-            b = Bomb("Bomb",[925,825])
-            b.respawn(size, tileSize)
-            bombs+=[b] 
-            if checkSpawn(bombs[-1]):
-                bombs.remove(bombs[-1])
-            else:
-                bombDidSpawn=True
-        elif bombDidSpawn and points % bombSpawnRate == 1:
-            bombDidSpawn=False
-            
-        if not bomb2xDidSpawn and points % bomb2xSpawnRate == 0:
-            b = Bomb("Bomb2x",[725,825])
-            b.respawn(size, tileSize)
-            bombs+=[b]
-            if checkSpawn(bombs[-1]):
-                bombs.remove(bombs[-1])
-            else:
-                bomb2xDidSpawn=True
-        elif bomb2xDidSpawn and points % bomb2xSpawnRate == 1:
-            bomb2xDidSpawn=False
-            
-        if not bomb3xDidSpawn and points % bomb3xSpawnRate == 0:
-            b = Bomb("Bomb3x",[625,825])
-            b.respawn(size, tileSize)
-            bombs+=[b]
-            if checkSpawn(bombs[-1]):
-                bombs.remove(bombs[-1])
-            else:
-                bomb3xDidSpawn=True
-        elif bomb3xDidSpawn and points % bomb3xSpawnRate == 1:
-            bomb3xDidSpawn=False
-            
-        if not bomb4xDidSpawn and points % bomb4xSpawnRate == 0:
-            b = Bomb("Bomb4x",[625,525])
-            b.respawn(size, tileSize)
-            bombs+=[b]
-            if checkSpawn(bombs[-1]):
-                bombs.remove(bombs[-1])
-            else:
-                bomb4xDidSpawn=True
-        elif bomb4xDidSpawn and points % bomb4xSpawnRate == 1:
-            bomb4xDidSpawn=False
-            
-            
-        if not bomb5xDidSpawn and points % bomb5xSpawnRate == 0:
-            b = Bomb("Bomb5x",[625,525])
-            b.respawn(size, tileSize)
-            bombs+=[b]
-            if checkSpawn(bombs[-1]):
-                bombs.remove(bombs[-1])
-            else:
-                bomb5xDidSpawn=True
-        elif bomb5xDidSpawn and points % bomb5xSpawnRate == 1:
-            bomb5xDidSpawn=False
-            
-        if not bomb6xDidSpawn and points % bomb6xSpawnRate == 0:
-            b = Bomb("Bomb6x",[625,525])
-            b.respawn(size, tileSize)
-            bombs+=[b]
-            if checkSpawn(bombs[-1]):
-                bombs.remove(bombs[-1])
-            else:
-                bomb6xDidSpawn=True
-        elif bomb6xDidSpawn and points % bomb6xSpawnRate == 1:
-            bomb6xDidSpawn=False
-            
-        if not bmobDidSpawn and points % bmobSpawnRate == 0:
-            b = Bomb("bmoB",[625,525])
-            b.respawn(size, tileSize)
-            bombs+=[b]
-            bmobDidSpawn=True
-        elif bmobDidSpawn and points % bmobSpawnRate == 1:
-            bmobDidSpawn=False
-            
-        if not x2bmobDidSpawn and points % x2bmobSpawnRate == 0:
-            b = Bomb("x2bmoB",[625,525])
-            b.respawn(size, tileSize)
-            bombs+=[b]
-            x2bmobDidSpawn=True
-        elif x2bmobDidSpawn and points % x2bmobSpawnRate == 1:
-            x2bmobDidSpawn=False
-            
-        if not goldbombDidSpawn and points % goldbombSpawnRate == 0:
-            b = Bomb("goldBomb",[925,825])
-            b.respawn(size, tileSize)
-            bombs+=[b]
-            goldbombDidSpawn=True
-        elif goldbombDidSpawn and points % goldbombSpawnRate == 1:
-            goldbombDidSpawn=False
-        if not bomb7xDidSpawn and points % bomb7xSpawnRate == 0:
-            b = Bomb("Bomb7x",[625,525])
-            b.respawn(size, tileSize)
-            bombs+=[b]
-            if checkSpawn(bombs[-1]):
-                bombs.remove(bombs[-1])
-            else:
-                bomb7xDidSpawn=True
-        elif bomb7xDidSpawn and points % bomb7xSpawnRate == 1:
-            bomb7xDidSpawn=False
-        if not bomb8xDidSpawn and points % bomb8xSpawnRate == 0:
-            b = Bomb("Bomb8x",[625,525])
-            b.respawn(size, tileSize)
-            bombs+=[b]
-            if checkSpawn(bombs[-1]):
-                bombs.remove(bombs[-1])
-            else:
-                bomb8xDidSpawn=True
-        elif bomb8xDidSpawn and points % bomb8xSpawnRate == 1:
-            bomb8xDidSpawn=False
-            
-        if not bomb9xDidSpawn and points % bomb9xSpawnRate == 0:
-            b = Bomb("Bomb9x",[625,525])
-            b.respawn(size, tileSize)
-            bombs+=[b]
-            if checkSpawn(bombs[-1]):
-                bombs.remove(bombs[-1])
-            else:
-                bomb9xDidSpawn=True
-        elif bomb9xDidSpawn and points % bomb9xSpawnRate == 1:
-            bomb9xDidSpawn=False
-            
-        if not bomb10xDidSpawn and points % bomb10xSpawnRate == 0:
-            b = Bomb("Bomb10x",[625,525])
-            b.respawn(size, tileSize)
-            bombs+=[b]
-            if checkSpawn(bombs[-1]):
-                bombs.remove(bombs[-1])
-            else:
-                bomb10xDidSpawn=True
-        elif bomb10xDidSpawn and points % bomb10xSpawnRate == 1:
-            bomb10xDidSpawn=False
       
         
         if not pelletDidSpawn and points % pelletSpawnRate == 0:
@@ -384,37 +284,6 @@ while True:
         
         for bomb in bombs:
             if player.collide(bomb):
-                if bomb.kind =="Bomb4x":
-                    playerSpeed=2.5
-                    frozen=True
-                if bomb.kind =="Bomb5x":
-                    playerSpeed=20
-                    zap=True
-                if bomb.kind =="Bomb3x":
-                    b = Bomb("flame",[225,525])
-                    bombs+=[b]
-                if bomb.kind =="Bomb6x":
-                    b = Bomb("poison",[625,525])
-                    bombs+=[b]
-                    
-                if bomb.kind =="Bomb10x":
-                    b = Bomb("water",[725,525])
-                    bombs+=[b]
-                    
-                if bomb.kind =="Bomb7x":
-                    playerSpeed=1.25
-                    sick=True
-                if bomb.kind =="Bomb8x":
-                    b = Bomb("rock",[425,525])
-                    bombs+=[b]
-                if bomb.kind =="Bomb8x":
-                    b = Bomb("pit",[525,100])
-                    bombs+=[b]
-                if bomb.kind =="Bomb9x":
-                    playerSpeed=10
-                    clean=True
-                    
-                    
                 bomb.snakeCollide(player)
                 player.die(bomb.damage) 
                 bomb.respawn(size, tileSize)
@@ -449,22 +318,6 @@ while True:
             snake = [player]
             for i in range(snakeSize-1):
                 snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[0].direction)]
-            if frozen:
-                frozen = False
-                playerSpeed = 5
-                
-                
-            if zap:
-                zap = False
-                playerSpeed = 5
-                
-            if sick:
-                sick = False
-                playerSpeed = 5
-                
-            if clean:
-                clean = False
-                playerSpeed = 5
               
             life.update(lives)
             
@@ -490,7 +343,7 @@ while True:
     if sound:
         pygame.mixer.music.load("Music/Background/DEATH.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play()
+        pygame.mixer.music.play(0)
     else:
         print("No Sound")
     
