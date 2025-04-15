@@ -174,48 +174,6 @@ while True:
                    "Bomb10x": True
                     }
     
-    bombDidSpawn=True
-    bombSpawnRate=1
-    
-    bomb2xDidSpawn=True
-    bomb2xSpawnRate=1
-    
-    bomb3xDidSpawn=True
-    bomb3xSpawnRate=1
-    
-    bomb4xDidSpawn=True
-    bomb4xSpawnRate=1
-    
-    bomb5xDidSpawn=True
-    bomb5xSpawnRate=1
-    
-    bomb6xDidSpawn=True
-    bomb6xSpawnRate=1
-    
-    bmobDidSpawn=True
-    bmobSpawnRate=1
-    
-    x2bmobDidSpawn=True
-    x2bmobSpawnRate=1
-    
-    
-    goldbombDidSpawn=True
-    goldbombSpawnRate=1
-    
-    
-    bomb7xDidSpawn=True
-    bomb7xSpawnRate=1
-
-    
-    bomb8xDidSpawn=True
-    bomb8xSpawnRate=1
-
-    bomb9xDidSpawn=True
-    bomb9xSpawnRate=1
-
-    
-    bomb10xDidSpawn=True
-    bomb10xSpawnRate=185
     
     pellets = [Pellet([550,425])]
     pelletDidSpawn=True
