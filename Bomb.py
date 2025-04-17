@@ -8,54 +8,14 @@ class Bomb():
         elif kind == "Bomb2x":
             self.image = pygame.image.load("Art/Objects/Bomb/Bomb2x.png")
             self.damage=2
-        elif kind == "Bomb3x":
-            self.image = pygame.image.load("Art/Objects/Bomb/Bomb3x.png")
-            self.damage=3
-        elif kind == "Bomb4x":
-            self.image = pygame.image.load("Art/Objects/Bomb/Bomb4x.png")
-            self.damage=4
-        elif kind == "Bomb5x":
-            self.image = pygame.image.load("Art/Objects/Bomb/Bomb5x.png")
-            self.damage=5
-        elif kind == "Bomb6x":
-            self.image = pygame.image.load("Art/Objects/Bomb/Bomb6x.png")
-            self.damage=6
+     
         elif kind == "bmoB":
             self.image = pygame.image.load("Art/Objects/Bomb/bmoB.png")
             self.damage=-1
         elif kind == "x2bmoB":
             self.image = pygame.image.load("Art/Objects/Bomb/x2bomB.png")
             self.damage=-2
-        elif kind == "flame":
-            self.image = pygame.image.load("Art/Objects/Bomb/flame.png")
-            self.damage=1
-        elif kind == "water":
-            self.image = pygame.image.load("Art/Objects/Bomb/water.png")
-            self.damage=-3
-        elif kind == "poison":
-            self.image = pygame.image.load("Art/Objects/Bomb/poison.png")
-            self.damage=2
-        elif kind == "goldBomb":
-            self.image = pygame.image.load("Art/Objects/Bomb/goldBomb.png")
-            self.damage=100
-        elif kind == "Bomb7x":
-            self.image = pygame.image.load("Art/Objects/Bomb/Bomb7x.png")
-            self.damage=7
-        elif kind == "Bomb8x":
-            self.image = pygame.image.load("Art/Objects/Bomb/Bomb8x.png")
-            self.damage=8
-        elif kind == "Bomb9x":
-            self.image = pygame.image.load("Art/Objects/Bomb/Bomb9x.png")
-            self.damage=9
-        elif kind == "Bomb10x":
-            self.image = pygame.image.load("Art/Objects/Bomb/Bomb10x.png")
-            self.damage=10
-        elif kind == "rock":
-            self.image = pygame.image.load("Art/Objects/Bomb/rock.png")
-            self.damage=3
-        elif kind == "pit":
-            self.image = pygame.image.load("Art/Objects/Bomb/pit.png")
-            self.damage=3
+     
         else:
             print(kind)
         self.rect = self.image.get_rect(center=startPos)
