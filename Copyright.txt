@@ -1,3 +1,7 @@
 hit wall sound affect:
 https://opengameart.org/content/short-impact
 author: Soundsnap
+
+hit self sound affect:
+https://opengameart.org/content/player-hit-damage
+author: GreyFrogGames
