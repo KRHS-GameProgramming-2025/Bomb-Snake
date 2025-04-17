@@ -227,7 +227,12 @@ while True:
             if player.collide(bomb):
                 bomb.snakeCollide(player)
                 player.die(bomb.damage) 
-                bomb.respawn(size, tileSize)
+                
+                goodSpawn = False
+                while not goodSpawn:
+                    print("Respawning")
+                    bomb.respawn(size, tileSize)
+                    goodSpawn = not checkSpawn(bomb)
               
         
         for pellet in pellets:

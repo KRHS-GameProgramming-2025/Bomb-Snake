@@ -58,7 +58,7 @@ class Pellet():
         
     def respawn(self, size, tileSize):
         width = size[0]
-        height = size[1]-100
+        height = size[1]-150
         fruitValue = random.randint(0,self.totalFruitOdds)
         index = 0
         for i, fo in enumerate(self.fruitOdds):
