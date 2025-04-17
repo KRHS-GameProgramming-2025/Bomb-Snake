@@ -143,6 +143,7 @@ while True:
     life = Hud ("Lives: ", lives, [765,938])
           
     bombs = [Bomb("Bomb",[550,425])]
+    bombs[-1].respawn(size, tileSize)
     
     bombSpawnRates={"Bomb": 5,
                     "Bomb2x": 10,
@@ -157,6 +158,7 @@ while True:
     
     
     pellets = [Pellet([550,425])]
+    pellets[-1].respawn(size, tileSize)
     pelletDidSpawn=True
     pelletSpawnRate=15
 

@@ -87,8 +87,4 @@ class Bomb():
         self.rect.center = [x,y]
         print(x,y)
         
-        x =  random.randint(0, int(width/tileSize)-1)*50+25
-        y =  random.randint(1, int(height/tileSize)-1)*50+25
-        self.rect.center = [x,y]
-        print(x,y)
 
