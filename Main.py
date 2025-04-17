@@ -45,7 +45,7 @@ while True:
     if sound:
         pygame.mixer.music.load("Music/Background/Main_Theme.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play(0)
+        pygame.mixer.music.play(loops=0)
     else:
         print("No Sound")
     
@@ -124,7 +124,7 @@ while True:
     if sound:
         pygame.mixer.music.load("Music/Background/Main_Background.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play(0)
+        pygame.mixer.music.play(loops=0)
     else:
         print("No Sound")
 
@@ -301,7 +301,7 @@ while True:
     if sound:
         pygame.mixer.music.load("Music/Background/DEATH.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play(0)
+        pygame.mixer.music.play(loops=0)
     else:
         print("No Sound")
     
