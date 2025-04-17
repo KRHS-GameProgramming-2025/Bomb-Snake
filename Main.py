@@ -144,35 +144,16 @@ while True:
           
     bombs = [Bomb("Bomb",[550,425])]
     
-    bombSpawnRates={"Bomb": 1,
-                    "Bomb2x": 5,
-                    "Bomb3x": 10,
-                    "Bomb4x": 15,
-                    "Bomb5x": 20,
-                    "Bomb6x": 25,
-                    "bmoB": 30,
-                    "x2bmoB": 35,
-                    "goldBomb": 40,
-                    "Bomb7x": 45,
-                    "Bomb8x": 50,
-                    "Bomb9x": 55,
-                    "Bomb10x": 60
+    bombSpawnRates={"Bomb": 5,
+                    "Bomb2x": 10,
+                    "bmoB":20 ,
+                    "x2bmoB": 50,
                     }
                     
     bombDidSpawns={"Bomb": True,
                    "Bomb2x": True,
-                   "Bomb3x": True,
-                   "Bomb4x": True,
-                   "Bomb5x": True,
-                   "Bomb6x": True,
                    "bmoB": True,
-                   "x2bmoB": True,
-                   "goldBomb": True,
-                   "Bomb7x": True,
-                   "Bomb8x": True,
-                   "Bomb9x": True,
-                   "Bomb10x": True
-                    }
+                   "x2bmoB": True,}
     
     
     pellets = [Pellet([550,425])]
