@@ -12,7 +12,7 @@ class Button():
         
        
         
-        self.normalImage = pygame.image.load("Art/Button/Button.png")
+        self.normalImage = pygame.image.load("Art/Background/button-std.png")
         self.rect = self.normalImage.get_rect(center=startpos)
         text=font.render(name,True,pygame.Color(0,0,0))
         textPos = text.get_rect(center = [self.rect.width/2,self.rect.height/2])
@@ -20,7 +20,7 @@ class Button():
         self.normalImage=pygame.transform.scale(self.normalImage,[self.rect.width*scale,self.rect.height*scale])
 
         
-        self.hoverImage = pygame.image.load("Art/Button/Button Hover.png")
+        self.hoverImage = pygame.image.load("Art/Background/button-hover.png")
         self.rect = self.hoverImage.get_rect(center=startpos)
         text=font.render(name,True,pygame.Color(0,0,0))
         textPos = text.get_rect(center = [self.rect.width/2,self.rect.height/2])
@@ -28,7 +28,7 @@ class Button():
         self.hoverImage=pygame.transform.scale(self.hoverImage,[self.rect.width*scale,self.rect.height*scale])
 
         
-        self.clickImage = pygame.image.load("Art/Button/Button while clicked.png")
+        self.clickImage = pygame.image.load("Art/Background/button-pressed.png")
         self.rect = self.clickImage.get_rect(center=startpos)
         text=font.render(name,False,pygame.Color(0,0,0))
         textPos = text.get_rect(center = [self.rect.width/2,self.rect.height/2])
