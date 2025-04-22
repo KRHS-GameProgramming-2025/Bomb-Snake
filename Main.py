@@ -38,6 +38,7 @@ size = [1000,1000]
 screen = pygame.display.set_mode(size)
 
 mode="start"
+clicked = False
 
 
 while True:
@@ -51,7 +52,7 @@ while True:
     
     buttons = [Button("Start", [191,325], 1), 
                Button("Modes", [191,425], 1),
-               Button("Credit", [191,525], 1),
+               Button("Credits", [191,525], 1),
                Button("Bombs", [191,625], 1)]
     
     bgImage=pygame.image.load("Art/Background/Start_Screen.png")
@@ -67,6 +68,29 @@ while True:
                     mode="modeSelect"
                 if event.key == pygame.K_c:
                     mode="credits"
+                if event.key == K_b:
+                    mode="bomb"
+            elif event.type == pygame.MOUSEMOTION:
+               for button in buttons:
+                   button.collidePoint(event.pos, clicked) 
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    clicked = True
+                    for button in buttons:
+                        button.collidePoint(event.pos, clicked)
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if event.button == 1:
+                    clicked = False
+                    for button in buttons:
+                        if button.collidePoint(event.pos, clicked):
+                            if button.name == "Start":
+                                mode="play"
+                            elif button.name == "Modes":
+                                mode="modeSelect"
+                            elif button.name == "Credits":
+                                mode="credits"
+                            elif button.name == "Bombs":
+                                mode="bomb"
             
         screen.blit(bgImage, bgRect)
         
@@ -87,7 +111,7 @@ while True:
     else:
         print("No Sound")
     
-    bgImage=pygame.image.load("Art/Background/Credit_idea.png")
+    bgImage=pygame.image.load("Art/Background/dead_Screen.png")
     bgRect = bgImage.get_rect()
     while mode =="credits":
         for event in pygame.event.get():
@@ -102,7 +126,7 @@ while True:
         pygame.display.flip()
         clock.tick(60)
 
-    #-----------------------Credits Screen------------------------------#
+    #-----------------------Modes Screen--------------------------------#
     if sound:
         pygame.mixer.music.load("Music/Background/CHOOSE.mp3")
         pygame.mixer.music.set_volume(.25)
@@ -118,6 +142,30 @@ while True:
                 sys.exit();
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_m:
+                     mode="play"
+                     
+        screen.blit(bgImage, bgRect)
+        
+        pygame.display.flip()
+        clock.tick(60)
+
+
+    #-----------------------Bomb Screen---------------------------------#
+    if sound:
+        pygame.mixer.music.load("Music/Background/CHOOSE.mp3")
+        pygame.mixer.music.set_volume(.25)
+        pygame.mixer.music.play(0)
+    else:
+        print("No Sound")
+    
+    bgImage=pygame.image.load("Art/Background/Bomb_Screen.png")
+    bgRect = bgImage.get_rect()
+    while mode =="bomb":
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                sys.exit();
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_b:
                      mode="play"
                      
         screen.blit(bgImage, bgRect)
