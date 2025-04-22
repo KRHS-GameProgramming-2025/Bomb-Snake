@@ -5,7 +5,7 @@ from Pellet import *
 from Head import *
 from Bomb import *
 from Tail import *
-
+from Button import*
 from Wall import *
 
 pygame.init()
@@ -49,6 +49,11 @@ while True:
     else:
         print("No Sound")
     
+    buttons = [Button("Start", [191,325], 1), 
+               Button("Modes", [191,425], 1),
+               Button("Credit", [191,525], 1),
+               Button("Bombs", [191,625], 1)]
+    
     bgImage=pygame.image.load("Art/Background/Start_Screen.png")
     bgRect = bgImage.get_rect()
     while mode=="start":
@@ -64,6 +69,9 @@ while True:
                     mode="credits"
             
         screen.blit(bgImage, bgRect)
+        
+        for button in buttons:
+            screen.blit(button.image, button.rect)
         
 
         
