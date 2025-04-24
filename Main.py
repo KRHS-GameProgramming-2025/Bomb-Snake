@@ -68,7 +68,7 @@ while True:
                     mode="modeSelect"
                 if event.key == pygame.K_c:
                     mode="credits"
-                if event.key == K_b:
+                if event.key == pygame.K_b:
                     mode="bomb"
             elif event.type == pygame.MOUSEMOTION:
                for button in buttons:
@@ -110,8 +110,12 @@ while True:
         pygame.mixer.music.play(0)
     else:
         print("No Sound")
+        
+    buttons = [Button("BACK", [191,525], 1),
+               Button ("PLAY", [191,625], 1)]
+
     
-    bgImage=pygame.image.load("Art/Background/dead_Screen.png")
+    bgImage=pygame.image.load("Art/Background/Credit_idea.png")
     bgRect = bgImage.get_rect()
     while mode =="credits":
         for event in pygame.event.get():
@@ -121,7 +125,28 @@ while True:
                 if event.key == pygame.K_c:
                      mode="play"
                      
+            elif event.type == pygame.MOUSEMOTION:
+               for button in buttons:
+                   button.collidePoint(event.pos, clicked) 
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    clicked = True
+                    for button in buttons:
+                        button.collidePoint(event.pos, clicked)
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if event.button == 1:
+                    clicked = False
+                    for button in buttons:
+                        if button.collidePoint(event.pos, clicked):
+                            if button.name == "BACK":
+                                mode="start"
+                            elif button.name == "PLAY":
+                                mode="play"
+                     
         screen.blit(bgImage, bgRect)
+        
+        for button in buttons:
+            screen.blit(button.image, button.rect)
         
         pygame.display.flip()
         clock.tick(60)
@@ -133,6 +158,9 @@ while True:
         pygame.mixer.music.play(0)
     else:
         print("No Sound")
+        
+    buttons = [Button("BACK", [191,525], 1),
+               Button ("PLAY", [191,625], 1)]
     
     bgImage=pygame.image.load("Art/Background/Mode_Select_idea.png")
     bgRect = bgImage.get_rect()
@@ -144,7 +172,29 @@ while True:
                 if event.key == pygame.K_m:
                      mode="play"
                      
+            elif event.type == pygame.MOUSEMOTION:
+               for button in buttons:
+                   button.collidePoint(event.pos, clicked) 
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    clicked = True
+                    for button in buttons:
+                        button.collidePoint(event.pos, clicked)
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if event.button == 1:
+                    clicked = False
+                    for button in buttons:
+                        if button.collidePoint(event.pos, clicked):
+                            if button.name == "BACK":
+                                mode="start"
+                            elif button.name == "PLAY":
+                                mode="play"
+                     
         screen.blit(bgImage, bgRect)
+        
+        for button in buttons:
+            screen.blit(button.image, button.rect)
+                    
         
         pygame.display.flip()
         clock.tick(60)
@@ -157,8 +207,11 @@ while True:
         pygame.mixer.music.play(0)
     else:
         print("No Sound")
+        
+    buttons = [Button("BACK", [191,525], 1),
+               Button ("PLAY", [191,625], 1)]
     
-    bgImage=pygame.image.load("Art/Background/Bomb_Screen.png")
+    bgImage=pygame.image.load("Art/Background/bomb screen.png")
     bgRect = bgImage.get_rect()
     while mode =="bomb":
         for event in pygame.event.get():
@@ -168,7 +221,30 @@ while True:
                 if event.key == pygame.K_b:
                      mode="play"
                      
+            elif event.type == pygame.MOUSEMOTION:
+               for button in buttons:
+                   button.collidePoint(event.pos, clicked) 
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    clicked = True
+                    for button in buttons:
+                        button.collidePoint(event.pos, clicked)
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if event.button == 1:
+                    clicked = False
+                    for button in buttons:
+                        if button.collidePoint(event.pos, clicked):
+                            if button.name == "BACK":
+                                mode="start"
+                            elif button.name == "PLAY":
+                                mode="play"
+                     
         screen.blit(bgImage, bgRect)
+        
+        for button in buttons:
+            screen.blit(button.image, button.rect)
+                    
+
         
         pygame.display.flip()
         clock.tick(60)
