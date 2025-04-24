@@ -111,8 +111,8 @@ while True:
     else:
         print("No Sound")
         
-    buttons = [Button("BACK", [191,525], 1),
-               Button ("PLAY", [191,625], 1)]
+    buttons = [Button("BACK", [840,950], 1),
+               Button ("PLAY", [160,950], 1)]
 
     
     bgImage=pygame.image.load("Art/Background/Credit_idea.png")
@@ -159,8 +159,8 @@ while True:
     else:
         print("No Sound")
         
-    buttons = [Button("BACK", [191,525], 1),
-               Button ("PLAY", [191,625], 1)]
+    buttons = [Button("BACK", [840,950], 1),
+               Button ("PLAY", [160,950], 1)]
     
     bgImage=pygame.image.load("Art/Background/Mode_Select_idea.png")
     bgRect = bgImage.get_rect()
@@ -208,10 +208,10 @@ while True:
     else:
         print("No Sound")
         
-    buttons = [Button("BACK", [191,525], 1),
-               Button ("PLAY", [191,625], 1)]
+    buttons = [Button("BACK", [840,950], 1),
+               Button ("PLAY", [160,950], 1)]
     
-    bgImage=pygame.image.load("Art/Background/bomb screen.png")
+    bgImage=pygame.image.load("Art/Background/Bomb_Screen.png")
     bgRect = bgImage.get_rect()
     while mode =="bomb":
         for event in pygame.event.get():
