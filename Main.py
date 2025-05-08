@@ -427,6 +427,8 @@ while True:
         pygame.mixer.music.play(loops=0)
     else:
         print("No Sound")
+        
+    buttons = [Button("BACK", [500,950], 1)]
     
     bgImage=pygame.image.load("Art/Background/dead_Screen.png")
     bgRect = bgImage.get_rect()
@@ -437,8 +439,28 @@ while True:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                      mode="start"
+                     
+            elif event.type == pygame.MOUSEMOTION:
+               for button in buttons:
+                   button.collidePoint(event.pos, clicked) 
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    clicked = True
+                    for button in buttons:
+                        button.collidePoint(event.pos, clicked)
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if event.button == 1:
+                    clicked = False
+                    for button in buttons:
+                        if button.collidePoint(event.pos, clicked):
+                            if button.name == "BACK":
+                                mode="start"
             
         screen.blit(bgImage, bgRect)
+        
+        for button in buttons:
+            screen.blit(button.image, button.rect)
+        
         
         pygame.display.flip()
         clock.tick(60)
