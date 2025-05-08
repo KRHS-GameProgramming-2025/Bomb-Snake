@@ -160,7 +160,10 @@ while True:
         print("No Sound")
         
     buttons = [Button("BACK", [840,950], 1),
-               Button ("PLAY", [160,950], 1)]
+               Button ("PLAY", [160,950], 1),
+               Button ("Easy", [160,350], 1),
+               Button ("Normal", [500,350], 1),
+               Button ("Hard", [840,350], 1)]
     
     bgImage=pygame.image.load("Art/Background/Mode_Select_idea.png")
     bgRect = bgImage.get_rect()
@@ -202,7 +205,7 @@ while True:
 
     #-----------------------Bomb Screen---------------------------------#
     if sound:
-        pygame.mixer.music.load("Music/Background/CHOOSE.mp3")
+        pygame.mixer.music.load("Music/Background/KaBOOM.mp3")
         pygame.mixer.music.set_volume(.25)
         pygame.mixer.music.play(0)
     else:
