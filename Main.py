@@ -39,6 +39,7 @@ screen = pygame.display.set_mode(size)
 
 mode="start"
 clicked = False
+dificulty = "Normal"
 
 
 while True:
@@ -160,7 +161,6 @@ while True:
         print("No Sound")
         
     buttons = [Button("BACK", [840,950], 1),
-               Button ("PLAY", [160,950], 1),
                Button ("Easy", [160,350], 1),
                Button ("Normal", [500,350], 1),
                Button ("Hard", [840,350], 1),
@@ -191,8 +191,10 @@ while True:
                         if button.collidePoint(event.pos, clicked):
                             if button.name == "BACK":
                                 mode="start"
-                            elif button.name == "PLAY":
-                                mode="play"
+                            else:
+                                dificulty = button.name
+                                mode = "play"
+                                
                      
         screen.blit(bgImage, bgRect)
         
@@ -278,19 +280,28 @@ while True:
     lives = player.lives
     life = Hud ("Lives: ", lives, [765,938])
           
-    bombs = [Bomb("Bomb",[550,425])]
-    bombs[-1].respawn(size, tileSize)
     
-    bombSpawnRates={"Bomb": 25,
-                    "Bomb2x": 45,
-                    "bmoB":52 ,
-                    "x2bmoB": 54,
-                    }
-                    
-    bombDidSpawns={"Bomb": True,
-                   "Bomb2x": True,
-                   "bmoB": True,
-                   "x2bmoB": True,}
+    
+    if dificulty == "Normal":
+        bombs = [Bomb("Bomb",[550,425])]
+        bombs[-1].respawn(size, tileSize)
+    
+        bombSpawnRates={"Bomb": 25,
+                        "Bomb2x": 45,
+                        "bmoB":52 ,
+                        "x2bmoB": 54 }
+                        
+        bombDidSpawns={"Bomb": True,
+                       "Bomb2x": True,
+                       "bmoB": True,
+                       "x2bmoB": True }
+    elif dificulty == "Easy":
+        bombs = []
+    
+        bombSpawnRates={}
+                        
+        bombDidSpawns={}
+            
     
     
     pellets = [Pellet([550,425])]
@@ -300,7 +311,7 @@ while True:
 
     bgImage = pygame.image.load("Art/Background/board.png")
     bgRect = bgImage.get_rect()
-    Bomb
+    
     didSpawn=True
     
     bombIsExploding = False
