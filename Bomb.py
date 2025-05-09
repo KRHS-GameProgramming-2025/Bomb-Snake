@@ -15,8 +15,6 @@ class Bomb():
     
         
         if kind == "Bomb":
-            
-            
             self.damage=1
         elif kind == "Bomb2x":
             self.image = pygame.image.load("Art/Objects/Bomb/Bomb2x.png")
