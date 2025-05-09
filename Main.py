@@ -268,8 +268,8 @@ while True:
     points = 0
     
     score = Hud ("Score: ", points, [70,938])
-    playerSpeed=5
-    player = Head(10,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+    playerSpeed=10
+    player = Head(5,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
     snake = [player]
     snakeSize = 3
     for i in range(snakeSize-1):
@@ -281,10 +281,10 @@ while True:
     bombs = [Bomb("Bomb",[550,425])]
     bombs[-1].respawn(size, tileSize)
     
-    bombSpawnRates={"Bomb": 5,
-                    "Bomb2x": 10,
-                    "bmoB":20 ,
-                    "x2bmoB": 50,
+    bombSpawnRates={"Bomb": 25,
+                    "Bomb2x": 45,
+                    "bmoB":52 ,
+                    "x2bmoB": 54,
                     }
                     
     bombDidSpawns={"Bomb": True,
