@@ -163,7 +163,8 @@ while True:
                Button ("PLAY", [160,950], 1),
                Button ("Easy", [160,350], 1),
                Button ("Normal", [500,350], 1),
-               Button ("Hard", [840,350], 1)]
+               Button ("Hard", [840,350], 1),
+               Button ("Elemental", [500,450], 1)]
     
     bgImage=pygame.image.load("Art/Background/Mode_Select_idea.png")
     bgRect = bgImage.get_rect()
@@ -268,7 +269,7 @@ while True:
     
     score = Hud ("Score: ", points, [70,938])
     playerSpeed=5
-    player = Head(10,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+    player = Head(5,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
     snake = [player]
     snakeSize = 3
     for i in range(snakeSize-1):
@@ -280,10 +281,10 @@ while True:
     bombs = [Bomb("Bomb",[550,425])]
     bombs[-1].respawn(size, tileSize)
     
-    bombSpawnRates={"Bomb": 5,
-                    "Bomb2x": 10,
-                    "bmoB":20 ,
-                    "x2bmoB": 50,
+    bombSpawnRates={"Bomb": 25,
+                    "Bomb2x": 45,
+                    "bmoB":52 ,
+                    "x2bmoB": 54,
                     }
                     
     bombDidSpawns={"Bomb": True,
@@ -437,6 +438,8 @@ while True:
         pygame.mixer.music.play(loops=0)
     else:
         print("No Sound")
+        
+    buttons = [Button("BACK", [500,950], 1)]
     
     bgImage=pygame.image.load("Art/Background/dead_Screen.png")
     bgRect = bgImage.get_rect()
@@ -447,8 +450,28 @@ while True:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                      mode="start"
+                     
+            elif event.type == pygame.MOUSEMOTION:
+               for button in buttons:
+                   button.collidePoint(event.pos, clicked) 
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    clicked = True
+                    for button in buttons:
+                        button.collidePoint(event.pos, clicked)
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if event.button == 1:
+                    clicked = False
+                    for button in buttons:
+                        if button.collidePoint(event.pos, clicked):
+                            if button.name == "BACK":
+                                mode="start"
             
         screen.blit(bgImage, bgRect)
+        
+        for button in buttons:
+            screen.blit(button.image, button.rect)
+        
         
         pygame.display.flip()
         clock.tick(60)
