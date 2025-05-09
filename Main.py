@@ -163,7 +163,8 @@ while True:
                Button ("PLAY", [160,950], 1),
                Button ("Easy", [160,350], 1),
                Button ("Normal", [500,350], 1),
-               Button ("Hard", [840,350], 1)]
+               Button ("Hard", [840,350], 1),
+               Button ("Elemental", [500,450], 1)]
     
     bgImage=pygame.image.load("Art/Background/Mode_Select_idea.png")
     bgRect = bgImage.get_rect()
