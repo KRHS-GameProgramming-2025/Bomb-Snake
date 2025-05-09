@@ -1,9 +1,22 @@
-import pygame, sys,math,random
+import pygame, sys,math,random, os
 
 class Bomb():
     def __init__(self, kind, startPos=[0,9]):
+        path = "Art/Objects/Bomb/"+ kind
+        files = os.listdir(path)
+        self.images = []
+        for f in files:
+            self.images += [pygame.image.load(path + "/"+ f)]
+        self.frame = 0
+        self.frameMax = len(self.images)-1
+        self.animationTimer = 0
+        self.animationTimerMax = int(60*1/len(self.images))
+        self.image = self.images[self.frame]
+    
+        
         if kind == "Bomb":
-            self.image = pygame.image.load("Art/Objects/Bomb/Bomb.png")
+            
+            
             self.damage=1
         elif kind == "Bomb2x":
             self.image = pygame.image.load("Art/Objects/Bomb/Bomb2x.png")
@@ -43,6 +56,22 @@ class Bomb():
                                 
         return False
                     
+    def explode(self):
+        if self.animationTimer < self.animationTimerMax:
+            self.animationTimer += 1
+        else:
+            self.animationTimer = 0
+            if self.frame < self.frameMax:
+                self.frame += 1
+                self.image = self.images[self.frame]
+            else:
+                self.frame = 0
+                self.image = self.images[self.frame]
+                return True
+        return False
+                
+        
+    
     def dist(self,other):
         x1=self.rect.centerx
         y1=self.rect.centery
