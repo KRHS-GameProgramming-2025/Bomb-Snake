@@ -2,10 +2,10 @@ import pygame, sys, math
 
 class Button():    
     def __init__(self,name,startpos=[0,0], scale=1):
-        if len(name)<=27-12:
-            font=pygame.font.Font(None,125)
-        elif len(name)<=31-12:
+        if len(name)<9:
             font=pygame.font.Font(None,100)
+        elif len(name)<15:
+            font=pygame.font.Font(None,90)
         else:
             font=pygame.font.Font(None,60)
         self.name = name
