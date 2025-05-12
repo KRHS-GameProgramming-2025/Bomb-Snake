@@ -39,6 +39,7 @@ screen = pygame.display.set_mode(size)
 
 mode="start"
 clicked = False
+dificulty = "Normal"
 
 
 while True:
@@ -49,6 +50,8 @@ while True:
         pygame.mixer.music.play(loops=0)
     else:
         print("No Sound")
+        
+    pygame.mouse.set_visible(True)
     
     buttons = [Button("Start", [191,325], 1), 
                Button("Modes", [191,425], 1),
@@ -111,6 +114,8 @@ while True:
     else:
         print("No Sound")
         
+    pygame.mouse.set_visible(True)
+        
     buttons = [Button("BACK", [840,950], 1),
                Button ("PLAY", [160,950], 1)]
 
@@ -159,8 +164,9 @@ while True:
     else:
         print("No Sound")
         
-    buttons = [Button("BACK", [840,950], 1),
-               Button ("PLAY", [160,950], 1),
+    pygame.mouse.set_visible(True)
+        
+    buttons = [Button("BACK", [500,950], 1),
                Button ("Easy", [160,350], 1),
                Button ("Normal", [500,350], 1),
                Button ("Hard", [840,350], 1),
@@ -191,8 +197,10 @@ while True:
                         if button.collidePoint(event.pos, clicked):
                             if button.name == "BACK":
                                 mode="start"
-                            elif button.name == "PLAY":
-                                mode="play"
+                            else:
+                                dificulty = button.name
+                                mode = "play"
+                                
                      
         screen.blit(bgImage, bgRect)
         
@@ -211,6 +219,8 @@ while True:
         pygame.mixer.music.play(0)
     else:
         print("No Sound")
+        
+    pygame.mouse.set_visible(True)
         
     buttons = [Button("BACK", [840,950], 1),
                Button ("PLAY", [160,950], 1)]
@@ -263,6 +273,8 @@ while True:
         pygame.mixer.music.play(loops=0)
     else:
         print("No Sound")
+        
+    pygame.mouse.set_visible(False)
 
     counter = 0
     points = 0
@@ -278,19 +290,42 @@ while True:
     lives = player.lives
     life = Hud ("Lives: ", lives, [765,938])
           
-    bombs = [Bomb("Bomb",[550,425])]
-    bombs[-1].respawn(size, tileSize)
     
-    bombSpawnRates={"Bomb": 25,
-                    "Bomb2x": 45,
-                    "bmoB":52 ,
-                    "x2bmoB": 54,
-                    }
-                    
-    bombDidSpawns={"Bomb": True,
-                   "Bomb2x": True,
-                   "bmoB": True,
-                   "x2bmoB": True,}
+    
+    if dificulty == "Normal":
+        bombs = [Bomb("Bomb",[550,425])]
+        bombs[-1].respawn(size, tileSize)
+    
+        bombSpawnRates={"Bomb": 25,
+                        "Bomb2x": 45,
+                        "bmoB":52 ,
+                        "x2bmoB": 54 }
+                        
+        bombDidSpawns={"Bomb": True,
+                       "Bomb2x": True,
+                       "bmoB": True,
+                       "x2bmoB": True }
+    elif dificulty == "Easy":
+        bombs = []
+    
+        bombSpawnRates={}
+                        
+        bombDidSpawns={}
+        
+    elif dificulty == "Hard":
+        bombs = [Bomb("Bomb",[550,425])]
+        bombs[-1].respawn(size, tileSize)
+    
+        bombSpawnRates={"Bomb": 25,
+                        "Bomb2x": 45,
+                        "bmoB":52 ,
+                        "x2bmoB": 54 }
+                        
+        bombDidSpawns={"Bomb": True,
+                       "Bomb2x": True,
+                       "bmoB": True,
+                       "x2bmoB": True }
+            
     
     
     pellets = [Pellet([550,425])]
@@ -300,7 +335,7 @@ while True:
 
     bgImage = pygame.image.load("Art/Background/board.png")
     bgRect = bgImage.get_rect()
-    Bomb
+    
     didSpawn=True
     
     bombIsExploding = False
@@ -415,6 +450,9 @@ while True:
                 
                 if lives <=0:
                     mode = "end"
+                    
+                if points >=360:
+                    mode = "end"
         
         screen.blit(bgImage, bgRect)
         for bomb in bombs:
@@ -438,6 +476,8 @@ while True:
         pygame.mixer.music.play(loops=0)
     else:
         print("No Sound")
+        
+    pygame.mouse.set_visible(True)
         
     buttons = [Button("BACK", [500,950], 1)]
     
