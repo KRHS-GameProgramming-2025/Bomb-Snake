@@ -516,3 +516,51 @@ while True:
         pygame.display.flip()
         clock.tick(60)
         
+        
+    #-----------------------Win screen----------------------------------#
+    if sound:
+        pygame.mixer.music.load("Music/Background/DEATH.mp3")
+        pygame.mixer.music.set_volume(.25)
+        pygame.mixer.music.play(loops=0)
+    else:
+        print("No Sound")
+        
+    pygame.mouse.set_visible(True)
+        
+    buttons = [Button("BACK", [500,950], 1)]
+    
+    bgImage=pygame.image.load("Art/Background/WIN.png")
+    bgRect = bgImage.get_rect()
+    while mode=="win":
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                sys.exit();
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                     mode="start"
+                     
+            elif event.type == pygame.MOUSEMOTION:
+               for button in buttons:
+                   button.collidePoint(event.pos, clicked) 
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    clicked = True
+                    for button in buttons:
+                        button.collidePoint(event.pos, clicked)
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if event.button == 1:
+                    clicked = False
+                    for button in buttons:
+                        if button.collidePoint(event.pos, clicked):
+                            if button.name == "BACK":
+                                mode="start"
+            
+        screen.blit(bgImage, bgRect)
+        
+        for button in buttons:
+            screen.blit(button.image, button.rect)
+        
+        
+        pygame.display.flip()
+        clock.tick(60)
+        
