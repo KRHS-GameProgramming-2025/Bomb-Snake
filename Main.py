@@ -387,10 +387,8 @@ while True:
             for bomb in bombs:
                 if player.collide(bomb):
                     bomb.snakeCollide(player)
-                     
-                    
                     bombIsExploding = True
-                  
+                  #if Bomb is "Bomb4x" Then 
             
             for pellet in pellets:
                 if player.collide(pellet):

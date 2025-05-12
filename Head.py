@@ -39,7 +39,8 @@ class Head():
         self.targetCoor = None
         self.didUpdate = False
         
-
+        self.hitsnakesound=pygame.mixer.Sound("Music/Snake/player hit selft.wav")
+        self.hitwallsound=pygame.mixer.Sound("Music/Snake/hit wall.wav")
         
 
 
@@ -125,15 +126,19 @@ class Head():
         
         if self.rect.bottom >  height: 
             self.die()
+            self.hitwallsound.play()
             return True
         if self.rect.top < 0: 
             self.die()
+            self.hitwallsound.play()
             return True        
         if self.rect.right > width:
             self.die()
+            self.hitwallsound.play()
             return True
         if self.rect.left < 0:
             self.die()
+            self.hitwallsound.play()
             return True
         return False
        
@@ -145,7 +150,8 @@ class Head():
                     if self.rect.bottom > other.rect.top:
                         if self.rect.top < other.rect.bottom:
                             if self.getDist(other) < self.rad + other.rad:
-                                
+                                if other.kind=="tail":
+                                    self.hitsnakesound.play()
                                     
 
                                 return True
