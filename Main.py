@@ -50,6 +50,8 @@ while True:
         pygame.mixer.music.play(loops=0)
     else:
         print("No Sound")
+        
+    pygame.mouse.set_visible(True)
     
     buttons = [Button("Start", [191,325], 1), 
                Button("Modes", [191,425], 1),
@@ -112,6 +114,8 @@ while True:
     else:
         print("No Sound")
         
+    pygame.mouse.set_visible(True)
+        
     buttons = [Button("BACK", [840,950], 1),
                Button ("PLAY", [160,950], 1)]
 
@@ -160,7 +164,9 @@ while True:
     else:
         print("No Sound")
         
-    buttons = [Button("BACK", [840,950], 1),
+    pygame.mouse.set_visible(True)
+        
+    buttons = [Button("BACK", [500,950], 1),
                Button ("Easy", [160,350], 1),
                Button ("Normal", [500,350], 1),
                Button ("Hard", [840,350], 1),
@@ -214,6 +220,8 @@ while True:
     else:
         print("No Sound")
         
+    pygame.mouse.set_visible(True)
+        
     buttons = [Button("BACK", [840,950], 1),
                Button ("PLAY", [160,950], 1)]
     
@@ -265,6 +273,8 @@ while True:
         pygame.mixer.music.play(loops=0)
     else:
         print("No Sound")
+        
+    pygame.mouse.set_visible(False)
 
     counter = 0
     points = 0
@@ -287,19 +297,31 @@ while True:
         bombs[-1].respawn(size, tileSize)
         bombSpawnRates={"Bomb": 15,
                         "Bomb2x": 25,
-                        "Bomb4x": 5,
                         "bmoB":52 ,
                         "x2bmoB": 54 }
                         
         bombDidSpawns={"Bomb": True,
                        "Bomb2x": True,
-                       "Bomb4x": True,
                        "bmoB": True,
                        "x2bmoB": True }
     elif dificulty == "Easy":
         bombs = []
         bombSpawnRates={}
         bombDidSpawns={}
+
+    elif dificulty == "Hard":
+        bombs = [Bomb("Bomb",[550,425])]
+        bombs[-1].respawn(size, tileSize)
+    
+        bombSpawnRates={"Bomb": 25,
+                        "Bomb2x": 45,
+                        "bmoB":52 ,
+                        "x2bmoB": 54 }
+                        
+        bombDidSpawns={"Bomb": True,
+                       "Bomb2x": True,
+                       "bmoB": True,
+                       "x2bmoB": True }
         
     elif dificulty == "Elemental":
         bombs = [Bomb("Bomb",[550,425])]
@@ -449,6 +471,9 @@ while True:
                 
                 if lives <=0:
                     mode = "end"
+                    
+                if points >=360:
+                    mode = "end"
         
         screen.blit(bgImage, bgRect)
         for bomb in bombs:
@@ -473,11 +498,61 @@ while True:
     else:
         print("No Sound")
         
+    pygame.mouse.set_visible(True)
+        
     buttons = [Button("BACK", [500,950], 1)]
     
     bgImage=pygame.image.load("Art/Background/dead_Screen.png")
     bgRect = bgImage.get_rect()
     while mode=="end":
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                sys.exit();
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                     mode="start"
+                     
+            elif event.type == pygame.MOUSEMOTION:
+               for button in buttons:
+                   button.collidePoint(event.pos, clicked) 
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    clicked = True
+                    for button in buttons:
+                        button.collidePoint(event.pos, clicked)
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if event.button == 1:
+                    clicked = False
+                    for button in buttons:
+                        if button.collidePoint(event.pos, clicked):
+                            if button.name == "BACK":
+                                mode="start"
+            
+        screen.blit(bgImage, bgRect)
+        
+        for button in buttons:
+            screen.blit(button.image, button.rect)
+        
+        
+        pygame.display.flip()
+        clock.tick(60)
+        
+        
+    #-----------------------Win screen----------------------------------#
+    if sound:
+        pygame.mixer.music.load("Music/Background/DEATH.mp3")
+        pygame.mixer.music.set_volume(.25)
+        pygame.mixer.music.play(loops=0)
+    else:
+        print("No Sound")
+        
+    pygame.mouse.set_visible(True)
+        
+    buttons = [Button("BACK", [500,950], 1)]
+    
+    bgImage=pygame.image.load("Art/Background/WIN.png")
+    bgRect = bgImage.get_rect()
+    while mode=="win":
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 sys.exit();
