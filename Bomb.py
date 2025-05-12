@@ -17,14 +17,13 @@ class Bomb():
         if kind == "Bomb":
             self.damage=1
         elif kind == "Bomb2x":
-            self.image = pygame.image.load("Art/Objects/Bomb/Bomb2x.png")
             self.damage=2
      
+        elif kind == "Bomb4x":
+            self.damage=4
         elif kind == "bmoB":
-            self.image = pygame.image.load("Art/Objects/Bomb/bmoB.png")
             self.damage=-1
         elif kind == "x2bmoB":
-            self.image = pygame.image.load("Art/Objects/Bomb/x2bomB.png")
             self.damage=-2
      
         else:

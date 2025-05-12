@@ -271,7 +271,7 @@ while True:
     
     score = Hud ("Score: ", points, [70,938])
     playerSpeed=5
-    player = Head(5,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+    player = Head(10,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
     snake = [player]
     snakeSize = 3
     for i in range(snakeSize-1):
@@ -285,22 +285,35 @@ while True:
     if dificulty == "Normal":
         bombs = [Bomb("Bomb",[550,425])]
         bombs[-1].respawn(size, tileSize)
-    
-        bombSpawnRates={"Bomb": 25,
-                        "Bomb2x": 45,
+        bombSpawnRates={"Bomb": 15,
+                        "Bomb2x": 25,
+                        "Bomb4x": 5,
                         "bmoB":52 ,
                         "x2bmoB": 54 }
                         
         bombDidSpawns={"Bomb": True,
                        "Bomb2x": True,
+                       "Bomb4x": True,
                        "bmoB": True,
                        "x2bmoB": True }
     elif dificulty == "Easy":
         bombs = []
-    
         bombSpawnRates={}
-                        
         bombDidSpawns={}
+        
+    elif dificulty == "Elemental":
+        bombs = [Bomb("Bomb",[550,425])]
+        bombs[-1].respawn(size, tileSize)
+        frozen=False
+        bombSpawnRates={"Bomb4x": 45,
+                        "bmoB":52 ,
+                        "x2bmoB": 54 }
+
+                        
+        bombDidSpawns={"Bomb4x": True,
+                       "Bomb2x": True,
+                       "bmoB": True,
+                       "x2bmoB": True }
             
     
     
@@ -313,8 +326,10 @@ while True:
     bgRect = bgImage.get_rect()
     
     didSpawn=True
-    
+    frozen=False
+
     bombIsExploding = False
+    theBomb=None
 
     while mode=="play":
         for event in pygame.event.get():
@@ -335,15 +350,18 @@ while True:
                         player.goKey("down")
         
         if bombIsExploding:
-            if bomb.explode():
+            if theBomb.explode():
                 bombIsExploding = False
-                
+                frozen=False
+                playerSpeed = 5
                 goodSpawn = False
                 while not goodSpawn:
                     print("Respawning")
-                    bomb.respawn(size, tileSize)
+                    theBomb.respawn(size, tileSize)
                     goodSpawn = not checkSpawn(bomb)
-                player.die(bomb.damage)
+                player.die(theBomb.damage)
+                print("die")
+                theBomb=None
         
         else:
         
@@ -385,10 +403,15 @@ while True:
                 
             
             for bomb in bombs:
-                if player.collide(bomb):
+                if player.collide(bomb) and not bombIsExploding:
                     bomb.snakeCollide(player)
                     bombIsExploding = True
-                  #if Bomb is "Bomb4x" Then 
+                    
+                    if bomb.kind =="Bomb4x":
+                        playerSpeed=2.5
+                        frozen=True
+                    theBomb=bomb
+                    break
             
             for pellet in pellets:
                 if player.collide(pellet):
@@ -419,7 +442,9 @@ while True:
                 snake = [player]
                 for i in range(snakeSize-1):
                     snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[0].direction)]
-                  
+                if frozen:
+                    frozen = False
+                    playerSpeed = 2.5
                 life.update(lives)
                 
                 if lives <=0:
