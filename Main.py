@@ -50,6 +50,8 @@ while True:
         pygame.mixer.music.play(loops=0)
     else:
         print("No Sound")
+        
+    pygame.mouse.set_visible(True)
     
     buttons = [Button("Start", [191,325], 1), 
                Button("Modes", [191,425], 1),
@@ -112,6 +114,8 @@ while True:
     else:
         print("No Sound")
         
+    pygame.mouse.set_visible(True)
+        
     buttons = [Button("BACK", [840,950], 1),
                Button ("PLAY", [160,950], 1)]
 
@@ -159,6 +163,8 @@ while True:
         pygame.mixer.music.play(0)
     else:
         print("No Sound")
+        
+    pygame.mouse.set_visible(True)
         
     buttons = [Button("BACK", [500,950], 1),
                Button ("Easy", [160,350], 1),
@@ -214,6 +220,8 @@ while True:
     else:
         print("No Sound")
         
+    pygame.mouse.set_visible(True)
+        
     buttons = [Button("BACK", [840,950], 1),
                Button ("PLAY", [160,950], 1)]
     
@@ -265,6 +273,8 @@ while True:
         pygame.mixer.music.play(loops=0)
     else:
         print("No Sound")
+        
+    pygame.mouse.set_visible(False)
 
     counter = 0
     points = 0
@@ -466,6 +476,8 @@ while True:
         pygame.mixer.music.play(loops=0)
     else:
         print("No Sound")
+        
+    pygame.mouse.set_visible(True)
         
     buttons = [Button("BACK", [500,950], 1)]
     
