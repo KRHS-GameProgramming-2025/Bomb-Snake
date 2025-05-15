@@ -297,13 +297,13 @@ while True:
         bombs[-1].respawn(size, tileSize)
         bombSpawnRates={"Bomb": 15,
                         "Bomb2x": 25,
-                        "bmoB":52 ,
-                        "x2bmoB": 54 }
+                        "Bomb1+":2 ,
+                        "Bomb2+": 2 }
                         
         bombDidSpawns={"Bomb": True,
                        "Bomb2x": True,
-                       "bmoB": True,
-                       "x2bmoB": True }
+                       "Bomb1+": True,
+                       "Bomb2+": True }
     elif dificulty == "Easy":
         bombs = []
         bombSpawnRates={}
@@ -315,27 +315,27 @@ while True:
     
         bombSpawnRates={"Bomb": 25,
                         "Bomb2x": 45,
-                        "bmoB":52 ,
-                        "x2bmoB": 54 }
+                        "Bomb1+":52 ,
+                        "Bomb2+": 54 }
                         
         bombDidSpawns={"Bomb": True,
                        "Bomb2x": True,
-                       "bmoB": True,
-                       "x2bmoB": True }
+                       "Bomb1+": True,
+                       "Bomb2+": True }
         
     elif dificulty == "Elemental":
         bombs = [Bomb("Bomb",[550,425])]
         bombs[-1].respawn(size, tileSize)
         frozen=False
         bombSpawnRates={"Bomb4x": 45,
-                        "bmoB":52 ,
-                        "x2bmoB": 54 }
+                        "Bomb1+":52 ,
+                        "Bomb2+": 54 }
 
                         
         bombDidSpawns={"Bomb4x": True,
                        "Bomb2x": True,
-                       "bmoB": True,
-                       "x2bmoB": True }
+                       "Bomb1+": True,
+                       "Bomb2+": True }
             
     
     
@@ -381,7 +381,7 @@ while True:
                     print("Respawning")
                     theBomb.respawn(size, tileSize)
                     goodSpawn = not checkSpawn(bomb)
-                player.die(theBomb.damage)
+                player.die("theBomb.damage")
                 print("die")
                 theBomb=None
         
