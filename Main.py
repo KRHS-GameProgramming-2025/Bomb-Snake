@@ -299,15 +299,15 @@ while True:
                         "Bomb2x": 25,
                         "Bomb4x": 45,
                         "Bomb5x": 55,
-                        "bmoB":52 ,
-                        "x2bmoB": 54 }
+                        "Bomb1+":52 ,
+                        "Bomb2+": 54 }
                         
         bombDidSpawns={"Bomb": True,
                        "Bomb2x": True,
                        "Bomb4x": True,
                        "Bomb5x": True,
-                       "bmoB": True,
-                       "x2bmoB": True }
+                       "Bomb2+": True,
+                       "Bomb2+": True }
     elif dificulty == "Easy":
         bombs = []
         bombSpawnRates={}
@@ -323,8 +323,8 @@ while True:
                         "Bomb5x": 55,
                         "Bomb7x": 75,
                         "Bomb9x": 5,
-                        "bmoB":52 ,
-                        "x2bmoB": 54 }
+                        "Bomb1+":52 ,
+                        "Bomb2+": 54 }
                         
         bombDidSpawns={"Bomb": True,
                        "Bomb2x": True,
@@ -332,8 +332,8 @@ while True:
                        "Bomb5x": True,
                        "Bomb7x": True,
                        "Bomb9x": True,
-                       "bmoB": True,
-                       "x2bmoB": True }
+                       "Bomb1+": True,
+                       "Bomb2+": True }
         
     elif dificulty == "Elemental":
         bombs = [Bomb("Bomb",[550,425])]
@@ -345,15 +345,15 @@ while True:
         bombSpawnRates={"Bomb4x": 45,
                         "Bomb5x": 55,
                         "Bomb9x": 95,
-                        "bmoB":52 ,
-                        "x2bmoB": 54 }
+                        "Bomb1+":52 ,
+                        "Bomb2+": 54 }
 
                         
         bombDidSpawns={"Bomb4x": True,
                        "Bomb5x": True,
                         "Bomb9x": True,
-                       "bmoB": True,
-                       "x2bmoB": True }
+                       "Bomb1+": True,
+                       "Bomb2+": True }
             
     
     
