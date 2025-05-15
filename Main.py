@@ -297,8 +297,8 @@ while True:
         bombs[-1].respawn(size, tileSize)
         bombSpawnRates={"Bomb": 15,
                         "Bomb2x": 25,
-                        "Bomb1+":2 ,
-                        "Bomb2+": 2 }
+                        "Bomb1+":50 ,
+                        "Bomb2+":75}
                         
         bombDidSpawns={"Bomb": True,
                        "Bomb2x": True,
