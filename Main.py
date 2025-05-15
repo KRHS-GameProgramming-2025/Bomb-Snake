@@ -281,7 +281,7 @@ while True:
     
     score = Hud ("Score: ", points, [70,938])
     playerSpeed=5
-    player = Head(10,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+    player = Head(100,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
     snake = [player]
     snakeSize = 3
     for i in range(snakeSize-1):
@@ -297,11 +297,15 @@ while True:
         bombs[-1].respawn(size, tileSize)
         bombSpawnRates={"Bomb": 15,
                         "Bomb2x": 25,
+                        "Bomb4x": 45,
+                        "Bomb5x": 55,
                         "bmoB":52 ,
                         "x2bmoB": 54 }
                         
         bombDidSpawns={"Bomb": True,
                        "Bomb2x": True,
+                       "Bomb4x": True,
+                       "Bomb5x": True,
                        "bmoB": True,
                        "x2bmoB": True }
     elif dificulty == "Easy":
@@ -313,13 +317,17 @@ while True:
         bombs = [Bomb("Bomb",[550,425])]
         bombs[-1].respawn(size, tileSize)
     
-        bombSpawnRates={"Bomb": 25,
-                        "Bomb2x": 45,
+        bombSpawnRates={"Bomb": 15,
+                        "Bomb2x": 25,
+                        "Bomb4x": 45,
+                        "Bomb5x": 55,
                         "bmoB":52 ,
                         "x2bmoB": 54 }
                         
         bombDidSpawns={"Bomb": True,
                        "Bomb2x": True,
+                       "Bomb4x": True,
+                       "Bomb5x": True,
                        "bmoB": True,
                        "x2bmoB": True }
         
@@ -327,13 +335,15 @@ while True:
         bombs = [Bomb("Bomb",[550,425])]
         bombs[-1].respawn(size, tileSize)
         frozen=False
+        zap=False
         bombSpawnRates={"Bomb4x": 45,
+                        "Bomb5x": 55,
                         "bmoB":52 ,
                         "x2bmoB": 54 }
 
                         
         bombDidSpawns={"Bomb4x": True,
-                       "Bomb2x": True,
+                       "Bomb5x": True,
                        "bmoB": True,
                        "x2bmoB": True }
             
@@ -349,7 +359,7 @@ while True:
     
     didSpawn=True
     frozen=False
-
+    zap=False
     bombIsExploding = False
     theBomb=None
 
@@ -374,8 +384,7 @@ while True:
         if bombIsExploding:
             if theBomb.explode():
                 bombIsExploding = False
-                frozen=False
-                playerSpeed = 5
+                
                 goodSpawn = False
                 while not goodSpawn:
                     print("Respawning")
@@ -432,6 +441,9 @@ while True:
                     if bomb.kind =="Bomb4x":
                         playerSpeed=2.5
                         frozen=True
+                    elif bomb.kind =="Bomb5x":
+                        playerSpeed=10
+                        zap=True
                     theBomb=bomb
                     break
             
@@ -460,13 +472,17 @@ while True:
              
             if not player.living:
                 lives=player.lives
+                if frozen:
+                    frozen=False
+                elif zap:
+                    zap=False
+                else:
+                    playerSpeed = 5
                 player = Head(player.lives,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
                 snake = [player]
                 for i in range(snakeSize-1):
                     snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[0].direction)]
-                if frozen:
-                    frozen = False
-                    playerSpeed = 2.5
+                
                 life.update(lives)
                 
                 if lives <=0:

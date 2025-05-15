@@ -21,6 +21,8 @@ class Bomb():
      
         elif kind == "Bomb4x":
             self.damage=4
+        elif kind == "Bomb5x":
+            self.damage=5
         elif kind == "bmoB":
             self.damage=-1
         elif kind == "x2bmoB":
