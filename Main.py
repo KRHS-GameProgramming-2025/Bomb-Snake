@@ -281,7 +281,7 @@ while True:
     
     score = Hud ("Score: ", points, [70,938])
     playerSpeed=5
-    player = Head(100,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+    player = Head(10,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
     snake = [player]
     snakeSize = 3
     for i in range(snakeSize-1):
