@@ -281,7 +281,7 @@ while True:
     
     score = Hud ("Score: ", points, [70,938])
     playerSpeed=5
-    player = Head(10,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+    player = Head(100,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
     snake = [player]
     snakeSize = 3
     for i in range(snakeSize-1):
@@ -321,6 +321,8 @@ while True:
                         "Bomb2x": 25,
                         "Bomb4x": 45,
                         "Bomb5x": 55,
+                        "Bomb7x": 75,
+                        "Bomb9x": 5,
                         "bmoB":52 ,
                         "x2bmoB": 54 }
                         
@@ -328,6 +330,8 @@ while True:
                        "Bomb2x": True,
                        "Bomb4x": True,
                        "Bomb5x": True,
+                       "Bomb7x": True,
+                       "Bomb9x": True,
                        "bmoB": True,
                        "x2bmoB": True }
         
@@ -336,14 +340,18 @@ while True:
         bombs[-1].respawn(size, tileSize)
         frozen=False
         zap=False
+        sick=False
+        clean=False
         bombSpawnRates={"Bomb4x": 45,
                         "Bomb5x": 55,
+                        "Bomb9x": 95,
                         "bmoB":52 ,
                         "x2bmoB": 54 }
 
                         
         bombDidSpawns={"Bomb4x": True,
                        "Bomb5x": True,
+                        "Bomb9x": True,
                        "bmoB": True,
                        "x2bmoB": True }
             
@@ -360,6 +368,8 @@ while True:
     didSpawn=True
     frozen=False
     zap=False
+    sick=False
+    clean=False
     bombIsExploding = False
     theBomb=None
 
@@ -442,8 +452,14 @@ while True:
                         playerSpeed=2.5
                         frozen=True
                     elif bomb.kind =="Bomb5x":
-                        playerSpeed=10
+                        playerSpeed=12.5
                         zap=True
+                    elif bomb.kind =="Bomb7x":
+                        playerSpeed=1.25
+                        sick=True
+                    elif bomb.kind =="Bomb9x":
+                        playerSpeed=10
+                        clean=True
                     theBomb=bomb
                     break
             
@@ -476,6 +492,10 @@ while True:
                     frozen=False
                 elif zap:
                     zap=False
+                elif sick:
+                    sick=False
+                elif clean:
+                    clean=False
                 else:
                     playerSpeed = 5
                 player = Head(player.lives,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
