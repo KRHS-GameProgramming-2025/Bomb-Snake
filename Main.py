@@ -1,4 +1,3 @@
-
 import pygame, sys, math, random
 from Hud import *
 from Pellet import *
@@ -307,7 +306,7 @@ while True:
                        "Bomb4x": True,
                        "Bomb5x": True,
                        "Bomb2+": True,
-                       "Bomb2+": True }
+                       "Bomb1+": True }
     elif dificulty == "Easy":
         bombs = []
         bombSpawnRates={}
@@ -509,7 +508,7 @@ while True:
                     mode = "end"
                     
                 if points >=360:
-                    mode = "end"
+                    mode = "win"
         
         screen.blit(bgImage, bgRect)
         for bomb in bombs:
