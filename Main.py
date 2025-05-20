@@ -46,7 +46,7 @@ while True:
     if sound:
         pygame.mixer.music.load("Music/Background/Main_Theme.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play(loops=0)
+        pygame.mixer.music.play(loops=-1)
     else:
         print("No Sound")
         
@@ -109,7 +109,7 @@ while True:
     if sound:
         pygame.mixer.music.load("Music/Background/Thanks!.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play(0)
+        pygame.mixer.music.play(-1)
     else:
         print("No Sound")
         
@@ -159,7 +159,7 @@ while True:
     if sound:
         pygame.mixer.music.load("Music/Background/CHOOSE.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play(0)
+        pygame.mixer.music.play(-1)
     else:
         print("No Sound")
         
@@ -215,7 +215,7 @@ while True:
     if sound:
         pygame.mixer.music.load("Music/Background/KaBOOM.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play(0)
+        pygame.mixer.music.play(-1)
     else:
         print("No Sound")
         
@@ -269,7 +269,7 @@ while True:
     if sound:
         pygame.mixer.music.load("Music/Background/Main_Background.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play(loops=0)
+        pygame.mixer.music.play(loops=-1)
     else:
         print("No Sound")
         
@@ -527,7 +527,7 @@ while True:
     if sound:
         pygame.mixer.music.load("Music/Background/DEATH.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play(loops=0)
+        pygame.mixer.music.play(loops=-1)
     else:
         print("No Sound")
         
@@ -575,7 +575,7 @@ while True:
     if sound:
         pygame.mixer.music.load("Music/Background/You_Win!.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play(loops=0)
+        pygame.mixer.music.play(loops=-1)
     else:
         print("No Sound")
         
