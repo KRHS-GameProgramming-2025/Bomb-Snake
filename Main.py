@@ -280,7 +280,7 @@ while True:
     
     score = Hud ("Score: ", points, [70,938])
     playerSpeed=5
-    player = Head(100,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+    player = Head(1,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
     snake = [player]
     snakeSize = 3
     for i in range(snakeSize-1):
@@ -297,14 +297,12 @@ while True:
         bombSpawnRates={"Bomb": 15,
                         "Bomb2x": 25,
                         "Bomb4x": 45,
-                        "Bomb5x": 55,
                         "Bomb1+":52 ,
                         "Bomb2+": 54 }
                         
         bombDidSpawns={"Bomb": True,
                        "Bomb2x": True,
                        "Bomb4x": True,
-                       "Bomb5x": True,
                        "Bomb2+": True,
                        "Bomb1+": True }
     elif dificulty == "Easy":
@@ -575,7 +573,7 @@ while True:
         
     #-----------------------Win screen----------------------------------#
     if sound:
-        pygame.mixer.music.load("Music/Background/DEATH.mp3")
+        pygame.mixer.music.load("Music/Background/You_Win!.mp3")
         pygame.mixer.music.set_volume(.25)
         pygame.mixer.music.play(loops=0)
     else:
