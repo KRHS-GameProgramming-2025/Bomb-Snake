@@ -40,6 +40,11 @@ mode="start"
 clicked = False
 dificulty = "Normal"
 
+cPressed = False
+hPressed = False
+gPressed = False
+
+
 
 while True:
     #-----------------------Start screen--------------------------------#
@@ -66,33 +71,41 @@ while True:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                      mode="play"
-                if event.key == pygame.K_m:
-                    mode="modeSelect"
-                if event.key == pygame.K_c:
-                    mode="credits"
-                if event.key == pygame.K_b:
-                    mode="bomb"
-            elif event.type == pygame.MOUSEMOTION:
-               for button in buttons:
-                   button.collidePoint(event.pos, clicked) 
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    clicked = True
-                    for button in buttons:
-                        button.collidePoint(event.pos, clicked)
-            elif event.type == pygame.MOUSEBUTTONUP:
-                if event.button == 1:
-                    clicked = False
-                    for button in buttons:
-                        if button.collidePoint(event.pos, clicked):
-                            if button.name == "Start":
-                                mode="play"
-                            elif button.name == "Modes":
-                                mode="modeSelect"
-                            elif button.name == "Credits":
-                                mode="credits"
-                            elif button.name == "Bombs":
-                                mode="bomb"
+                elif event.key == pygame.K_c and not cPressed and not hPressed and not gPressed:
+                    cPressed = True
+                elif event.key == pygame.K_h and cPressed and not hPressed and not gPressed:
+                    hPressed = True
+                elif event.key == pygame.K_g and cPressed and hPressed and not gPressed:
+                    gPressed = True
+                    
+                else:
+                    cPressed = False
+                    hPressed = False
+                    gPressed = False
+                    
+        if cPressed and hPressed and gPressed:
+            print("CHG")
+        elif event.type == pygame.MOUSEMOTION:
+           for button in buttons:
+               button.collidePoint(event.pos, clicked) 
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                clicked = True
+                for button in buttons:
+                    button.collidePoint(event.pos, clicked)
+        elif event.type == pygame.MOUSEBUTTONUP:
+            if event.button == 1:
+                clicked = False
+                for button in buttons:
+                    if button.collidePoint(event.pos, clicked):
+                        if button.name == "Start":
+                            mode="play"
+                        elif button.name == "Modes":
+                            mode="modeSelect"
+                        elif button.name == "Credits":
+                            mode="credits"
+                        elif button.name == "Bombs":
+                            mode="bomb"
             
         screen.blit(bgImage, bgRect)
         
@@ -505,8 +518,8 @@ while True:
                 if lives <=0:
                     mode = "end"
                     
-                if points >360:
-                    mode = "win"
+            if points >=360:
+                mode = "win"
         
         screen.blit(bgImage, bgRect)
         for bomb in bombs:
