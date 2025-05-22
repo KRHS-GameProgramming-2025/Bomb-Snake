@@ -43,6 +43,7 @@ dificulty = "Normal"
 cPressed = False
 hPressed = False
 gPressed = False
+chg = False
 
 
 
@@ -193,25 +194,44 @@ while True:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_m:
                      mode="play"
+                elif event.key == pygame.K_c and not cPressed and not hPressed and not gPressed:
+                        cPressed = True
+                elif event.key == pygame.K_h and cPressed and not hPressed and not gPressed:
+                        hPressed = True
+                elif event.key == pygame.K_g and cPressed and hPressed and not gPressed:
+                        gPressed = True
+                        
+                else:
+                    cPressed = False
+                    hPressed = False
+                    gPressed = False
+                        
+        if cPressed and hPressed and gPressed:
+            print("CHG")
+            if not chg: buttons+=[Button("CHG",[840,450],1)]
+            chg = True
+            cPressed = False
+            hPressed = False
+            gPressed = False
                      
-            elif event.type == pygame.MOUSEMOTION:
-               for button in buttons:
-                   button.collidePoint(event.pos, clicked) 
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    clicked = True
-                    for button in buttons:
-                        button.collidePoint(event.pos, clicked)
-            elif event.type == pygame.MOUSEBUTTONUP:
-                if event.button == 1:
-                    clicked = False
-                    for button in buttons:
-                        if button.collidePoint(event.pos, clicked):
-                            if button.name == "BACK":
-                                mode="start"
-                            else:
-                                dificulty = button.name
-                                mode = "play"
+        elif event.type == pygame.MOUSEMOTION:
+           for button in buttons:
+               button.collidePoint(event.pos, clicked) 
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                clicked = True
+                for button in buttons:
+                    button.collidePoint(event.pos, clicked)
+        elif event.type == pygame.MOUSEBUTTONUP:
+            if event.button == 1:
+                clicked = False
+                for button in buttons:
+                    if button.collidePoint(event.pos, clicked):
+                        if button.name == "BACK":
+                            mode="start"
+                        else:
+                            dificulty = button.name
+                            mode = "play"
                                 
                      
         screen.blit(bgImage, bgRect)
