@@ -329,12 +329,14 @@ while True:
         bombs[-1].respawn(size, tileSize)
         bombSpawnRates={"Bomb": 15,
                         "Bomb2x": 25,
+                        "Bomb3x": 35,
                         "Bomb4x": 45,
                         "Bomb1+":52 ,
                         "Bomb2+": 54 }
                         
         bombDidSpawns={"Bomb": True,
                        "Bomb2x": True,
+                       "Bomb3x": True,
                        "Bomb4x": True,
                        "Bomb2+": True,
                        "Bomb1+": True }
@@ -349,19 +351,23 @@ while True:
     
         bombSpawnRates={"Bomb": 15,
                         "Bomb2x": 25,
+                        "Bomb3x": 35,
                         "Bomb4x": 45,
                         "Bomb5x": 55,
                         "Bomb7x": 75,
-                        "Bomb9x": 5,
+                        "Bomb9x": 95,
+                        "Bomb10x": 105,
                         "Bomb1+":52 ,
                         "Bomb2+": 54 }
                         
         bombDidSpawns={"Bomb": True,
                        "Bomb2x": True,
+                       "Bomb3x": True,
                        "Bomb4x": True,
                        "Bomb5x": True,
                        "Bomb7x": True,
                        "Bomb9x": True,
+                       "Bomb10x": True,
                        "Bomb1+": True,
                        "Bomb2+": True }
         
@@ -372,16 +378,20 @@ while True:
         zap=False
         sick=False
         clean=False
-        bombSpawnRates={"Bomb4x": 45,
+        bombSpawnRates={"Bomb3x": 35,
+                        "Bomb4x": 45,
                         "Bomb5x": 55,
                         "Bomb9x": 95,
+                        "Bomb10x": 105,
                         "Bomb1+":52 ,
                         "Bomb2+": 54 }
 
                         
-        bombDidSpawns={"Bomb4x": True,
+        bombDidSpawns={"Bomb3x": True,
+                        "Bomb4x": True,
                        "Bomb5x": True,
                         "Bomb9x": True,
+                        "Bomb10x": True,
                        "Bomb1+": True,
                        "Bomb2+": True }
             
@@ -432,6 +442,12 @@ while True:
                         b = Bomb("Water",bomb.rect.center)
                         bombs+=[b] 
                     elif theBomb.kind =="Water":
+                        bombs.remove(bomb)
+                        break 
+                    elif theBomb.kind =="Bomb3x":
+                        b = Bomb("Fire",bomb.rect.center)
+                        bombs+=[b] 
+                    elif theBomb.kind =="Fire":
                         bombs.remove(bomb)
                         break 
                     theBomb.respawn(size, tileSize)

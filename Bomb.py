@@ -18,7 +18,8 @@ class Bomb():
             self.damage=1
         elif kind == "Bomb2x":
             self.damage=2
-     
+        elif kind == "Bomb3x":
+            self.damage=3
         elif kind == "Bomb4x":
             self.damage=4
         elif kind == "Bomb5x":
@@ -31,6 +32,8 @@ class Bomb():
             self.damage=10
         elif kind == "Water":
             self.damage=-1
+        elif kind == "Fire":
+            self.damage=1
         
      
         else:
