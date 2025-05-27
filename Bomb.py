@@ -27,10 +27,11 @@ class Bomb():
             self.damage=7
         elif kind == "Bomb9x":
             self.damage=9
-        elif kind == "bmoB":
+        elif kind == "Bomb10x":
+            self.damage=10
+        elif kind == "Water":
             self.damage=-1
-        elif kind == "x2bmoB":
-            self.damage=-2
+        
      
         else:
             print(kind)

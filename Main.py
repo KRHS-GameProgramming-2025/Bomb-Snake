@@ -407,15 +407,20 @@ while True:
                 
                 goodSpawn = False
                 while not goodSpawn:
-                    print("Respawning")
+                    print("Respawning_____")
+                    if theBomb.kind =="Bomb10x":
+                        b = Bomb("Water",bomb.rect.center)
+                        bombs+=[b] 
+                    elif theBomb.kind =="Water":
+                        bombs.remove(bomb)
+                        break 
                     theBomb.respawn(size, tileSize)
-                    goodSpawn = not checkSpawn(bomb)
+                    goodSpawn = not checkSpawn(theBomb)
                 player.die(theBomb.damage)
                 print("die")
                 theBomb=None
         
         else:
-        
             for bomb in bombSpawnRates.keys():
                 if not bombDidSpawns[bomb] and points % bombSpawnRates[bomb] == 0:
                     b = Bomb(bomb,[925,825])
@@ -427,7 +432,31 @@ while True:
                         bombDidSpawns[bomb]=True
                 elif bombDidSpawns[bomb] and points % bombSpawnRates[bomb] == 1:
                     bombDidSpawns[bomb]=False
+             
+            if not player.living:
+                lives=player.lives
+                if frozen:
+                    frozen=False
+                elif zap:
+                    zap=False
+                elif sick:
+                    sick=False
+                elif clean:
+                    clean=False
+                else:
+                    playerSpeed = 5
+                player = Head(player.lives,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+                snake = [player]
+                for i in range(snakeSize-1):
+                    snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[0].direction)]
                 
+                life.update(lives)
+                
+                if lives <=0:
+                    mode = "end"
+                    
+            if points >=360:
+                mode = "end"
             
           
             
@@ -471,6 +500,7 @@ while True:
                         playerSpeed=10
                         clean=True
                     theBomb=bomb
+                    bomb=None
                     break
             
             for pellet in pellets:
