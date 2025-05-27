@@ -327,6 +327,7 @@ while True:
     if dificulty == "Normal":
         bombs = [Bomb("Bomb",[550,425])]
         bombs[-1].respawn(size, tileSize)
+      
         bombSpawnRates={"Bomb": 15,
                         "Bomb2x": 25,
                         "Bomb4x": 45,
@@ -372,6 +373,7 @@ while True:
         zap=False
         sick=False
         clean=False
+       
         bombSpawnRates={"Bomb4x": 45,
                         "Bomb5x": 55,
                         "Bomb9x": 95,
@@ -384,8 +386,32 @@ while True:
                         "Bomb9x": True,
                        "Bomb1+": True,
                        "Bomb2+": True }
-            
-    
+                       
+    elif dificulty == "CHG":
+        bombs = [Bomb("Bomb",[550,425])]
+        bombs[-1].respawn(size, tileSize)
+        
+        bombSpawnRates={"Bomb": 15,
+                        "Bomb2x": 25,
+                        "Bomb3x": 45,
+                        "Bomb4x": 50,
+                        "Bomb5x": 55,
+                        "Bomb6x": 65,
+                        "Bomb7x": 75,
+                        "Bomb8x": 80,
+                        "Bomb9x": 85,
+                        "Bomb10x": 90}
+                        
+        bombDidSpawns={"Bomb": True,
+                       "Bomb2x": True,
+                       "Bomb3x": True,
+                       "Bomb4x": True,
+                       "Bomb5x": True,
+                       "Bomb6x": True,
+                       "Bomb7x": True,
+                       "Bomb8x": True,
+                       "Bomb9x": True,
+                       "Bomb10x": True}
     
     pellets = [Pellet([550,425])]
     pellets[-1].respawn(size, tileSize)
