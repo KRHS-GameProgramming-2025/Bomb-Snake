@@ -330,12 +330,14 @@ while True:
       
         bombSpawnRates={"Bomb": 15,
                         "Bomb2x": 25,
+                        "Bomb3x": 35,
                         "Bomb4x": 45,
                         "Bomb1+":52 ,
                         "Bomb2+": 54 }
                         
         bombDidSpawns={"Bomb": True,
                        "Bomb2x": True,
+                       "Bomb3x": True,
                        "Bomb4x": True,
                        "Bomb2+": True,
                        "Bomb1+": True }
@@ -350,19 +352,23 @@ while True:
     
         bombSpawnRates={"Bomb": 15,
                         "Bomb2x": 25,
+                        "Bomb3x": 35,
                         "Bomb4x": 45,
                         "Bomb5x": 55,
                         "Bomb7x": 75,
-                        "Bomb9x": 5,
+                        "Bomb9x": 95,
+                        "Bomb10x": 105,
                         "Bomb1+":52 ,
                         "Bomb2+": 54 }
                         
         bombDidSpawns={"Bomb": True,
                        "Bomb2x": True,
+                       "Bomb3x": True,
                        "Bomb4x": True,
                        "Bomb5x": True,
                        "Bomb7x": True,
                        "Bomb9x": True,
+                       "Bomb10x": True,
                        "Bomb1+": True,
                        "Bomb2+": True }
         
@@ -377,13 +383,16 @@ while True:
         bombSpawnRates={"Bomb4x": 45,
                         "Bomb5x": 55,
                         "Bomb9x": 95,
+                        "Bomb10x": 105,
                         "Bomb1+":52 ,
                         "Bomb2+": 54 }
 
                         
-        bombDidSpawns={"Bomb4x": True,
+        bombDidSpawns={"Bomb3x": True,
+                        "Bomb4x": True,
                        "Bomb5x": True,
                         "Bomb9x": True,
+                        "Bomb10x": True,
                        "Bomb1+": True,
                        "Bomb2+": True }
                        
@@ -473,7 +482,31 @@ while True:
                         bombDidSpawns[bomb]=True
                 elif bombDidSpawns[bomb] and points % bombSpawnRates[bomb] == 1:
                     bombDidSpawns[bomb]=False
+             
+            if not player.living:
+                lives=player.lives
+                if frozen:
+                    frozen=False
+                elif zap:
+                    zap=False
+                elif sick:
+                    sick=False
+                elif clean:
+                    clean=False
+                else:
+                    playerSpeed = 5
+                player = Head(player.lives,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+                snake = [player]
+                for i in range(snakeSize-1):
+                    snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[0].direction)]
                 
+                life.update(lives)
+                
+                if lives <=0:
+                    mode = "end"
+                    
+            if points >=360:
+                mode = "end"
             
           
             
@@ -517,6 +550,7 @@ while True:
                         playerSpeed=10
                         clean=True
                     theBomb=bomb
+                    bomb=None
                     break
             
             for pellet in pellets:
