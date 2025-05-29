@@ -331,6 +331,7 @@ while True:
                         "Bomb2x": 25,
                         "Bomb3x": 35,
                         "Bomb4x": 45,
+                         "Bomb5x": 55,
                         "Bomb1+":52 ,
                         "Bomb2+": 54 }
                         
@@ -338,6 +339,7 @@ while True:
                        "Bomb2x": True,
                        "Bomb3x": True,
                        "Bomb4x": True,
+                       "Bomb5x": True,
                        "Bomb2+": True,
                        "Bomb1+": True }
     elif dificulty == "Easy":
