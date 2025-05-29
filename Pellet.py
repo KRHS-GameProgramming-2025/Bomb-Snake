@@ -3,9 +3,9 @@ import pygame, sys, math, random
 class Pellet():
     def __init__(self, startPos=[0,5]):
         self.fruits=[
-            "mango", "blueberries", "dragonfruit","pomegrante", "B3RR0R","spaghetti"]
+            "mango", "blueberries", "dragonfruit", "fruitsalad" ,"pomegrante", "B3RR0R","spaghetti"]
         self.fruitOdds = [
-              20   ,    50        ,    19        ,   10       ,    5  ,   10000  ]
+              30   ,    20        ,    19        ,        15    ,   10       ,    5    ,   1       ]
         self.totalFruitOdds = 0
         for fo in self.fruitOdds:
             self.totalFruitOdds += fo

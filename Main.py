@@ -40,13 +40,19 @@ mode="start"
 clicked = False
 dificulty = "Normal"
 
+cPressed = False
+hPressed = False
+gPressed = False
+chg = False
+
+
 
 while True:
     #-----------------------Start screen--------------------------------#
     if sound:
         pygame.mixer.music.load("Music/Background/Main_Theme.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play(loops=0)
+        pygame.mixer.music.play(loops=-1)
     else:
         print("No Sound")
         
@@ -66,33 +72,41 @@ while True:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                      mode="play"
-                if event.key == pygame.K_m:
-                    mode="modeSelect"
-                if event.key == pygame.K_c:
-                    mode="credits"
-                if event.key == pygame.K_b:
-                    mode="bomb"
-            elif event.type == pygame.MOUSEMOTION:
-               for button in buttons:
-                   button.collidePoint(event.pos, clicked) 
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    clicked = True
-                    for button in buttons:
-                        button.collidePoint(event.pos, clicked)
-            elif event.type == pygame.MOUSEBUTTONUP:
-                if event.button == 1:
-                    clicked = False
-                    for button in buttons:
-                        if button.collidePoint(event.pos, clicked):
-                            if button.name == "Start":
-                                mode="play"
-                            elif button.name == "Modes":
-                                mode="modeSelect"
-                            elif button.name == "Credits":
-                                mode="credits"
-                            elif button.name == "Bombs":
-                                mode="bomb"
+                elif event.key == pygame.K_c and not cPressed and not hPressed and not gPressed:
+                    cPressed = True
+                elif event.key == pygame.K_h and cPressed and not hPressed and not gPressed:
+                    hPressed = True
+                elif event.key == pygame.K_g and cPressed and hPressed and not gPressed:
+                    gPressed = True
+                    
+                else:
+                    cPressed = False
+                    hPressed = False
+                    gPressed = False
+                    
+        if cPressed and hPressed and gPressed:
+            print("CHG")
+        elif event.type == pygame.MOUSEMOTION:
+           for button in buttons:
+               button.collidePoint(event.pos, clicked) 
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                clicked = True
+                for button in buttons:
+                    button.collidePoint(event.pos, clicked)
+        elif event.type == pygame.MOUSEBUTTONUP:
+            if event.button == 1:
+                clicked = False
+                for button in buttons:
+                    if button.collidePoint(event.pos, clicked):
+                        if button.name == "Start":
+                            mode="play"
+                        elif button.name == "Modes":
+                            mode="modeSelect"
+                        elif button.name == "Credits":
+                            mode="credits"
+                        elif button.name == "Bombs":
+                            mode="bomb"
             
         screen.blit(bgImage, bgRect)
         
@@ -109,7 +123,7 @@ while True:
     if sound:
         pygame.mixer.music.load("Music/Background/Thanks!.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play(0)
+        pygame.mixer.music.play(-1)
     else:
         print("No Sound")
         
@@ -159,7 +173,7 @@ while True:
     if sound:
         pygame.mixer.music.load("Music/Background/CHOOSE.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play(0)
+        pygame.mixer.music.play(-1)
     else:
         print("No Sound")
         
@@ -180,25 +194,44 @@ while True:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_m:
                      mode="play"
+                elif event.key == pygame.K_c and not cPressed and not hPressed and not gPressed:
+                        cPressed = True
+                elif event.key == pygame.K_h and cPressed and not hPressed and not gPressed:
+                        hPressed = True
+                elif event.key == pygame.K_g and cPressed and hPressed and not gPressed:
+                        gPressed = True
+                        
+                else:
+                    cPressed = False
+                    hPressed = False
+                    gPressed = False
+                        
+        if cPressed and hPressed and gPressed:
+            print("CHG")
+            if not chg: buttons+=[Button("CHG",[840,450],1)]
+            chg = True
+            cPressed = False
+            hPressed = False
+            gPressed = False
                      
-            elif event.type == pygame.MOUSEMOTION:
-               for button in buttons:
-                   button.collidePoint(event.pos, clicked) 
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    clicked = True
-                    for button in buttons:
-                        button.collidePoint(event.pos, clicked)
-            elif event.type == pygame.MOUSEBUTTONUP:
-                if event.button == 1:
-                    clicked = False
-                    for button in buttons:
-                        if button.collidePoint(event.pos, clicked):
-                            if button.name == "BACK":
-                                mode="start"
-                            else:
-                                dificulty = button.name
-                                mode = "play"
+        elif event.type == pygame.MOUSEMOTION:
+           for button in buttons:
+               button.collidePoint(event.pos, clicked) 
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                clicked = True
+                for button in buttons:
+                    button.collidePoint(event.pos, clicked)
+        elif event.type == pygame.MOUSEBUTTONUP:
+            if event.button == 1:
+                clicked = False
+                for button in buttons:
+                    if button.collidePoint(event.pos, clicked):
+                        if button.name == "BACK":
+                            mode="start"
+                        else:
+                            dificulty = button.name
+                            mode = "play"
                                 
                      
         screen.blit(bgImage, bgRect)
@@ -215,7 +248,7 @@ while True:
     if sound:
         pygame.mixer.music.load("Music/Background/KaBOOM.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play(0)
+        pygame.mixer.music.play(-1)
     else:
         print("No Sound")
         
@@ -269,7 +302,7 @@ while True:
     if sound:
         pygame.mixer.music.load("Music/Background/Main_Background.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play(loops=0)
+        pygame.mixer.music.play(loops=-1)
     else:
         print("No Sound")
         
@@ -280,7 +313,7 @@ while True:
     
     score = Hud ("Score: ", points, [70,938])
     playerSpeed=5
-    player = Head(100,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+    player = Head(10,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
     snake = [player]
     snakeSize = 3
     for i in range(snakeSize-1):
@@ -294,17 +327,18 @@ while True:
     if dificulty == "Normal":
         bombs = [Bomb("Bomb",[550,425])]
         bombs[-1].respawn(size, tileSize)
+      
         bombSpawnRates={"Bomb": 15,
                         "Bomb2x": 25,
+                        "Bomb3x": 35,
                         "Bomb4x": 45,
-                        "Bomb5x": 55,
                         "Bomb1+":52 ,
                         "Bomb2+": 54 }
                         
         bombDidSpawns={"Bomb": True,
                        "Bomb2x": True,
+                       "Bomb3x": True,
                        "Bomb4x": True,
-                       "Bomb5x": True,
                        "Bomb2+": True,
                        "Bomb1+": True }
     elif dificulty == "Easy":
@@ -318,19 +352,23 @@ while True:
     
         bombSpawnRates={"Bomb": 15,
                         "Bomb2x": 25,
+                        "Bomb3x": 35,
                         "Bomb4x": 45,
                         "Bomb5x": 55,
                         "Bomb7x": 75,
-                        "Bomb9x": 5,
+                        "Bomb9x": 95,
+                        "Bomb10x": 105,
                         "Bomb1+":52 ,
                         "Bomb2+": 54 }
                         
         bombDidSpawns={"Bomb": True,
                        "Bomb2x": True,
+                       "Bomb3x": True,
                        "Bomb4x": True,
                        "Bomb5x": True,
                        "Bomb7x": True,
                        "Bomb9x": True,
+                       "Bomb10x": True,
                        "Bomb1+": True,
                        "Bomb2+": True }
         
@@ -341,20 +379,48 @@ while True:
         zap=False
         sick=False
         clean=False
+       
         bombSpawnRates={"Bomb4x": 45,
                         "Bomb5x": 55,
                         "Bomb9x": 95,
+                        "Bomb10x": 105,
                         "Bomb1+":52 ,
                         "Bomb2+": 54 }
 
                         
-        bombDidSpawns={"Bomb4x": True,
+        bombDidSpawns={"Bomb3x": True,
+                        "Bomb4x": True,
                        "Bomb5x": True,
                         "Bomb9x": True,
+                        "Bomb10x": True,
                        "Bomb1+": True,
                        "Bomb2+": True }
-            
-    
+                       
+    elif dificulty == "CHG":
+        bombs = [Bomb("Bomb",[550,425])]
+        bombs[-1].respawn(size, tileSize)
+        
+        bombSpawnRates={"Bomb": 15,
+                        "Bomb2x": 25,
+                        "Bomb3x": 45,
+                        "Bomb4x": 50,
+                        "Bomb5x": 55,
+                        "Bomb6x": 65,
+                        "Bomb7x": 75,
+                        "Bomb8x": 80,
+                        "Bomb9x": 85,
+                        "Bomb10x": 90}
+                        
+        bombDidSpawns={"Bomb": True,
+                       "Bomb2x": True,
+                       "Bomb3x": True,
+                       "Bomb4x": True,
+                       "Bomb5x": True,
+                       "Bomb6x": True,
+                       "Bomb7x": True,
+                       "Bomb8x": True,
+                       "Bomb9x": True,
+                       "Bomb10x": True}
     
     pellets = [Pellet([550,425])]
     pellets[-1].respawn(size, tileSize)
@@ -416,7 +482,31 @@ while True:
                         bombDidSpawns[bomb]=True
                 elif bombDidSpawns[bomb] and points % bombSpawnRates[bomb] == 1:
                     bombDidSpawns[bomb]=False
+             
+            if not player.living:
+                lives=player.lives
+                if frozen:
+                    frozen=False
+                elif zap:
+                    zap=False
+                elif sick:
+                    sick=False
+                elif clean:
+                    clean=False
+                else:
+                    playerSpeed = 5
+                player = Head(player.lives,playerSpeed,[tileSize*10+tileSize/2,tileSize*9+tileSize/2])
+                snake = [player]
+                for i in range(snakeSize-1):
+                    snake += [Tail(snake[-1].maxSpeed, snake[-1].rect, snake[0].direction)]
                 
+                life.update(lives)
+                
+                if lives <=0:
+                    mode = "end"
+                    
+            if points >=360:
+                mode = "end"
             
           
             
@@ -460,6 +550,7 @@ while True:
                         playerSpeed=10
                         clean=True
                     theBomb=bomb
+                    bomb=None
                     break
             
             for pellet in pellets:
@@ -507,8 +598,8 @@ while True:
                 if lives <=0:
                     mode = "end"
                     
-                if points >=360:
-                    mode = "win"
+            if points >=360:
+                mode = "win"
         
         screen.blit(bgImage, bgRect)
         for bomb in bombs:
@@ -529,7 +620,7 @@ while True:
     if sound:
         pygame.mixer.music.load("Music/Background/DEATH.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play(loops=0)
+        pygame.mixer.music.play(loops=-1)
     else:
         print("No Sound")
         
@@ -575,9 +666,9 @@ while True:
         
     #-----------------------Win screen----------------------------------#
     if sound:
-        pygame.mixer.music.load("Music/Background/DEATH.mp3")
+        pygame.mixer.music.load("Music/Background/You_Win!.mp3")
         pygame.mixer.music.set_volume(.25)
-        pygame.mixer.music.play(loops=0)
+        pygame.mixer.music.play(loops=-1)
     else:
         print("No Sound")
         
