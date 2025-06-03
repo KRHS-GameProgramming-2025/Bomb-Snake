@@ -382,7 +382,8 @@ while True:
         sick=False
         clean=False
        
-        bombSpawnRates={"Bomb4x": 45,
+        bombSpawnRates={"Bomb3x": 35,
+                        "Bomb4x": 45,
                         "Bomb5x": 55,
                         "Bomb9x": 95,
                         "Bomb10x": 105,
