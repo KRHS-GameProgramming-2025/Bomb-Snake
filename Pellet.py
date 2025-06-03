@@ -5,7 +5,7 @@ class Pellet():
         self.fruits=[
             "mango", "blueberries", "dragonfruit", "fruitsalad" ,"pomegrante", "B3RR0R","spaghetti"]
         self.fruitOdds = [
-              30   ,    20        ,    19        ,        15    ,   10       ,    5    ,   1       ]
+              30   ,    20        ,    19        ,        10    ,   15       ,    5    ,   1       ]
         self.totalFruitOdds = 0
         for fo in self.fruitOdds:
             self.totalFruitOdds += fo
