@@ -564,7 +564,10 @@ while True:
             for pellet in pellets:
                 if player.collide(pellet):
                     pellet.snakeCollide(player)
-                    points += 1
+                    if pellet.fruit == "fruitsalad":
+                        points += 2
+                    else:
+                        points += 1 
                     score.update(points)
                     
                     goodSpawn = False
