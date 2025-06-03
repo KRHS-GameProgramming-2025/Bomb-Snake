@@ -401,6 +401,12 @@ while True:
     elif dificulty == "CHG":
         bombs = [Bomb("Bomb",[550,425])]
         bombs[-1].respawn(size, tileSize)
+        if sound:
+            pygame.mixer.music.load("Music/Background/CHG.mp3")
+            pygame.mixer.music.set_volume(.25)
+            pygame.mixer.music.play(loops=-1)
+        else:
+            print("No Sound")
         
         bombSpawnRates={"Bomb": 15,
                         "Bomb2x": 25,
