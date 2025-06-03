@@ -385,7 +385,7 @@ while True:
         bombSpawnRates={"Bomb4x": 45,
                         "Bomb5x": 55,
                         "Bomb9x": 95,
-                        "Bomb10x": 5,
+                        "Bomb10x": 105,
                         "Bomb1+":52 ,
                         "Bomb2+": 54 }
 
