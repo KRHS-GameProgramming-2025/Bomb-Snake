@@ -327,6 +327,7 @@ while True:
     if dificulty == "Normal":
         bombs = [Bomb("Bomb",[550,425])]
         bombs[-1].respawn(size, tileSize)
+      
         bombSpawnRates={"Bomb": 15,
                         "Bomb2x": 25,
                         "Bomb3x": 35,
@@ -380,8 +381,8 @@ while True:
         zap=False
         sick=False
         clean=False
-        bombSpawnRates={"Bomb3x": 35,
-                        "Bomb4x": 45,
+       
+        bombSpawnRates={"Bomb4x": 45,
                         "Bomb5x": 55,
                         "Bomb9x": 95,
                         "Bomb10x": 105,
@@ -396,8 +397,32 @@ while True:
                         "Bomb10x": True,
                        "Bomb1+": True,
                        "Bomb2+": True }
-            
-    
+                       
+    elif dificulty == "CHG":
+        bombs = [Bomb("Bomb",[550,425])]
+        bombs[-1].respawn(size, tileSize)
+        
+        bombSpawnRates={"Bomb": 15,
+                        "Bomb2x": 25,
+                        "Bomb3x": 45,
+                        "Bomb4x": 50,
+                        "Bomb5x": 55,
+                        "Bomb6x": 65,
+                        "Bomb7x": 75,
+                        "Bomb8x": 80,
+                        "Bomb9x": 85,
+                        "Bomb10x": 90}
+                        
+        bombDidSpawns={"Bomb": True,
+                       "Bomb2x": True,
+                       "Bomb3x": True,
+                       "Bomb4x": True,
+                       "Bomb5x": True,
+                       "Bomb6x": True,
+                       "Bomb7x": True,
+                       "Bomb8x": True,
+                       "Bomb9x": True,
+                       "Bomb10x": True}
     
     pellets = [Pellet([550,425])]
     pellets[-1].respawn(size, tileSize)
@@ -439,26 +464,15 @@ while True:
                 
                 goodSpawn = False
                 while not goodSpawn:
-                    print("Respawning_____")
-                    if theBomb.kind =="Bomb10x":
-                        b = Bomb("Water",bomb.rect.center)
-                        bombs+=[b] 
-                    elif theBomb.kind =="Water":
-                        bombs.remove(bomb)
-                        break 
-                    elif theBomb.kind =="Bomb3x":
-                        b = Bomb("Fire",bomb.rect.center)
-                        bombs+=[b] 
-                    elif theBomb.kind =="Fire":
-                        bombs.remove(bomb)
-                        break 
+                    print("Respawning")
                     theBomb.respawn(size, tileSize)
-                    goodSpawn = not checkSpawn(theBomb)
+                    goodSpawn = not checkSpawn(bomb)
                 player.die(theBomb.damage)
                 print("die")
                 theBomb=None
         
         else:
+        
             for bomb in bombSpawnRates.keys():
                 if not bombDidSpawns[bomb] and points % bombSpawnRates[bomb] == 0:
                     b = Bomb(bomb,[925,825])
