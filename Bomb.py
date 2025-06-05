@@ -30,6 +30,10 @@ class Bomb():
             self.damage=9
         elif kind == "Bomb10x":
             self.damage=10
+        elif kind == "Bomb1+":
+            self.damage=-1
+        elif kind == "Bomb2+":
+            self.damage=-2
         elif kind == "Water":
             self.damage=-1
         elif kind == "Fire":
@@ -38,6 +42,7 @@ class Bomb():
      
         else:
             print(kind)
+            self.damgae = 0
         self.rect = self.image.get_rect(center=startPos)
         self.rad=self.rect.width/2
         self.kind = kind
