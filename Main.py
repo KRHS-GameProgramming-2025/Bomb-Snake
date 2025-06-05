@@ -333,7 +333,7 @@ while True:
                         "Bomb3x": 35,
                         "Bomb4x": 45,
                          "Bomb5x": 55,
-                        "Bomb1+":51 ,
+                        "Bomb1+": 51 ,
                         "Bomb2+": 52 }
                         
         bombDidSpawns={"Bomb": True,
