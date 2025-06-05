@@ -333,8 +333,8 @@ while True:
                         "Bomb3x": 35,
                         "Bomb4x": 45,
                          "Bomb5x": 55,
-                        "Bomb1+":52 ,
-                        "Bomb2+": 54 }
+                        "Bomb1+":51 ,
+                        "Bomb2+": 52 }
                         
         bombDidSpawns={"Bomb": True,
                        "Bomb2x": True,
@@ -360,8 +360,8 @@ while True:
                         "Bomb7x": 75,
                         "Bomb9x": 95,
                         "Bomb10x": 105,
-                        "Bomb1+":52 ,
-                        "Bomb2+": 54 }
+                        "Bomb1+":51 ,
+                        "Bomb2+": 52 }
                         
         bombDidSpawns={"Bomb": True,
                        "Bomb2x": True,
@@ -393,8 +393,8 @@ while True:
                         "Bomb5x": 55,
                         "Bomb9x": 95,
                         "Bomb10x": 105,
-                        "Bomb1+":52 ,
-                        "Bomb2+": 54 }
+                        "Bomb1+":51 ,
+                        "Bomb2+": 52 }
 
                         
         bombDidSpawns={"Bomb3x": True,
