@@ -359,7 +359,7 @@ while True:
                         "Bomb5x": 55,
                         "Bomb7x": 75,
                         "Bomb9x": 95,
-                        "Bomb10x": 105,
+                        "Bomb10x": 5,
                         "Bomb1+":51 ,
                         "Bomb2+": 52 }
                         
@@ -477,9 +477,21 @@ while True:
                 
                 goodSpawn = False
                 while not goodSpawn:
-                    print("Respawning")
+                    print("Respawning_____")
+                    if theBomb.kind =="Bomb10x":
+                        b = Bomb("Water",bomb.rect.center)
+                        bombs+=[b] 
+                    elif theBomb.kind =="Water":
+                        bombs.remove(bomb)
+                        break 
+                    elif theBomb.kind =="Bomb3x":
+                        b = Bomb("Fire",bomb.rect.center)
+                        bombs+=[b] 
+                    elif theBomb.kind =="Fire":
+                        bombs.remove(bomb)
+                        break 
                     theBomb.respawn(size, tileSize)
-                    goodSpawn = not checkSpawn(bomb)
+                    goodSpawn = not checkSpawn(theBomb)
                 player.die(theBomb.damage)
                 print("die")
                 theBomb=None
