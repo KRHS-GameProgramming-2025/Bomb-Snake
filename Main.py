@@ -359,6 +359,7 @@ while True:
                         "Bomb5x": 55,
                         "Bomb6x": 65,
                         "Bomb7x": 75,
+                        "Bomb8x": 85,
                         "Bomb9x": 95,
                         "Bomb10x": 105,
                         "Bomb1+":51 ,
@@ -371,6 +372,7 @@ while True:
                        "Bomb5x": True,
                        "Bomb6x": True,
                        "Bomb7x": True,
+                       "Bomb8x": True,
                        "Bomb9x": True,
                        "Bomb10x": True,
                        "Bomb1+": True,
@@ -394,6 +396,7 @@ while True:
                         "Bomb4x": 45,
                         "Bomb5x": 55,
                         "Bomb6x": 65,
+                        "Bomb8x": 85,
                         "Bomb9x": 95,
                         "Bomb10x": 105,
                         "Bomb1+":51 ,
@@ -404,6 +407,7 @@ while True:
                         "Bomb4x": True,
                        "Bomb5x": True,
                        "Bomb6x": True,
+                        "Bomb8x": True,
                         "Bomb9x": True,
                         "Bomb10x": True,
                        "Bomb1+": True,
@@ -500,6 +504,12 @@ while True:
                     elif theBomb.kind =="Poison":
                         bombs.remove(bomb)
                         break 
+                    elif theBomb.kind =="Bomb8x":
+                        b = Bomb("Rock",bomb.rect.center)
+                        bombs+=[b] 
+                    elif theBomb.kind =="Rock":
+                        bombs.remove(bomb)
+                        break
                     theBomb.respawn(size, tileSize)
                     goodSpawn = not checkSpawn(theBomb)
                 player.die(theBomb.damage)
