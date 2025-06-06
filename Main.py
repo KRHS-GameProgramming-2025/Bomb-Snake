@@ -357,9 +357,10 @@ while True:
                         "Bomb3x": 35,
                         "Bomb4x": 45,
                         "Bomb5x": 55,
+                        "Bomb6x": 65,
                         "Bomb7x": 75,
                         "Bomb9x": 95,
-                        "Bomb10x": 5,
+                        "Bomb10x": 105,
                         "Bomb1+":51 ,
                         "Bomb2+": 52 }
                         
@@ -368,6 +369,7 @@ while True:
                        "Bomb3x": True,
                        "Bomb4x": True,
                        "Bomb5x": True,
+                       "Bomb6x": True,
                        "Bomb7x": True,
                        "Bomb9x": True,
                        "Bomb10x": True,
@@ -391,6 +393,7 @@ while True:
         bombSpawnRates={"Bomb3x": 35,
                         "Bomb4x": 45,
                         "Bomb5x": 55,
+                        "Bomb6x": 5,
                         "Bomb9x": 95,
                         "Bomb10x": 105,
                         "Bomb1+":51 ,
@@ -400,6 +403,7 @@ while True:
         bombDidSpawns={"Bomb3x": True,
                         "Bomb4x": True,
                        "Bomb5x": True,
+                       "Bomb6x": True,
                         "Bomb9x": True,
                         "Bomb10x": True,
                        "Bomb1+": True,
@@ -488,6 +492,12 @@ while True:
                         b = Bomb("Fire",bomb.rect.center)
                         bombs+=[b] 
                     elif theBomb.kind =="Fire":
+                        bombs.remove(bomb)
+                        break 
+                    elif theBomb.kind =="Bomb6x":
+                        b = Bomb("Poison",bomb.rect.center)
+                        bombs+=[b] 
+                    elif theBomb.kind =="Poison":
                         bombs.remove(bomb)
                         break 
                     theBomb.respawn(size, tileSize)
