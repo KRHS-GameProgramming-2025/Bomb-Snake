@@ -487,28 +487,28 @@ while True:
                 while not goodSpawn:
                     print("Respawning_____")
                     if theBomb.kind =="Bomb10x":
-                        b = Bomb("Water",bomb.rect.center)
+                        b = Bomb("Water",theBomb.rect.center)
                         bombs+=[b] 
                     elif theBomb.kind =="Water":
-                        bombs.remove(bomb)
+                        bombs.remove(theBomb)
                         break 
                     elif theBomb.kind =="Bomb3x":
-                        b = Bomb("Fire",bomb.rect.center)
+                        b = Bomb("Fire",theBomb.rect.center)
                         bombs+=[b] 
                     elif theBomb.kind =="Fire":
-                        bombs.remove(bomb)
+                        bombs.remove(theBomb)
                         break 
                     elif theBomb.kind =="Bomb6x":
-                        b = Bomb("Poison",bomb.rect.center)
+                        b = Bomb("Poison",theBomb.rect.center)
                         bombs+=[b] 
                     elif theBomb.kind =="Poison":
-                        bombs.remove(bomb)
+                        bombs.remove(theBomb)
                         break 
                     elif theBomb.kind =="Bomb8x":
-                        b = Bomb("Rock",bomb.rect.center)
+                        b = Bomb("Rock",theBomb.rect.center)
                         bombs+=[b] 
                     elif theBomb.kind =="Rock":
-                        bombs.remove(bomb)
+                        bombs.remove(theBomb)
                         break
                     theBomb.respawn(size, tileSize)
                     goodSpawn = not checkSpawn(theBomb)
